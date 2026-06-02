@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RevenueBase Design System — Foundations</title>
+<title>RevenueBase Design System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -272,17 +272,9 @@
 <body>
 <header class="topbar">
   <div class="logo">
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ff7708"/><stop offset="1" stop-color="#ffaa00"/>
-      </linearGradient></defs>
-      <path d="M3 4 L13 13 L3 22 Z" fill="url(#g)"/>
-      <path d="M11 4 L21 13 L11 22 Z" fill="url(#g)" opacity="0.55"/>
-    </svg>
-    <span class="wm"><b>Revenue</b><span>Base</span></span>
+    <img src="assets/revenuebase-logo.svg" alt="RevenueBase" style="display:block;height:22px;width:auto;">
   </div>
   <div class="topbar-right">
-    <span class="step-pill">Step 1 of 3 · Foundations</span>
     <div class="toggle" id="toggle">
       <span id="toggle-icon">☀︎</span><span id="toggle-label">Light</span>
     </div>
@@ -292,7 +284,7 @@
 <main>
   <div class="hero">
     <h1 class="serif">The design foundation<br>your <em>product & site</em> share.</h1>
-    <p>One token system — navy, amber, teal, slate — across two surfaces and two themes. Toggle light / dark up top to see both modes live. Everything below is rendered in the real fonts and real values.</p>
+    <p>One token system — navy, amber, teal, slate — across two surfaces and two themes. Toggle light / dark to see both modes live. Everything is rendered in the real fonts and real values.</p>
   </div>
 
   <!-- COLOR PRIMITIVES -->
@@ -467,22 +459,10 @@
       <div class="note-card"><h4>Two text ramps</h4><p>Marketing text runs on navy (brand-saturated); product text runs on the neutral slate ramp for readability, with navy reserved for links/prices.</p></div>
       <div class="note-card"><h4>Both modes are tinted</h4><p>Light = navy-50, dark = navy-900. Deliberately not pure #fff / #000, matching the live site.</p></div>
       <div class="note-card"><h4>Texture stays whisper-quiet</h4><p>Noise rides at 4% over the canvas; the grid is reserved for panels, not full pages. Both are real site assets, saved locally and theme-swapped.</p></div>
-      <div class="note-card warn"><h4>Warning color = Known Gap</h4><p>Orange/amber warning barely appears in the inspected product screens. I'll document it from the scale and flag it as under-specified.</p></div>
+      <div class="note-card warn"><h4>Warning color is lightly used</h4><p>Orange/amber warning appears in the product screens as an inline alert banner. It is documented in the palette but is not a primary UI color.</p></div>
     </div>
   </section>
 
-  <!-- NEXT -->
-  <div class="next">
-    <div class="eyebrow">Next</div>
-    <h3 class="serif">Approve the foundation, or tell me what to change.</h3>
-    <p>Once this is locked, Step 2 documents the marketing components (hero, feature & pricing cards, testimonial, logos, CTA banner, nav, footer) and Step 3 the product components (app shell, stepper, plan cards, tabs, tables, badges, modals, buttons, forms). Then I assemble the unified DESIGN.md and lint it.</p>
-    <div class="flow">
-      <span class="cur">1 · Foundations</span>
-      <span>2 · Marketing</span>
-      <span>3 · Product</span>
-      <span>→ DESIGN.md</span>
-    </div>
-  </div>
 </main>
 
 <script>
