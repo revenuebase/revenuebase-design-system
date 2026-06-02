@@ -1,6 +1,19 @@
 # RevenueBase Design System
 
-A `design.md`-format design system for [RevenueBase](https://revenuebase.ai), covering both the **marketing site** and the **product app**, in **light and dark** themes.
+A complete brand and design system for [RevenueBase](https://revenuebase.ai) — covering the marketing site, product app, email, presentations, banners, and any other designed output.
+
+**Assets hosted at:** `https://revenuebase.github.io/revenuebase-design-system/assets/`
+
+## Using this as a Claude skill
+
+`CLAUDE.md` at the repo root is a Claude Code project instruction file — it gives Claude the full RevenueBase design system context so it can design anything on-brand.
+
+**Option 1 — Work within this repo** (clone and open in Claude Code). Claude loads the design system automatically.
+
+**Option 2 — Use from any project** (globally install the skill):
+1. Copy the contents of `CLAUDE.md` into `~/.claude/CLAUDE.md` on your machine
+2. All asset URLs are fully hosted — no repo clone needed
+3. Claude will know the RevenueBase design system in any project you open
 
 - **[DESIGN.md](DESIGN.md)** — the system itself (YAML tokens + token-referenced prose), in the [VoltAgent / Google `design.md`](https://github.com/VoltAgent/awesome-design-md) format. Lint with `npx @google/design.md lint DESIGN.md`.
 
