@@ -21,11 +21,11 @@ RevenueBase is a B2B data-infrastructure company. The brand reads as **infrastru
 
 ## Logo
 
-| File | Use |
-|---|---|
-| `assets/revenuebase-logo.svg` | Web, presentations, large-format digital |
-| `assets/revenuebase-logo.png` | Anywhere white background (email header, light slides) |
-| `assets/revenuebase-logo-grey.png` | On `#f1f4f9` navy-50 backgrounds (email footer, tinted panels) |
+| File | URL | Use |
+|---|---|---|
+| Logo (SVG) | `https://revenuebase.github.io/revenuebase-design-system/assets/revenuebase-logo.svg` | Web, presentations, large-format digital |
+| Logo (white bg PNG) | `https://revenuebase.github.io/revenuebase-design-system/assets/revenuebase-logo.png` | White backgrounds (email header, light slides) |
+| Logo (grey bg PNG) | `https://revenuebase.github.io/revenuebase-design-system/assets/revenuebase-logo-grey.png` | `#f1f4f9` backgrounds (email footer, tinted panels) |
 
 The logo mark is a gradient chevron (orange `#ff7708` → amber `#ffaa00`) + wordmark (**Revenue**Base — bold + regular weight). Never use a glyph or approximation.
 
@@ -191,10 +191,12 @@ A signature motif on marketing surfaces: small `+` registration marks just outsi
 
 Two background textures — both lifted from the live site, both theme-aware:
 
-| Asset | How to use |
-|---|---|
-| `assets/bg-noise-light.webp` / `bg-noise-dark.webp` | 256px tile at **4% opacity** over the canvas. Felt, not seen. |
-| `assets/grid-light.svg` / `grid-dark.svg` | 45px hairline tile (0.5px stroke) on framed panels — not full-page backgrounds. |
+| Asset | URL | How to use |
+|---|---|---|
+| Noise grain (light) | `https://revenuebase.github.io/revenuebase-design-system/assets/bg-noise-light.webp` | 256px tile at **4% opacity** over canvas |
+| Noise grain (dark) | `https://revenuebase.github.io/revenuebase-design-system/assets/bg-noise-dark.webp` | 256px tile at **4% opacity** over canvas |
+| Grid (light) | `https://revenuebase.github.io/revenuebase-design-system/assets/grid-light.svg` | 45px hairline tile (0.5px stroke) on framed panels |
+| Grid (dark) | `https://revenuebase.github.io/revenuebase-design-system/assets/grid-dark.svg` | 45px hairline tile (0.5px stroke) on framed panels |
 
 ---
 
@@ -262,16 +264,17 @@ Two background textures — both lifted from the live site, both theme-aware:
 
 ## Assets in this repo
 
-```
-assets/
-├── revenuebase-logo.svg           ← Web, presentations (vector)
-├── revenuebase-logo.png           ← Email header, white-bg contexts
-├── revenuebase-logo-grey.png      ← Email footer, #f1f4f9-bg contexts
-├── bg-noise-light.webp            ← Canvas grain, light mode (use at 4%)
-├── bg-noise-dark.webp             ← Canvas grain, dark mode (use at 4%)
-├── grid-light.svg                 ← 45px hairline grid tile, light
-└── grid-dark.svg                  ← 45px hairline grid tile, dark
-```
+All assets are hosted at `https://revenuebase.github.io/revenuebase-design-system/assets/` — no repo clone needed.
+
+| Asset | Hosted URL |
+|---|---|
+| Logo SVG | `https://revenuebase.github.io/revenuebase-design-system/assets/revenuebase-logo.svg` |
+| Logo PNG (white bg) | `https://revenuebase.github.io/revenuebase-design-system/assets/revenuebase-logo.png` |
+| Logo PNG (grey bg) | `https://revenuebase.github.io/revenuebase-design-system/assets/revenuebase-logo-grey.png` |
+| Noise grain (light) | `https://revenuebase.github.io/revenuebase-design-system/assets/bg-noise-light.webp` |
+| Noise grain (dark) | `https://revenuebase.github.io/revenuebase-design-system/assets/bg-noise-dark.webp` |
+| Grid tile (light) | `https://revenuebase.github.io/revenuebase-design-system/assets/grid-light.svg` |
+| Grid tile (dark) | `https://revenuebase.github.io/revenuebase-design-system/assets/grid-dark.svg` |
 
 ---
 
