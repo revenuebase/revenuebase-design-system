@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+# push-module — push a RevenueBase HubSpot email module to portal 8486714
+# Usage: push-module <module-name>    e.g.  push-module rb-hero
+#        push-module --all            push all 16 modules
+# PAK source (in order): env HUBSPOT_PAK → .env file → prompt
+
+set -euo pipefail
+
+PORTAL=8486714
+BASE="$(git rev-parse --show-toplevel 2>/dev/null)/email/modules"
+API="https://api.hubapi.com"
+
+# ── resolve PAK ───────────────────────────────────────────────────────────────
+resolve_pak() {
+  if [ -n "${HUBSPOT_PAK:-}" ]; then echo "$HUBSPOT_PAK"; return; fi
+  local envfile
+  for envfile in "$(git rev-parse --show-toplevel 2>/dev/null)/.env" "$HOME/.env.revenuebase"; do
+    if [ -f "$envfile" ] && grep -q "^HUBSPOT_PAK=" "$envfile" 2>/dev/null; then
+      grep "^HUBSPOT_PAK=" "$envfile" | cut -d= -f2-
+      return
+    fi
+  done
+  echo "ERROR: HUBSPOT_PAK not found. Set env var or add to .env: HUBSPOT_PAK=<your-key>" >&2
+  exit 1
+}
+
+# ── exchange PAK for access token ─────────────────────────────────────────────
+get_token() {
+  local pak="$1"
+  local resp
+  resp=$(curl -s -X POST "$API/localdevauth/v1/auth/refresh" \
+    -H "Content-Type: application/json" \
+    -d "{\"encodedOAuthRefreshToken\":\"$pak\"}")
+  local tok
+  tok=$(echo "$resp" | python3 -c "import sys,json; print(json.load(sys.stdin)['oauthAccessToken'])" 2>/dev/null || \
+        echo "$resp" | grep -o '"oauthAccessToken":"[^"]*"' | cut -d'"' -f4)
+  if [ -z "$tok" ]; then
+    echo "ERROR: Could not exchange PAK for token. Check your key." >&2
+    exit 1
+  fi
+  echo "$tok"
+}
+
+# ── push one module ───────────────────────────────────────────────────────────
+push_one() {
+  local mod="$1" tok="$2"
+  local dir="$BASE/$mod.module"
+  if [ ! -d "$dir" ]; then
+    echo "ERROR: $dir not found" >&2; return 1
+  fi
+  local ok=0 fail=0
+  for f in meta.json fields.json module.html; do
+    if [ ! -f "$dir/$f" ]; then continue; fi
+    local code
+    code=$(curl -s -X PUT \
+      "$API/cms/v3/source-code/published/content/revenuebase/modules/$mod.module/$f" \
+      -H "Authorization: Bearer $tok" \
+      -F "file=@$dir/$f" \
+      -o /tmp/.rb_push_resp -w "%{http_code}")
+    local msg
+    msg=$(python3 -c "import json; d=json.load(open('/tmp/.rb_push_resp')); print(d.get('message',''))" 2>/dev/null || true)
+    if [ "$code" = "200" ]; then
+      echo "  ✓ $mod/$f"
+      ok=$((ok+1))
+    else
+      echo "  ✗ $mod/$f  ($code $msg)" >&2
+      fail=$((fail+1))
+    fi
+  done
+  [ "$fail" -eq 0 ] && return 0 || return 1
+}
+
+# ── main ──────────────────────────────────────────────────────────────────────
+PAK=$(resolve_pak)
+echo "Authenticating with HubSpot portal $PORTAL..."
+TOKEN=$(get_token "$PAK")
+echo "Token OK."
+
+ALL_MODULES=(
+  rb-header rb-hero rb-section-heading rb-text rb-image
+  rb-feature-card rb-button rb-cta rb-stat-strip rb-stat-figures
+  rb-quote rb-checklist rb-logo-strip rb-divider rb-spacer rb-footer
+)
+
+if [ "${1:-}" = "--all" ]; then
+  echo "Pushing all ${#ALL_MODULES[@]} modules..."
+  total_ok=0; total_fail=0
+  for m in "${ALL_MODULES[@]}"; do
+    echo "→ $m"
+    if push_one "$m" "$TOKEN"; then total_ok=$((total_ok+1)); else total_fail=$((total_fail+1)); fi
+  done
+  echo ""
+  echo "Done: $total_ok ok, $total_fail failed."
+elif [ -n "${1:-}" ]; then
+  echo "→ $1"
+  push_one "$1" "$TOKEN"
+  echo "Done."
+else
+  echo "Usage: push-module <module-name> | --all"
+  echo "Modules: ${ALL_MODULES[*]}"
+  exit 1
+fi
+
+rm -f /tmp/.rb_push_resp
