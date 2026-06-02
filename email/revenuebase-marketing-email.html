@@ -1,0 +1,161 @@
+<!--
+  templateType: email
+  isAvailableForNewContent: true
+  label: RevenueBase - Marketing Email
+-->
+<!-- RevenueBase marketing email, built on the RevenueBase design system. Copy is editable via HubL modules in the email editor. The footer uses the CAN-SPAM tokens (unsubscribe + company address); set your address under Settings, Marketing, Email, Configuration. Logo: upload assets/revenuebase-logo.png to the File Manager and select it in the logo image module. -->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="x-apple-disable-message-reformatting">
+<title>{{ content.subject }}</title>
+<!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  body,table,td,a{ -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+  table,td{ mso-table-lspace:0pt; mso-table-rspace:0pt; }
+  img{ -ms-interpolation-mode:bicubic; border:0; outline:none; text-decoration:none; }
+  body{ margin:0 !important; padding:0 !important; width:100% !important; background:#f1f4f9; }
+  a{ text-decoration:none; }
+  .accent-serif{ font-family:'Fraunces',Georgia,'Times New Roman',serif; font-style:italic; font-weight:400; }
+  @media screen and (max-width:620px){
+    .container{ width:100% !important; }
+    .px{ padding-left:24px !important; padding-right:24px !important; }
+    .h1{ font-size:32px !important; line-height:38px !important; }
+    .stack{ display:block !important; width:100% !important; }
+    .stat-fig{ font-size:40px !important; }
+  }
+</style>
+</head>
+<body style="margin:0; padding:0; background:#f1f4f9;">
+
+  <!-- PREHEADER (hidden inbox preview text) -->
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#f1f4f9;">
+    {% text "preheader" label="Preheader (inbox preview)", value="Primary-sourced B2B data, re-verified every 60 days. No resale, full provenance." %}
+    &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f1f4f9" style="background:#f1f4f9;">
+    <tr><td align="center" style="padding:28px 12px;">
+
+      <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background:#ffffff; border:1px solid #d2d5dc;">
+
+        <!-- HEADER -->
+        <tr><td class="px" style="padding:20px 40px; border-bottom:1px solid #d2d5dc;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td align="left">
+              <!-- Logo: upload assets/revenuebase-logo.png to HubSpot (File Manager) — the image module below will serve it. SVG is intentionally avoided (Outlook/Gmail don't render inline SVG in email). -->
+              {% image "logo" label="Logo", src="https://8486714.fs1.hubspotusercontent-na1.net/hubfs/8486714/revenuebase/revenuebase-logo.png", alt="RevenueBase", width=150 %}
+            </td>
+            <td align="right" style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;">
+              <a href="{{ view_as_page_url }}" style="color:#5e82b8;">View in browser</a>
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- HERO -->
+        <tr><td class="px" style="padding:44px 40px 8px;">
+          <div class="h1" style="font-family:'DM Sans',Arial,sans-serif; font-size:42px; line-height:48px; font-weight:500; letter-spacing:-0.03em; color:#0f537e;">
+            {% text "hero_headline" label="Hero headline", value="The trust layer" %} <span class="accent-serif" style="color:#0f537e;">{% text "hero_headline_accent" label="Hero headline (italic accent)", value="for B2B data." %}</span>
+          </div>
+          <div style="font-family:'DM Sans',Arial,sans-serif; font-size:16px; line-height:25px; color:#2e323d; margin-top:18px;">
+            <p style="margin:0 0 12px;">Hi {{ contact.firstname|default("there", true) }},</p>
+            {% rich_text "hero_body" label="Hero body", html="<p style='margin:0;'>One platform to clean the data you have, keep it current, and find what's missing. Flat-rate feeds, per-outcome APIs, full provenance on every record.</p>" %}
+          </div>
+        </td></tr>
+
+        <!-- HERO CTA -->
+        <tr><td class="px" style="padding:26px 40px 40px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td bgcolor="#0f537e" style="background:#0f537e;">
+              {% text "primary_button_url" label="Primary button URL", value="https://app.revenuebase.ai/signup", export_to_template_context=True %}<a href="{{ widget_data.primary_button_url.value }}" style="display:inline-block; font-family:'DM Sans',Arial,sans-serif; font-size:15px; font-weight:500; color:#ffffff; padding:15px 28px;">{% text "primary_button_text" label="Primary button text", value="Start building for free" %}</a>
+            </td>
+            <td width="14">&nbsp;</td>
+            <td style="border:1px solid #89a5cc;">
+              {% text "secondary_button_url" label="Secondary button URL", value="https://revenuebase.ai/demo", export_to_template_context=True %}<a href="{{ widget_data.secondary_button_url.value }}" style="display:inline-block; font-family:'DM Sans',Arial,sans-serif; font-size:15px; font-weight:500; color:#0f537e; padding:14px 26px;">{% text "secondary_button_text" label="Secondary button text", value="Get a demo" %}</a>
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- FEATURE BLOCKS -->
+        <tr><td class="px" style="padding:0 40px 8px;">
+          <!-- teal -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:14px;"><tr>
+            <td bgcolor="#ecfcfb" style="background:#ecfcfb; border-top:3px solid #219f98; padding:20px 22px;">
+              <div style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:#107069; margin-bottom:6px;">{% text "feat1_eyebrow" label="Feature 1 eyebrow", value="Product Teams" %}</div>
+              <div style="font-family:'DM Sans',Arial,sans-serif; font-size:18px; font-weight:600; color:#13161d; letter-spacing:-0.01em;">{% text "feat1_title" label="Feature 1 title", value="Launch data-powered products faster." %}</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif; font-size:14px; line-height:22px; color:#2e323d; margin:7px 0 0;">{% text "feat1_body" label="Feature 1 body", value="Embed verified company and contact data, enrichment, and verification without building the pipeline yourself." %}</p>
+            </td>
+          </tr></table>
+          <!-- slate -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:14px;"><tr>
+            <td bgcolor="#f7f7f9" style="background:#f7f7f9; border-top:3px solid #626879; padding:20px 22px;">
+              <div style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:#2e323d; margin-bottom:6px;">{% text "feat2_eyebrow" label="Feature 2 eyebrow", value="Sales & Marketing" %}</div>
+              <div style="font-family:'DM Sans',Arial,sans-serif; font-size:18px; font-weight:600; color:#13161d; letter-spacing:-0.01em;">{% text "feat2_title" label="Feature 2 title", value="Keep your data clean and complete." %}</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif; font-size:14px; line-height:22px; color:#2e323d; margin:7px 0 0;">{% text "feat2_body" label="Feature 2 body", value="Fix stale records, verify emails, detect job changes, and enrich accounts automatically." %}</p>
+            </td>
+          </tr></table>
+          <!-- amber -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td bgcolor="#fff8e6" style="background:#fff8e6; border-top:3px solid #bf7c00; padding:20px 22px;">
+              <div style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:#946000; margin-bottom:6px;">{% text "feat3_eyebrow" label="Feature 3 eyebrow", value="Agencies" %}</div>
+              <div style="font-family:'DM Sans',Arial,sans-serif; font-size:18px; font-weight:600; color:#13161d; letter-spacing:-0.01em;">{% text "feat3_title" label="Feature 3 title", value="Volume without the bill shock." %}</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif; font-size:14px; line-height:22px; color:#2e323d; margin:7px 0 0;">{% text "feat3_body" label="Feature 3 body", value="Run high-volume programs on flat-rate, continuously refreshed data. Predictable spend, every client." %}</p>
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- STATS -->
+        <tr><td style="padding:32px 40px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f1f4f9" style="background:#f1f4f9;"><tr>
+            <td align="center" class="stack" style="padding:22px 8px;" width="33%">
+              <div class="stat-fig accent-serif" style="font-size:44px; line-height:1; color:#0f537e;">{% text "stat1_figure" label="Stat 1 figure", value="1B+" %}</div>
+              <div style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#868c9b; margin-top:8px;">{% text "stat1_label" label="Stat 1 label", value="Verified records" %}</div>
+            </td>
+            <td align="center" class="stack" style="padding:22px 8px;" width="33%">
+              <div class="stat-fig accent-serif" style="font-size:44px; line-height:1; color:#0f537e;">{% text "stat2_figure" label="Stat 2 figure", value="390M+" %}</div>
+              <div style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#868c9b; margin-top:8px;">{% text "stat2_label" label="Stat 2 label", value="Contacts" %}</div>
+            </td>
+            <td align="center" class="stack" style="padding:22px 8px;" width="33%">
+              <div class="stat-fig accent-serif" style="font-size:44px; line-height:1; color:#0f537e;">{% text "stat3_figure" label="Stat 3 figure", value="60d" %}</div>
+              <div style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#868c9b; margin-top:8px;">{% text "stat3_label" label="Stat 3 label", value="Re-verification" %}</div>
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- CTA BANNER -->
+        <tr><td bgcolor="#0e1a2e" style="background:#0e1a2e; padding:44px 40px; text-align:center;">
+          <div style="font-family:'JetBrains Mono',Courier,monospace; font-size:12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:#ffce66; margin-bottom:14px;">{% text "cta_eyebrow" label="CTA eyebrow", value="Get started" %}</div>
+          <div style="font-family:'DM Sans',Arial,sans-serif; font-size:26px; line-height:33px; font-weight:500; letter-spacing:-0.02em; color:#f1f4f9;">
+            <span class="accent-serif" style="color:#f1f4f9;">{% text "cta_headline_accent" label="CTA headline (italic accent)", value="You shouldn't have to choose" %}</span> {% text "cta_headline" label="CTA headline (rest)", value="between clean data & your actual job." %}
+          </div>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:26px auto 0;"><tr>
+            <td bgcolor="#b5c8e0" style="background:#b5c8e0;">
+              {% text "cta_button_url" label="CTA button URL", value="https://revenuebase.ai/demo", export_to_template_context=True %}<a href="{{ widget_data.cta_button_url.value }}" style="display:inline-block; font-family:'DM Sans',Arial,sans-serif; font-size:15px; font-weight:500; color:#0e1a2e; padding:15px 30px;">{% text "cta_button_text" label="CTA button text", value="Book a 15-min demo" %}</a>
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- FOOTER (CAN-SPAM: physical address + unsubscribe are required) -->
+        <tr><td class="px" style="padding:32px 40px; background:#f1f4f9; border-top:1px solid #d2d5dc;">
+          <div style="margin-bottom:10px;">{% image "footer_logo" label="Footer logo", src="https://8486714.fs1.hubspotusercontent-na1.net/hubfs/8486714/revenuebase/revenuebase-logo.png", alt="RevenueBase", width=132 %}</div>
+          <p style="font-family:'DM Sans',Arial,sans-serif; font-size:12px; line-height:19px; color:#626879; margin:0 0 14px;">
+            The trust layer for B2B data.<br>
+            {{ site_settings.company_name }} &middot; {{ site_settings.company_street_address_1 }}{% if site_settings.company_street_address_2 %}, {{ site_settings.company_street_address_2 }}{% endif %}, {{ site_settings.company_city }}, {{ site_settings.company_state }} {{ site_settings.company_zip }}
+          </p>
+          <p style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; letter-spacing:0.04em; color:#868c9b; margin:0;">
+            <a href="{{ unsubscribe_link }}" style="color:#0f537e; text-decoration:underline;">Unsubscribe</a>
+            &nbsp;&middot;&nbsp;
+            <a href="{{ subscription_preferences_link }}" style="color:#0f537e; text-decoration:underline;">Manage preferences</a>
+          </p>
+        </td></tr>
+
+      </table>
+
+    </td></tr>
+  </table>
+</body>
+</html>

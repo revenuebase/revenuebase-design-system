@@ -1,0 +1,10 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+  <td bgcolor="#0e1a2e" style="background:#0e1a2e; padding:40px 32px; text-align:center;">
+    {% if module.eyebrow %}<div style="font-family:'JetBrains Mono',Courier,monospace; font-size:12px; font-weight:500; letter-spacing:1px; text-transform:uppercase; color:#ffce66; margin-bottom:14px;">{{ module.eyebrow }}</div>{% endif %}
+    <div style="font-family:'DM Sans',Arial,Helvetica,sans-serif; font-size:24px; line-height:31px; font-weight:500; letter-spacing:-0.5px; color:#f1f4f9;">{% if module.headline_accent %}<span style="font-family:'Fraunces',Georgia,'Times New Roman',serif; font-style:italic; font-weight:400;">{{ module.headline_accent }}</span> {% endif %}{{ module.headline }}</div>
+    {% if module.button_text %}<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:22px auto 0;"><tr>
+      <td bgcolor="#b5c8e0" style="background:#b5c8e0;"><a href="{{ module.button_url }}" style="display:inline-block; font-family:'DM Sans',Arial,Helvetica,sans-serif; font-size:15px; font-weight:500; color:#0e1a2e; padding:15px 30px; text-decoration:none;">{{ module.button_text }}</a></td>
+    </tr></table>{% endif %}
+  </td>
+</tr></table>

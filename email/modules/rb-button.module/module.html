@@ -1,0 +1,15 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+{% if module.style == "teal" %}
+  {% set bg = "#00b5b0" %}{% set fg = "#ffffff" %}{% set bd = "#00b5b0" %}
+{% elif module.style == "outline" %}
+  {% set bg = "transparent" %}{% set fg = "#0f537e" %}{% set bd = "#89a5cc" %}
+{% else %}
+  {% set bg = "#0f537e" %}{% set fg = "#ffffff" %}{% set bd = "#0f537e" %}
+{% endif %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:16px 40px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" align="{{ module.align }}" style="margin:{% if module.align == 'center' %}0 auto{% else %}0{% endif %};">
+  <tr>
+    <td bgcolor="{{ bg }}" style="background:{{ bg }}; border:1px solid {{ bd }};">
+      <a href="{{ module.button_url }}" style="display:inline-block; font-family:'DM Sans',Arial,Helvetica,sans-serif; font-size:15px; font-weight:500; line-height:1; color:{{ fg }}; padding:15px 28px; text-decoration:none;">{{ module.button_text }}</a>
+    </td>
+  </tr>
+</table></td></tr></table>

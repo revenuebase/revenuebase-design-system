@@ -1,0 +1,15 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+{% if module.accent == "navy" %}
+  {% set bg = "#dde6f1" %}{% set bar = "#0f537e" %}{% set eb = "#0a3652" %}
+{% elif module.accent == "amber" %}
+  {% set bg = "#fff8e6" %}{% set bar = "#bf7c00" %}{% set eb = "#946000" %}
+{% else %}
+  {% set bg = "#ecfcfb" %}{% set bar = "#219f98" %}{% set eb = "#107069" %}
+{% endif %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+  <td bgcolor="{{ bg }}" style="background:{{ bg }}; border-top:3px solid {{ bar }}; padding:24px 40px;">
+    {% if module.eyebrow %}<div style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; font-weight:500; letter-spacing:1px; text-transform:uppercase; color:{{ eb }}; margin-bottom:6px;">{{ module.eyebrow }}</div>{% endif %}
+    <div style="font-family:'DM Sans',Arial,Helvetica,sans-serif; font-size:18px; font-weight:600; color:#13161d; letter-spacing:-0.2px;">{{ module.card_title }}</div>
+    {% if module.body_text %}<div style="font-family:'DM Sans',Arial,Helvetica,sans-serif; font-size:14px; line-height:22px; color:#2e323d; margin-top:6px;">{{ module.body_text }}</div>{% endif %}
+  </td>
+</tr></table>

@@ -1,0 +1,4 @@
+[
+  { "name": "eyebrow", "label": "Eyebrow", "type": "text", "default": "What's new" },
+  { "name": "heading_text", "label": "Heading", "type": "text", "default": "Built for teams who need data" }
+]

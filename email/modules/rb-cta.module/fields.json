@@ -1,0 +1,7 @@
+[
+  { "name": "eyebrow", "label": "Eyebrow", "type": "text", "default": "Get started" },
+  { "name": "headline_accent", "label": "Headline italic accent (Fraunces)", "type": "text", "default": "See Insight Fields" },
+  { "name": "headline", "label": "Headline (rest)", "type": "text", "default": "in your catalog." },
+  { "name": "button_text", "label": "Button text", "type": "text", "default": "Open Data Catalog" },
+  { "name": "button_url", "label": "Button URL", "type": "text", "default": "https://app.revenuebase.ai/catalog" }
+]

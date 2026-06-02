@@ -1,0 +1,20 @@
+[
+  {
+    "name": "line_style",
+    "label": "Style",
+    "type": "choice",
+    "display": "select",
+    "choices": [ ["solid", "Solid"], ["dashed", "Dashed"], ["none", "None (spacer only)"] ],
+    "default": "solid"
+  },
+  {
+    "name": "line_color",
+    "label": "Color",
+    "type": "choice",
+    "display": "select",
+    "choices": [ ["light", "Light (#d2d5dc)"], ["medium", "Medium (#b5c8e0)"], ["dark", "Dark (#0f537e)"] ],
+    "default": "light"
+  },
+  { "name": "spacing_top", "label": "Padding top (px)", "type": "number", "default": 24 },
+  { "name": "spacing_bottom", "label": "Padding bottom (px)", "type": "number", "default": 24 }
+]

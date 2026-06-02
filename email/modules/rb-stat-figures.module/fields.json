@@ -1,0 +1,8 @@
+[
+  { "name": "stat1_figure", "label": "Stat 1 figure", "type": "text", "default": "1B+" },
+  { "name": "stat1_caption", "label": "Stat 1 caption", "type": "text", "default": "Verified records" },
+  { "name": "stat2_figure", "label": "Stat 2 figure", "type": "text", "default": "390M+" },
+  { "name": "stat2_caption", "label": "Stat 2 caption", "type": "text", "default": "Contacts" },
+  { "name": "stat3_figure", "label": "Stat 3 figure", "type": "text", "default": "60d" },
+  { "name": "stat3_caption", "label": "Stat 3 caption", "type": "text", "default": "Re-verification" }
+]

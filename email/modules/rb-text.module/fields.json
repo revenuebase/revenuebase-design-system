@@ -1,0 +1,19 @@
+[
+  { "name": "content_text", "label": "Content", "type": "richtext", "default": "<p>Write your content here. Use bold for emphasis and links for CTAs.</p>" },
+  {
+    "name": "text_size",
+    "label": "Text size",
+    "type": "choice",
+    "display": "select",
+    "choices": [ ["sm", "Small (14px)"], ["md", "Medium (16px)"], ["lg", "Large (18px)"] ],
+    "default": "md"
+  },
+  {
+    "name": "text_align",
+    "label": "Alignment",
+    "type": "choice",
+    "display": "select",
+    "choices": [ ["left", "Left"], ["center", "Center"] ],
+    "default": "left"
+  }
+]

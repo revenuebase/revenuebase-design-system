@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RevenueBase Design System — Foundations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ THEME TOKENS ============ */
+  :root {
+    /* primitives — navy */
+    --navy-50:#f1f4f9; --navy-75:#edf3fa; --navy-100:#dde6f1; --navy-150:#c1cfe0;
+    --navy-200:#b5c8e0; --navy-300:#89a5cc; --navy-400:#5e82b8; --navy-500:#43649f;
+    --navy-600:#2e5a82; --navy-700:#1a4a6e; --navy-800:#0f537e; --navy-850:#0a3652;
+    --navy-900:#0e1a2e; --navy-950:#091220;
+    /* primitives — amber */
+    --amber-50:#fff8e6; --amber-100:#fff0cc; --amber-200:#ffe099; --amber-300:#ffce66;
+    --amber-400:#ffbb33; --amber-500:#ffaa00; --amber-600:#bf7c00; --amber-700:#946000;
+    --amber-800:#704700; --amber-900:#4d3000;
+    /* primitives — teal */
+    --teal-50:#ecfcfb; --teal-100:#cff5f4; --teal-200:#9eeae7; --teal-300:#62dad6;
+    --teal-400:#2dc9c4; --teal-500:#00b5b0; --teal-600:#219f98; --teal-700:#107069;
+    --teal-800:#0a5551; --teal-900:#063d3b;
+    /* primitives — slate */
+    --slate-50:#f7f7f9; --slate-100:#ecedf0; --slate-200:#d2d5dc; --slate-300:#adb2bd;
+    --slate-400:#868c9b; --slate-500:#626879; --slate-600:#444a58; --slate-700:#2e323d;
+    --slate-800:#1e2129; --slate-900:#13161d; --slate-950:#0b0d11;
+    /* semantic */
+    --success:#2e7d32; --danger:#c62828; --warning:#bf7c00; --info:#0f537e;
+
+    /* fonts */
+    --serif:"Fraunces", Georgia, serif;
+    --sans:"DM Sans", Arial, sans-serif;
+    --mono:"JetBrains Mono", Menlo, monospace;
+    --radius-sharp:0px; --radius-nav:8px;
+  }
+  /* LIGHT theme semantic mapping */
+  html[data-theme="light"] {
+    --canvas:var(--navy-50);
+    --surface:#ffffff;
+    --surface-2:var(--navy-100);
+    --heading:var(--slate-900);
+    --text:var(--slate-700);
+    --muted:var(--slate-400);
+    --accent:var(--navy-800);
+    --border:var(--navy-200);
+    --border-soft:var(--slate-200);
+    --brand-bg:var(--amber-100);
+    --brand-text:var(--amber-800);
+    --action:var(--teal-500);
+    --action-text:#ffffff;
+    --code-bg:var(--slate-100);
+    --noise:url("assets/bg-noise-light.webp");
+    --grid:url("assets/grid-light.svg");
+  }
+  /* DARK theme semantic mapping */
+  html[data-theme="dark"] {
+    --canvas:var(--navy-900);
+    --surface:var(--navy-850);
+    --surface-2:var(--navy-800);
+    --heading:var(--navy-50);
+    --text:var(--navy-200);
+    --muted:var(--navy-300);
+    --accent:var(--navy-200);
+    --border:var(--navy-700);
+    --border-soft:var(--navy-700);
+    --brand-bg:var(--amber-900);
+    --brand-text:var(--amber-50);
+    --action:var(--teal-400);
+    --action-text:var(--navy-900);
+    --code-bg:var(--navy-850);
+    --noise:url("assets/bg-noise-dark.webp");
+    --grid:url("assets/grid-dark.svg");
+  }
+
+  /* ============ BASE ============ */
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:var(--sans); background:var(--canvas); color:var(--text);
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+    transition:background .25s ease, color .25s ease;
+  }
+  /* full-canvas noise grain — authentic 256px tile @ 4% */
+  body::before {
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:var(--noise); background-size:256px 256px; background-repeat:repeat;
+    opacity:.04;
+  }
+  h1,h2,h3,h4 { color:var(--heading); line-height:1.1; letter-spacing:-0.02em; }
+  .serif { font-family:var(--serif); }
+  .mono { font-family:var(--mono); }
+  a { color:var(--accent); }
+  code { font-family:var(--mono); font-size:.85em; background:var(--code-bg); padding:.12em .4em; border-radius:5px; }
+
+  /* ============ TOP BAR ============ */
+  header.topbar {
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px clamp(16px,4vw,48px);
+    background:color-mix(in srgb, var(--canvas) 88%, transparent);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo { display:flex; align-items:center; gap:10px; }
+  .logo svg { display:block; }
+  .logo .wm { font-size:20px; letter-spacing:-0.02em; color:var(--heading); }
+  .logo .wm b { font-weight:700; } .logo .wm span { font-weight:400; }
+  .topbar-right { display:flex; align-items:center; gap:14px; }
+  .step-pill {
+    font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--muted); border:1px solid var(--border); padding:6px 12px; border-radius:999px;
+  }
+  .toggle {
+    display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
+    border:1px solid var(--border); background:var(--surface); color:var(--text);
+    padding:7px 14px; border-radius:999px; font-size:13px; font-weight:500;
+    font-family:var(--sans); transition:all .2s ease;
+  }
+  .toggle:hover { border-color:var(--accent); }
+
+  /* ============ LAYOUT ============ */
+  main { max-width:1120px; margin:0 auto; padding:0 clamp(16px,4vw,48px) 120px; position:relative; z-index:1; }
+  section { padding-top:72px; }
+
+  /* texture section */
+  .tex-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media(max-width:680px){ .tex-grid{ grid-template-columns:1fr; } }
+  .tex-card { border:1px solid var(--border-soft); border-radius:var(--radius-md); overflow:hidden; background:var(--surface); }
+  .tex-sample { height:160px; }
+  .noise-amp { background:var(--surface-2); position:relative; }
+  .noise-amp::after { content:""; position:absolute; inset:0; background-image:var(--noise); background-size:200px; opacity:.55; }
+  .grid-sample { background-color:var(--surface-2); background-image:var(--grid); background-size:45px 45px; }
+  .grid-panel { background-color:var(--surface-2); background-image:var(--grid); background-size:45px 45px; display:flex; flex-direction:column; justify-content:center; gap:8px; padding:24px; }
+  .grid-panel .gp-eyebrow { font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--action); text-transform:uppercase; }
+  .grid-panel .gp-title { font-family:var(--serif); font-size:22px; color:var(--heading); font-weight:600; letter-spacing:-.02em; }
+  .tex-meta { padding:13px 15px; border-top:1px solid var(--border-soft); }
+  .tex-meta .nm { font-weight:600; color:var(--heading); font-size:14px; }
+  .tex-meta .dsc { font-size:12px; color:var(--muted); font-family:var(--mono); margin-top:3px; }
+  .eyebrow {
+    font-family:var(--mono); font-size:12px; font-weight:500; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--action); margin-bottom:14px;
+  }
+  .sec-title { font-family:var(--sans); font-weight:600; font-size:clamp(28px,4vw,40px); margin-bottom:8px; }
+  .sec-sub { color:var(--muted); max-width:60ch; font-size:16px; margin-bottom:32px; }
+
+  /* hero */
+  .hero { padding-top:64px; }
+  .hero h1 { font-family:var(--serif); font-weight:600; font-size:clamp(40px,7vw,72px); letter-spacing:-0.03em; line-height:1.02; }
+  .hero h1 em { font-style:italic; color:var(--accent); }
+  .hero p { font-size:clamp(17px,2vw,20px); color:var(--muted); margin-top:20px; max-width:54ch; }
+
+  .card { background:var(--surface); border:1px solid var(--border-soft); border-radius:var(--radius-md); }
+
+  /* color scales */
+  .scale { margin-bottom:28px; }
+  .scale-head { display:flex; align-items:baseline; gap:12px; margin-bottom:12px; }
+  .scale-head h3 { font-size:18px; font-weight:600; }
+  .scale-head .note { font-size:13px; color:var(--muted); }
+  .swatches { display:grid; grid-template-columns:repeat(auto-fit,minmax(78px,1fr)); gap:8px; }
+  .sw { border-radius:10px; overflow:hidden; border:1px solid var(--border-soft); }
+  .sw .chip { height:56px; }
+  .sw .meta { padding:7px 8px; background:var(--surface); }
+  .sw .w { font-size:11px; font-weight:600; color:var(--heading); }
+  .sw .hex { font-family:var(--mono); font-size:10px; color:var(--muted); text-transform:uppercase; }
+
+  .sem-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+  .sem { border:1px solid var(--border-soft); border-radius:var(--radius-md); padding:14px; background:var(--surface); }
+  .sem .dot { width:30px; height:30px; border-radius:8px; margin-bottom:10px; }
+  .sem .name { font-weight:600; color:var(--heading); font-size:14px; }
+  .sem .hex { font-family:var(--mono); font-size:11px; color:var(--muted); }
+  .sem .use { font-size:12px; color:var(--muted); margin-top:4px; }
+
+  /* theme preview cards */
+  .theme-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:720px){ .theme-row{ grid-template-columns:1fr; } }
+  .tp { border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border); }
+  .tp .bar { padding:9px 14px; font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; border-bottom:1px solid; }
+  .tp-body { padding:22px; }
+  .tp-light { background:#f1f4f9; }
+  .tp-light .bar { background:#fff; color:#626879; border-color:#b5c8e0; }
+  .tp-dark { background:#0e1a2e; }
+  .tp-dark .bar { background:#0a3652; color:#89a5cc; border-color:#1a4a6e; }
+  .tp h4 { font-family:var(--serif); font-weight:600; font-size:24px; margin-bottom:6px; letter-spacing:-0.02em; }
+  .tp-light h4{ color:#13161d; } .tp-dark h4{ color:#f1f4f9; }
+  .tp p { font-size:13.5px; margin-bottom:16px; }
+  .tp-light p{ color:#2e323d; } .tp-dark p{ color:#b5c8e0; }
+  .tp .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .mini-btn { font-size:12.5px; font-weight:600; padding:8px 14px; border-radius:8px; border:1px solid transparent; }
+  .mb-action-l{ background:#00b5b0; color:#fff; } .mb-action-d{ background:#2dc9c4; color:#0e1a2e; }
+  .mb-nav-l{ background:#c1cfe0; color:#0f537e; border-color:#89a5cc; } .mb-nav-d{ background:#0a3652; color:#f1f4f9; border-color:#43649f; }
+  .mb-ghost-l{ background:transparent; color:#0f537e; border-color:#89a5cc; }
+  .mb-ghost-d{ background:transparent; color:#f1f4f9; border-color:#5e82b8; }
+  .mini-badge { font-size:11px; font-weight:600; padding:3px 9px; border-radius:999px; }
+  .bdg-active-l{ background:#e6f3e6; color:#2e7d32; } .bdg-active-d{ background:#16321a; color:#7bd488; }
+  .brand-chip-l{ background:#fff0cc; color:#704700; padding:6px 12px; border-radius:8px; font-size:12.5px; font-weight:600; }
+  .brand-chip-d{ background:#4d3000; color:#fff8e6; padding:6px 12px; border-radius:8px; font-size:12.5px; font-weight:600; }
+
+  table.map { width:100%; border-collapse:collapse; margin-top:20px; font-size:14px; }
+  table.map th, table.map td { text-align:left; padding:11px 14px; border-bottom:1px solid var(--border-soft); }
+  table.map th { font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:500; }
+  table.map td:first-child { color:var(--heading); font-weight:500; }
+  .tok { display:inline-flex; align-items:center; gap:7px; }
+  .tok i { width:14px; height:14px; border-radius:4px; border:1px solid var(--border-soft); display:inline-block; }
+  table.map .mono-cell { font-family:var(--mono); font-size:12px; }
+
+  /* type specimens */
+  .spec { padding:20px 0; border-bottom:1px solid var(--border-soft); display:grid; grid-template-columns:140px 1fr; gap:24px; align-items:baseline; }
+  @media(max-width:680px){ .spec{ grid-template-columns:1fr; gap:6px; } }
+  .spec .label { font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+  .spec .label .fam { display:block; color:var(--action); margin-top:4px; }
+  .spec .sample { color:var(--heading); line-height:1.1; }
+
+  .font-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:8px; }
+  @media(max-width:680px){ .font-cards{ grid-template-columns:1fr; } }
+  .fc { background:var(--surface); border:1px solid var(--border-soft); border-radius:var(--radius-md); padding:20px; }
+  .fc .big { font-size:46px; color:var(--heading); line-height:1; margin-bottom:12px; }
+  .fc .nm { font-weight:600; color:var(--heading); }
+  .fc .role { font-size:13px; color:var(--muted); }
+
+  /* spacing */
+  .space-list { display:flex; flex-direction:column; gap:9px; }
+  .space-row { display:flex; align-items:center; gap:16px; }
+  .space-row .bar { height:18px; background:var(--action); border-radius:4px; opacity:.85; }
+  .space-row .lbl { font-family:var(--mono); font-size:12px; color:var(--muted); width:120px; }
+
+  /* radius */
+  .radius-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:14px; }
+  .rad { text-align:center; }
+  .rad .box { height:90px; background:var(--surface-2); border:1.5px solid var(--accent); margin-bottom:8px; }
+  .rad .lbl { font-family:var(--mono); font-size:12px; color:var(--muted); }
+  .rad .lbl b { color:var(--heading); }
+
+  /* decisions */
+  .notes { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media(max-width:680px){ .notes{ grid-template-columns:1fr; } }
+  .note-card { background:var(--surface); border:1px solid var(--border-soft); border-left:3px solid var(--action); border-radius:var(--radius-md); padding:18px; }
+  .note-card.warn { border-left-color:var(--warning); }
+  .note-card h4 { font-size:15px; margin-bottom:6px; }
+  .note-card p { font-size:13.5px; color:var(--text); }
+
+  .next { margin-top:64px; background:var(--brand-bg); color:var(--brand-text); border-radius:var(--radius-lg); padding:36px clamp(20px,4vw,44px); }
+  .next .eyebrow { color:var(--brand-text); opacity:.75; }
+  .next h3 { color:var(--brand-text); font-family:var(--serif); font-size:26px; font-weight:600; margin-bottom:10px; }
+  .next p { font-size:15px; max-width:62ch; }
+  .next .flow { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+  .next .flow span { font-family:var(--mono); font-size:12px; padding:7px 13px; border-radius:999px; border:1px solid currentColor; opacity:.6; }
+  .next .flow span.cur { opacity:1; font-weight:700; background:color-mix(in srgb, var(--brand-text) 14%, transparent); }
+
+  /* ===== AUTHENTIC SQUARE-CORNER SYSTEM — 0px everywhere; 8px only on the floating nav ===== */
+  .card,.tp,.tp .bar,.note-card,.sem,.sem .dot,.tex-card,.tex-sample,.fc,.next,
+  .mini-btn,.mini-badge,.brand-chip-l,.brand-chip-d,.sw,.sw .chip,.toggle,.step-pill,
+  .tok i,.space-row .bar,code,.grid-panel,.noise-amp,.fc .big{ border-radius:0 !important; }
+
+  /* shape section */
+  .shape-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media(max-width:680px){ .shape-grid{ grid-template-columns:1fr; } }
+  .shape-card { border:1px solid var(--border-soft); background:var(--surface); }
+  .shape-demo { height:150px; display:flex; align-items:center; justify-content:center; gap:12px; background:var(--surface); }
+  .demo-tag { font-size:12px; font-weight:600; padding:6px 12px; background:var(--brand-bg); color:var(--brand-text); }
+  .nav-demo { font-size:13px; font-weight:500; color:var(--accent); background:var(--surface); border:1px solid var(--border); padding:11px 18px; border-radius:8px; }
+  .cropframe { position:relative; width:62%; height:84px; border:1px solid var(--accent); display:flex; align-items:center; justify-content:center; }
+  .cf-label { font-size:15px; color:var(--heading); font-weight:600; }
+  .cm { position:absolute; width:11px; height:11px; pointer-events:none; }
+  .cm::before { content:""; position:absolute; left:5px; top:0; width:1px; height:11px; background:var(--accent); opacity:.6; }
+  .cm::after { content:""; position:absolute; top:5px; left:0; height:1px; width:11px; background:var(--accent); opacity:.6; }
+  .cm-tl{ top:-6px; left:-6px; } .cm-tr{ top:-6px; right:-6px; } .cm-bl{ bottom:-6px; left:-6px; } .cm-br{ bottom:-6px; right:-6px; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ff7708"/><stop offset="1" stop-color="#ffaa00"/>
+      </linearGradient></defs>
+      <path d="M3 4 L13 13 L3 22 Z" fill="url(#g)"/>
+      <path d="M11 4 L21 13 L11 22 Z" fill="url(#g)" opacity="0.55"/>
+    </svg>
+    <span class="wm"><b>Revenue</b><span>Base</span></span>
+  </div>
+  <div class="topbar-right">
+    <span class="step-pill">Step 1 of 3 · Foundations</span>
+    <div class="toggle" id="toggle">
+      <span id="toggle-icon">☀︎</span><span id="toggle-label">Light</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1 class="serif">The design foundation<br>your <em>product & site</em> share.</h1>
+    <p>One token system — navy, amber, teal, slate — across two surfaces and two themes. Toggle light / dark up top to see both modes live. Everything below is rendered in the real fonts and real values.</p>
+  </div>
+
+  <!-- COLOR PRIMITIVES -->
+  <section id="color">
+    <div class="eyebrow">01 — Color</div>
+    <h2 class="sec-title">Primitive scales</h2>
+    <p class="sec-sub">Four ramps shared by both surfaces. Navy is the primary brand color, amber/gold the signature accent, teal the action color, slate the neutral text & divider ramp.</p>
+
+    <div class="scale">
+      <div class="scale-head"><h3>Navy</h3><span class="note">primary brand · marketing text · product interactive</span></div>
+      <div class="swatches" data-scale="navy"></div>
+    </div>
+    <div class="scale">
+      <div class="scale-head"><h3>Amber / Gold</h3><span class="note">signature accent · the logo mark · brand moments only</span></div>
+      <div class="swatches" data-scale="amber"></div>
+    </div>
+    <div class="scale">
+      <div class="scale-head"><h3>Teal</h3><span class="note">action accent · progress, checks, in-product primary buttons</span></div>
+      <div class="swatches" data-scale="teal"></div>
+    </div>
+    <div class="scale">
+      <div class="scale-head"><h3>Slate</h3><span class="note">neutral · product text hierarchy & dividers</span></div>
+      <div class="swatches" data-scale="slate"></div>
+    </div>
+
+    <h3 style="margin:34px 0 14px; font-size:18px;">Semantic</h3>
+    <div class="sem-grid">
+      <div class="sem"><div class="dot" style="background:#2e7d32"></div><div class="name">Success</div><div class="hex">#2E7D32</div><div class="use">Active / Free badges, positive deltas</div></div>
+      <div class="sem"><div class="dot" style="background:#c62828"></div><div class="name">Danger</div><div class="hex">#C62828</div><div class="use">Cancel, sign out, negative credits</div></div>
+      <div class="sem"><div class="dot" style="background:#bf7c00"></div><div class="name">Warning</div><div class="hex">#BF7C00</div><div class="use">amber-600 · low usage (see note)</div></div>
+      <div class="sem"><div class="dot" style="background:#0f537e"></div><div class="name">Info</div><div class="hex">#0F537E</div><div class="use">navy-800 · links, prices, emphasis</div></div>
+      <div class="sem"><div class="dot" style="background:linear-gradient(135deg,#ff7708,#ffaa00)"></div><div class="name">Logo gradient</div><div class="hex">#FF7708 → #FFAA00</div><div class="use">brand mark only</div></div>
+    </div>
+  </section>
+
+  <!-- THEMES -->
+  <section id="themes">
+    <div class="eyebrow">02 — Light & Dark</div>
+    <h2 class="sec-title">Two themes, both navy-tinted</h2>
+    <p class="sec-sub">No pure black or white. Light canvas is navy-50; dark canvas is navy-900. Amber stays the brand accent and teal stays the action color in both modes. Both surfaces (site + product) ship both themes.</p>
+
+    <div class="theme-row">
+      <div class="tp tp-light">
+        <div class="bar">Light — canvas #F1F4F9</div>
+        <div class="tp-body">
+          <h4>Clean data, on tap.</h4>
+          <p>Primary-source B2B data, re-verified every 60 days. Built from primary sources — not resold.</p>
+          <div class="row">
+            <span class="mini-btn mb-nav-l">Start building</span>
+            <span class="mini-btn mb-action-l">Add credits</span>
+            <span class="mini-btn mb-ghost-l">Get a demo</span>
+            <span class="mini-badge bdg-active-l">Active</span>
+            <span class="brand-chip-l">★ Brand accent</span>
+          </div>
+        </div>
+      </div>
+      <div class="tp tp-dark">
+        <div class="bar">Dark — canvas #0E1A2E</div>
+        <div class="tp-body">
+          <h4>Clean data, on tap.</h4>
+          <p>Primary-source B2B data, re-verified every 60 days. Built from primary sources — not resold.</p>
+          <div class="row">
+            <span class="mini-btn mb-nav-d">Start building</span>
+            <span class="mini-btn mb-action-d">Add credits</span>
+            <span class="mini-btn mb-ghost-d">Get a demo</span>
+            <span class="mini-badge bdg-active-d">Active</span>
+            <span class="brand-chip-d">★ Brand accent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table class="map">
+      <thead><tr><th>Role</th><th>Light</th><th>Dark</th></tr></thead>
+      <tbody>
+        <tr><td>canvas</td><td><span class="tok"><i style="background:#f1f4f9"></i><span class="mono-cell">navy-50 #F1F4F9</span></span></td><td><span class="tok"><i style="background:#0e1a2e"></i><span class="mono-cell">navy-900 #0E1A2E</span></span></td></tr>
+        <tr><td>surface</td><td><span class="tok"><i style="background:#fff"></i><span class="mono-cell">#FFFFFF / navy-100</span></span></td><td><span class="tok"><i style="background:#0a3652"></i><span class="mono-cell">navy-850 / navy-800</span></span></td></tr>
+        <tr><td>text-primary</td><td><span class="tok"><i style="background:#13161d"></i><span class="mono-cell">slate-900 / navy-800</span></span></td><td><span class="tok"><i style="background:#f1f4f9"></i><span class="mono-cell">navy-50 #F1F4F9</span></span></td></tr>
+        <tr><td>text-muted</td><td><span class="tok"><i style="background:#868c9b"></i><span class="mono-cell">slate-400 #868C9B</span></span></td><td><span class="tok"><i style="background:#89a5cc"></i><span class="mono-cell">navy-300 #89A5CC</span></span></td></tr>
+        <tr><td>border</td><td><span class="tok"><i style="background:#b5c8e0"></i><span class="mono-cell">navy-200 #B5C8E0</span></span></td><td><span class="tok"><i style="background:#1a4a6e"></i><span class="mono-cell">navy-700 #1A4A6E</span></span></td></tr>
+        <tr><td>brand accent</td><td><span class="tok"><i style="background:#ffe099"></i><span class="mono-cell">amber-200 / -800 text</span></span></td><td><span class="tok"><i style="background:#4d3000"></i><span class="mono-cell">amber-900 / -50 text</span></span></td></tr>
+        <tr><td>action</td><td><span class="tok"><i style="background:#00b5b0"></i><span class="mono-cell">teal-500 #00B5B0</span></span></td><td><span class="tok"><i style="background:#2dc9c4"></i><span class="mono-cell">teal-400 #2DC9C4</span></span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section id="type">
+    <div class="eyebrow">03 — Typography</div>
+    <h2 class="sec-title">Three families, one voice</h2>
+    <p class="sec-sub">DM Sans 500 carries the headlines and all UI. Fraunces appears <em>only</em> as italic accent words inside headlines and for stat figures — it never sets a full headline. JetBrains Mono labels eyebrows and code.</p>
+
+    <div class="font-cards">
+      <div class="fc"><div class="big" style="font-weight:500">Ag</div><div class="nm">DM Sans</div><div class="role">Headlines, body, UI, buttons</div></div>
+      <div class="fc"><div class="big serif" style="font-weight:400;font-style:italic">Ag</div><div class="nm serif" style="font-style:italic">Fraunces italic</div><div class="role">Accent words & stat figures only</div></div>
+      <div class="fc"><div class="big mono" style="font-weight:500">Ag</div><div class="nm mono">JetBrains Mono</div><div class="role">Eyebrows, labels, code</div></div>
+    </div>
+
+    <div style="margin-top:14px;">
+      <div class="spec"><div class="label">Display · 54/500<span class="fam">DM Sans + Fraunces italic</span></div><div class="sample" style="font-size:52px;font-weight:500;letter-spacing:-.03em">The trust layer <em style="font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.07em">for B2B data.</em></div></div>
+      <div class="spec"><div class="label">H2 · 46/500<span class="fam">DM Sans + Fraunces italic</span></div><div class="sample" style="font-size:40px;font-weight:500;letter-spacing:-.02em"><em style="font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.07em">We help</em> customers achieve results</div></div>
+      <div class="spec"><div class="label">H3 · 32/500<span class="fam">DM Sans</span></div><div class="sample" style="font-size:30px;font-weight:500;letter-spacing:-.02em">One platform, zero seams</div></div>
+      <div class="spec"><div class="label">H4 · 24/600<span class="fam">DM Sans</span></div><div class="sample" style="font-size:24px;font-weight:600">Built for teams who need data</div></div>
+      <div class="spec"><div class="label">Body-lg · 20/400<span class="fam">DM Sans</span></div><div class="sample" style="font-size:20px;font-weight:400;color:var(--text)">Contacts linked to company firmographics in one unified schema.</div></div>
+      <div class="spec"><div class="label">Body · 16/400<span class="fam">DM Sans</span></div><div class="sample" style="font-size:16px;font-weight:400;color:var(--text)">Test integrations and validate your data model at no cost. Real data, masked for privacy.</div></div>
+      <div class="spec"><div class="label">Label · 12/500<span class="fam">JetBrains Mono</span></div><div class="sample mono" style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--action)">CONTACTS · COMPANIES · UPDATES</div></div>
+    </div>
+  </section>
+
+  <!-- SPACING -->
+  <section id="spacing">
+    <div class="eyebrow">04 — Spacing</div>
+    <h2 class="sec-title">4px base scale</h2>
+    <p class="sec-sub">Component spacing on a 4px grid; sections breathe on a larger fluid scale (80 → 224px).</p>
+    <div class="space-list" id="space-list"></div>
+  </section>
+
+  <!-- SHAPE -->
+  <section id="shape">
+    <div class="eyebrow">05 — Shape</div>
+    <h2 class="sec-title">Square by default</h2>
+    <p class="sec-sub">Sharp corners everywhere — buttons, inputs, cards, tags and panels are all 0px, on both the site and the app (the Figma file has no rounded node anywhere). The only rounded element is the floating nav at 8px. The signature detail: <strong>crosshair corner marks</strong> (the site's real <code>c-crosshair</code> element) sit just outside the corners of buttons and framed panels — the brand's blueprint/infrastructure tell.</p>
+    <div class="shape-grid">
+      <div class="shape-card">
+        <div class="shape-demo"><span class="mini-btn mb-nav-l">Button</span><span class="demo-tag">Tag</span></div>
+        <div class="tex-meta"><div class="nm">0px — default</div><div class="dsc">buttons · inputs · cards · tags · panels</div></div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-demo"><span class="nav-demo">Floating nav</span></div>
+        <div class="tex-meta"><div class="nm">8px — nav only</div><div class="dsc">the single exception</div></div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-demo"><div class="cropframe"><span class="cm cm-tl"></span><span class="cm cm-tr"></span><span class="cm cm-bl"></span><span class="cm cm-br"></span><span class="cf-label serif">Crosshair corners</span></div></div>
+        <div class="tex-meta"><div class="nm">Crosshair corners</div><div class="dsc">real c-crosshair motif · on buttons & panels</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEXTURE -->
+  <section id="texture">
+    <div class="eyebrow">06 — Texture</div>
+    <h2 class="sec-title">Grain & grid</h2>
+    <p class="sec-sub">Two background textures lifted from the site, both theme-aware. A 256px noise grain at 4% opacity sits over the whole canvas — it's switched on across this page right now. A 45px hairline grid is available for panels and feature surfaces.</p>
+    <div class="tex-grid">
+      <div class="tex-card">
+        <div class="tex-sample noise-amp"></div>
+        <div class="tex-meta"><div class="nm">Noise grain</div><div class="dsc">256px tile · shown ~14× amplified (real = 4%)</div></div>
+      </div>
+      <div class="tex-card">
+        <div class="tex-sample grid-sample"></div>
+        <div class="tex-meta"><div class="nm">Hairline grid</div><div class="dsc">45px tile · 0.5px · slate-200 / navy-850</div></div>
+      </div>
+      <div class="tex-card">
+        <div class="tex-sample grid-panel">
+          <span class="gp-eyebrow">Infrastructure</span>
+          <span class="gp-title">Not another B2B data reseller</span>
+        </div>
+        <div class="tex-meta"><div class="nm">Grid behind content</div><div class="dsc">how it reads on a panel</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECISIONS -->
+  <section id="decisions">
+    <div class="eyebrow">07 — Calls I made</div>
+    <h2 class="sec-title">Decisions to confirm</h2>
+    <p class="sec-sub">These are the judgment calls baked into the foundation. Flag any you'd change.</p>
+    <div class="notes">
+      <div class="note-card"><h4>Square corners + crosshairs</h4><p>0px on buttons, cards, inputs, tags and panels (only the nav rounds, 8px). Crosshair marks sit at the corners of buttons & framed panels — a real site element, not selection handles. Don't soften either.</p></div>
+      <div class="note-card"><h4>The primary button is quiet</h4><p>Marketing primary CTA = muted navy-150 <code>#c1cfe0</code> fill with navy-800 text and a hairline border — not a saturated color. Secondary is an outline. Teal fills are for in-app actions only.</p></div>
+      <div class="note-card"><h4>Navy is primary, amber is accent</h4><p>Navy dominates UI & text; amber/gold is reserved for the logo mark and brand moments — never as a button or large fill. Teal carries action.</p></div>
+      <div class="note-card"><h4>Two text ramps</h4><p>Marketing text runs on navy (brand-saturated); product text runs on the neutral slate ramp for readability, with navy reserved for links/prices.</p></div>
+      <div class="note-card"><h4>Both modes are tinted</h4><p>Light = navy-50, dark = navy-900. Deliberately not pure #fff / #000, matching the live site.</p></div>
+      <div class="note-card"><h4>Texture stays whisper-quiet</h4><p>Noise rides at 4% over the canvas; the grid is reserved for panels, not full pages. Both are real site assets, saved locally and theme-swapped.</p></div>
+      <div class="note-card warn"><h4>Warning color = Known Gap</h4><p>Orange/amber warning barely appears in the inspected product screens. I'll document it from the scale and flag it as under-specified.</p></div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <div class="next">
+    <div class="eyebrow">Next</div>
+    <h3 class="serif">Approve the foundation, or tell me what to change.</h3>
+    <p>Once this is locked, Step 2 documents the marketing components (hero, feature & pricing cards, testimonial, logos, CTA banner, nav, footer) and Step 3 the product components (app shell, stepper, plan cards, tabs, tables, badges, modals, buttons, forms). Then I assemble the unified DESIGN.md and lint it.</p>
+    <div class="flow">
+      <span class="cur">1 · Foundations</span>
+      <span>2 · Marketing</span>
+      <span>3 · Product</span>
+      <span>→ DESIGN.md</span>
+    </div>
+  </div>
+</main>
+
+<script>
+  const P = {
+    navy:["50","75","100","150","200","300","400","500","600","700","800","850","900","950"],
+    amber:["50","100","200","300","400","500","600","700","800","900"],
+    teal:["50","100","200","300","400","500","600","700","800","900"],
+    slate:["50","100","200","300","400","500","600","700","800","900","950"]
+  };
+  const root = getComputedStyle(document.documentElement);
+  Object.entries(P).forEach(([name,steps])=>{
+    const host = document.querySelector(`[data-scale="${name}"]`);
+    steps.forEach(s=>{
+      const hex = root.getPropertyValue(`--${name}-${s}`).trim();
+      const el = document.createElement("div");
+      el.className="sw";
+      el.innerHTML=`<div class="chip" style="background:${hex}"></div><div class="meta"><div class="w">${s}</div><div class="hex">${hex}</div></div>`;
+      host.appendChild(el);
+    });
+  });
+
+  const spaces=[["xxs",4],["xs",8],["sm",12],["md",16],["lg",24],["xl",32],["2xl",48],["3xl",64],["section-sm",80],["section",112],["section-lg",160]];
+  const sl=document.getElementById("space-list");
+  const maxv=160;
+  spaces.forEach(([n,v])=>{
+    const r=document.createElement("div"); r.className="space-row";
+    r.innerHTML=`<div class="lbl">${n} · ${v}px</div><div class="bar" style="width:${Math.max(8,(v/maxv)*100)}%"></div>`;
+    sl.appendChild(r);
+  });
+
+  const t=document.getElementById("toggle"), html=document.documentElement;
+  const ic=document.getElementById("toggle-icon"), lb=document.getElementById("toggle-label");
+  t.addEventListener("click",()=>{
+    const dark = html.getAttribute("data-theme")==="dark";
+    html.setAttribute("data-theme", dark?"light":"dark");
+    ic.textContent = dark?"☀︎":"☾"; lb.textContent = dark?"Light":"Dark";
+  });
+</script>
+</body>
+</html>

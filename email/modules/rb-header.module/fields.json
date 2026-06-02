@@ -1,0 +1,7 @@
+[
+  { "name": "logo_src", "label": "Logo image URL", "type": "text", "default": "https://8486714.fs1.hubspotusercontent-na1.net/hubfs/8486714/revenuebase/revenuebase-logo.png" },
+  { "name": "logo_alt", "label": "Logo alt text", "type": "text", "default": "RevenueBase" },
+  { "name": "logo_width", "label": "Logo width (px)", "type": "number", "default": 150 },
+  { "name": "tagline_text", "label": "Tagline text", "type": "text", "default": "B2B Data Infrastructure" },
+  { "name": "tagline_url", "label": "Tagline URL", "type": "text", "default": "https://revenuebase.ai" }
+]

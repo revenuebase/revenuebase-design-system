@@ -1,0 +1,11 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+{% if module.line_color == "medium" %}{% set clr = "#b5c8e0" %}
+{% elif module.line_color == "dark" %}{% set clr = "#0f537e" %}
+{% else %}{% set clr = "#d2d5dc" %}{% endif %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr><td style="padding:{{ module.spacing_top }}px 40px 0; font-size:0; line-height:0;">&nbsp;</td></tr>
+  {% if module.line_style != "none" %}
+  <tr><td style="padding:0 40px; border-top:1px {{ module.line_style }} {{ clr }}; font-size:0; line-height:0;">&nbsp;</td></tr>
+  {% endif %}
+  <tr><td style="padding:0 40px {{ module.spacing_bottom }}px; font-size:0; line-height:0;">&nbsp;</td></tr>
+</table>

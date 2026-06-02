@@ -1,0 +1,13 @@
+[
+  {
+    "name": "accent",
+    "label": "Accent color",
+    "type": "choice",
+    "display": "select",
+    "choices": [ ["teal", "Teal"], ["navy", "Navy"], ["amber", "Amber"] ],
+    "default": "teal"
+  },
+  { "name": "eyebrow", "label": "Eyebrow", "type": "text", "default": "Product Teams" },
+  { "name": "card_title", "label": "Title", "type": "text", "default": "Technographics" },
+  { "name": "body_text", "label": "Body", "type": "richtext", "default": "<p>Know the stack before you reach out.</p>" }
+]

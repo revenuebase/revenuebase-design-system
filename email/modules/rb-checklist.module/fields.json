@@ -1,0 +1,20 @@
+[
+  {
+    "name": "icon_style",
+    "label": "Icon",
+    "type": "choice",
+    "display": "select",
+    "choices": [
+      ["check", "✓ Check (teal)"],
+      ["arrow", "→ Arrow (navy)"],
+      ["dot",   "· Dot (slate)"]
+    ],
+    "default": "check"
+  },
+  { "name": "item1", "label": "Item 1", "type": "text", "default": "Primary-sourced data — no resale, no aggregation." },
+  { "name": "item2", "label": "Item 2", "type": "text", "default": "Re-verified every 60 days, automatically." },
+  { "name": "item3", "label": "Item 3", "type": "text", "default": "Flat-rate feeds with full provenance on every record." },
+  { "name": "item4", "label": "Item 4 (optional)", "type": "text", "default": "" },
+  { "name": "item5", "label": "Item 5 (optional)", "type": "text", "default": "" },
+  { "name": "item6", "label": "Item 6 (optional)", "type": "text", "default": "" }
+]

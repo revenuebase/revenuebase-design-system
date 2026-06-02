@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RevenueBase — Marketing Components (Step 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;0,9..144,400;0,9..144,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-50:#f1f4f9;--navy-75:#edf3fa;--navy-100:#dde6f1;--navy-150:#c1cfe0;--navy-200:#b5c8e0;--navy-300:#89a5cc;--navy-400:#5e82b8;--navy-500:#43649f;--navy-600:#2e5a82;--navy-700:#1a4a6e;--navy-800:#0f537e;--navy-850:#0a3652;--navy-900:#0e1a2e;--navy-950:#091220;
+    --amber-50:#fff8e6;--amber-100:#fff0cc;--amber-200:#ffe099;--amber-300:#ffce66;--amber-600:#bf7c00;--amber-700:#946000;--amber-800:#704700;--amber-900:#4d3000;
+    --teal-50:#ecfcfb;--teal-100:#cff5f4;--teal-200:#9eeae7;--teal-400:#2dc9c4;--teal-500:#00b5b0;--teal-600:#219f98;--teal-700:#107069;
+    --slate-50:#f7f7f9;--slate-100:#ecedf0;--slate-200:#d2d5dc;--slate-400:#868c9b;--slate-500:#626879;--slate-700:#2e323d;--slate-900:#13161d;
+    --cmp-red:#c9413a;--cmp-red-bg:#f2dcdd;--cmp-green:#1a9e6f;--cmp-green-bg:#d9eae4;
+    --serif:"Fraunces",Georgia,serif;--sans:"DM Sans",Arial,sans-serif;--mono:"JetBrains Mono",Menlo,monospace;
+  }
+  html[data-theme="light"]{
+    --canvas:var(--navy-50);--surface:#fff;--surface-2:var(--navy-100);
+    --heading:var(--navy-800);--text:rgba(15,83,126,.72);--eyebrow:rgba(15,83,126,.45);--muted:var(--slate-400);
+    --accent:var(--navy-800);--border:var(--navy-200);--border-soft:var(--slate-200);--grid-line:var(--slate-200);
+    --btn-bg:var(--navy-150);--btn-fg:var(--navy-800);--btn-bd:var(--navy-300);
+    --brand-bg:var(--amber-100);--brand-fg:var(--amber-800);--action:var(--teal-500);
+    --noise:url("assets/bg-noise-light.webp");--grid:url("assets/grid-light.svg");
+    --doc-bg:#e9edf3;
+  }
+  html[data-theme="dark"]{
+    --canvas:var(--navy-900);--surface:var(--navy-850);--surface-2:var(--navy-800);
+    --heading:var(--navy-50);--text:var(--navy-200);--eyebrow:var(--navy-300);--muted:var(--navy-300);
+    --accent:var(--navy-100);--border:var(--navy-700);--border-soft:var(--navy-700);--grid-line:var(--navy-850);
+    --btn-bg:var(--navy-200);--btn-fg:var(--navy-900);--btn-bd:var(--navy-400);
+    --brand-bg:var(--amber-900);--brand-fg:var(--amber-50);--action:var(--teal-400);
+    --noise:url("assets/bg-noise-dark.webp");--grid:url("assets/grid-dark.svg");
+    --doc-bg:#0a1322;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans);background:var(--doc-bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s;}
+  .serif{font-family:var(--serif);} .mono{font-family:var(--mono);}
+  .fa{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.07em;} /* fraunces accent */
+  code{font-family:var(--mono);font-size:.85em;background:color-mix(in srgb,var(--accent) 9%,transparent);padding:.1em .4em;}
+
+  /* topbar */
+  header.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:13px clamp(16px,4vw,40px);background:color-mix(in srgb,var(--canvas) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .logo{display:flex;align-items:center;gap:9px;}
+  .logo .wm{font-size:19px;letter-spacing:-.02em;color:var(--heading);} .logo .wm b{font-weight:700;} .logo .wm span{font-weight:400;}
+  .topbar-right{display:flex;align-items:center;gap:12px;}
+  .step-pill{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border:1px solid var(--border);padding:6px 12px;}
+  .toggle{display:flex;align-items:center;gap:7px;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:7px 13px;font-size:13px;font-weight:500;}
+
+  /* doc scaffold */
+  main{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 120px;}
+  .doc-intro{padding:48px 0 8px;}
+  .doc-intro h1{font-family:var(--sans);font-weight:500;font-size:clamp(30px,4.5vw,46px);color:var(--heading);letter-spacing:-.03em;line-height:1.05;}
+  .doc-intro p{color:var(--muted);font-size:17px;margin-top:14px;max-width:64ch;}
+  .block{margin-top:56px;}
+  .block-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:20px;}
+  .block-head .n{font-family:var(--mono);font-size:12px;color:var(--action);letter-spacing:.08em;}
+  .block-head h2{font-family:var(--sans);font-weight:600;font-size:22px;color:var(--heading);letter-spacing:-.01em;}
+  .block-head .spec{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;max-width:48%;}
+  .stage{background:var(--canvas);border:1px solid var(--border);position:relative;overflow:hidden;}
+  .stage::before{content:"";position:absolute;inset:0;background-image:var(--noise);background-size:256px;opacity:.04;pointer-events:none;}
+  .stage>*{position:relative;}
+  .pad{padding:clamp(22px,4vw,44px);}
+
+  /* eyebrow + headline */
+  .eyebrow{font-family:var(--mono);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--eyebrow);}
+  .hl{font-family:var(--sans);font-weight:500;color:var(--heading);letter-spacing:-.03em;line-height:1.08;}
+
+  /* crosshair button */
+  .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;font:500 15px/1 var(--sans);padding:15px 24px;border:1px solid transparent;text-decoration:none;cursor:pointer;}
+  .btn-primary{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bd);}
+  .btn-secondary{background:transparent;color:var(--accent);border-color:var(--btn-bd);}
+  .btn-sm{padding:10px 16px;font-size:14px;}
+  .nav-btn{border-radius:8px;}
+  .cm{position:absolute;width:11px;height:11px;pointer-events:none;}
+  .cm::before{content:"";position:absolute;left:5px;top:0;width:1px;height:11px;background:var(--accent);opacity:.55;}
+  .cm::after{content:"";position:absolute;top:5px;left:0;height:1px;width:11px;background:var(--accent);opacity:.55;}
+  .cm-tl{top:-6px;left:-6px;}.cm-tr{top:-6px;right:-6px;}.cm-bl{bottom:-6px;left:-6px;}.cm-br{bottom:-6px;right:-6px;}
+  .btn-row{display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
+
+  /* nav demo */
+  .navbar{display:flex;align-items:center;gap:28px;padding:14px 22px;background:var(--canvas);border:1px solid var(--border);border-radius:8px;}
+  .navbar .links{display:flex;gap:20px;margin-left:8px;}
+  .navbar .links a{color:var(--text);text-decoration:none;font-size:14px;}
+  .navbar .sp{margin-left:auto;}
+  .navbar .login{color:var(--accent);font-size:14px;font-weight:500;margin-right:16px;text-decoration:none;}
+
+  /* hero */
+  .hero-demo{text-align:left;}
+  .hero-demo .eyebrow{margin-bottom:18px;}
+  .hero-demo h1{font-size:clamp(34px,5vw,54px);margin-bottom:20px;}
+  .hero-demo p{font-size:19px;color:var(--text);max-width:46ch;margin-bottom:30px;}
+
+  /* feature cards */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);}
+  @media(max-width:760px){.feat-grid{grid-template-columns:1fr;}}
+  .feat{padding:26px;border-right:1px solid var(--border);border-top:3px solid var(--fa-600);background:var(--fa-50);}
+  .feat:last-child{border-right:none;}
+  .feat.teal{--fa-50:var(--teal-50);--fa-600:var(--teal-600);--fa-100:var(--teal-100);--fa-700:var(--teal-700);}
+  .feat.slate{--fa-50:var(--slate-50);--fa-600:var(--slate-500);--fa-100:var(--slate-100);--fa-700:var(--slate-700);}
+  .feat.amber{--fa-50:var(--amber-50);--fa-600:var(--amber-600);--fa-100:var(--amber-100);--fa-700:var(--amber-700);}
+  html[data-theme="dark"] .feat{background:color-mix(in srgb,var(--fa-600) 12%,var(--surface));}
+  .feat .ico{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:var(--fa-100);color:var(--fa-700);margin-bottom:18px;font-size:18px;}
+  .feat .fe{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--fa-700);margin-bottom:8px;}
+  .feat h3{font-family:var(--sans);font-weight:600;font-size:19px;color:var(--heading);margin-bottom:8px;letter-spacing:-.01em;}
+  .feat p{font-size:14.5px;color:var(--text);}
+
+  /* stats */
+  .stats{display:flex;gap:48px;flex-wrap:wrap;}
+  .stat .fig{font-family:var(--serif);font-style:italic;font-weight:400;font-size:52px;color:var(--heading);line-height:1;}
+  .stat .lbl{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--eyebrow);margin-top:8px;}
+
+  /* logo grid */
+  .logo-grid{display:grid;grid-template-columns:repeat(4,1fr);background-color:var(--canvas);background-image:var(--grid);background-size:46px 46px;border:1px solid var(--grid-line);}
+  @media(max-width:760px){.logo-grid{grid-template-columns:repeat(2,1fr);}}
+  .lg-cell{height:104px;display:flex;align-items:center;justify-content:center;position:relative;border-right:1px solid var(--grid-line);border-bottom:1px solid var(--grid-line);}
+  .lg-cell .nm{font-weight:700;font-size:17px;color:var(--accent);opacity:.8;letter-spacing:-.02em;}
+  .lg-cell .tt{position:absolute;bottom:8px;font-family:var(--sans);font-size:11px;font-weight:500;color:var(--accent);border:1px solid var(--btn-bd);background:var(--canvas);padding:3px 9px;}
+
+  /* testimonial */
+  .quote{border:1px solid var(--border);background:var(--surface);padding:32px;max-width:680px;}
+  .quote .q{font-family:var(--serif);font-style:italic;font-weight:400;font-size:23px;color:var(--heading);line-height:1.35;margin-bottom:22px;}
+  .quote .who{display:flex;align-items:center;gap:12px;}
+  .quote .av{width:40px;height:40px;background:var(--surface-2);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;}
+  .quote .nm{font-weight:600;color:var(--heading);font-size:14px;} .quote .ro{font-size:13px;color:var(--muted);}
+
+  /* before / after */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:680px){.ba{grid-template-columns:1fr;}}
+  .ba-col{border:1px solid var(--border);background:var(--surface);}
+  .ba-col h4{font-family:var(--sans);font-weight:600;font-size:15px;padding:14px 18px;border-bottom:1px solid var(--border);}
+  .ba-without h4{color:var(--cmp-red);} .ba-with h4{color:var(--cmp-green);}
+  .ba-col ul{list-style:none;padding:8px 18px 18px;}
+  .ba-col li{display:flex;gap:11px;padding:9px 0;font-size:14.5px;color:var(--text);align-items:flex-start;}
+  .ba-col li .mk{width:18px;height:18px;flex:none;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px;}
+  .ba-without li .mk{background:var(--cmp-red-bg);color:var(--cmp-red);} .ba-with li .mk{background:var(--cmp-green-bg);color:var(--cmp-green);}
+
+  /* faq */
+  .faq{border-top:1px solid var(--border);}
+  .faq .row{display:flex;align-items:center;justify-content:space-between;padding:18px 4px;border-bottom:1px solid var(--border);cursor:pointer;}
+  .faq .row .q{font-family:var(--sans);font-weight:500;font-size:17px;color:var(--heading);}
+  .faq .row .pl{font-family:var(--mono);color:var(--action);font-size:18px;}
+
+  /* cta banner */
+  .cta{background:var(--navy-900);position:relative;overflow:hidden;padding:clamp(40px,6vw,72px);text-align:center;}
+  .cta::before{content:"";position:absolute;inset:0;background-image:var(--noise-dark, url("assets/bg-noise-dark.webp"));background-size:256px;opacity:.05;}
+  .cta>*{position:relative;}
+  .cta .eyebrow{color:var(--amber-200);margin-bottom:18px;}
+  .cta h2{font-family:var(--sans);font-weight:500;font-size:clamp(28px,4vw,44px);color:var(--navy-50);letter-spacing:-.03em;line-height:1.1;margin-bottom:18px;}
+  .cta p{color:var(--navy-200);font-size:17px;max-width:52ch;margin:0 auto 30px;}
+  .cta .btn-row{justify-content:center;}
+  .cta .btn-primary{background:var(--navy-200);color:var(--navy-900);border-color:var(--navy-400);}
+  .cta .btn-secondary{color:var(--navy-50);border-color:var(--navy-400);}
+  .cta .cm::before,.cta .cm::after{background:var(--navy-100);}
+
+  /* footer */
+  .foot{background:var(--canvas);border:1px solid var(--border);padding:40px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:28px;}
+  @media(max-width:760px){.foot{grid-template-columns:1fr 1fr;}}
+  .foot .col h5{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--eyebrow);margin-bottom:14px;}
+  .foot .col a{display:block;color:var(--accent);font-size:15px;text-decoration:none;margin-bottom:9px;}
+  .foot .brand .wm{font-size:18px;color:var(--heading);} .foot .brand .wm b{font-weight:700;}
+  .foot .brand p{font-size:13px;color:var(--muted);margin-top:10px;max-width:30ch;}
+
+  .next{margin-top:64px;background:var(--brand-bg);color:var(--brand-fg);padding:34px clamp(20px,4vw,42px);}
+  .next h3{font-family:var(--serif);font-style:italic;font-size:25px;font-weight:400;margin-bottom:8px;}
+  .next p{font-size:15px;max-width:64ch;} .next .flow{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .next .flow span{font-family:var(--mono);font-size:12px;padding:7px 12px;border:1px solid currentColor;opacity:.55;}
+  .next .flow span.cur{opacity:1;font-weight:700;background:color-mix(in srgb,var(--brand-fg) 14%,transparent);}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">
+    <svg width="24" height="24" viewBox="0 0 26 26"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7708"/><stop offset="1" stop-color="#ffaa00"/></linearGradient></defs><path d="M3 4 L13 13 L3 22 Z" fill="url(#g)"/><path d="M11 4 L21 13 L11 22 Z" fill="url(#g)" opacity="0.55"/></svg>
+    <span class="wm"><b>Revenue</b><span>Base</span></span>
+  </div>
+  <div class="topbar-right">
+    <span class="step-pill">Step 2 of 3 · Marketing</span>
+    <div class="toggle" id="toggle"><span id="ti">☀︎</span><span id="tl">Light</span></div>
+  </div>
+</header>
+
+<main>
+  <div class="doc-intro">
+    <h1>Marketing <span class="fa">components</span></h1>
+    <p>Every piece pulled from revenuebase.ai and rebuilt on the approved foundation — square corners, crosshair buttons, DM Sans headlines with Fraunces-italic accents, dual-theme. Toggle light / dark up top. Approve, or flag anything off.</p>
+  </div>
+
+  <!-- NAV -->
+  <section class="block">
+    <div class="block-head"><span class="n">01</span><h2>Top navigation</h2><span class="spec">8px rounded bar · logo · links · Log in + muted primary</span></div>
+    <div class="navbar">
+      <div class="logo"><svg width="22" height="22" viewBox="0 0 26 26"><path d="M3 4 L13 13 L3 22 Z" fill="url(#g)"/><path d="M11 4 L21 13 L11 22 Z" fill="url(#g)" opacity="0.55"/></svg><span class="wm" style="font-size:17px;color:var(--heading)"><b style="font-weight:700">Revenue</b>Base</span></div>
+      <div class="links"><a>Data</a><a>Tools</a><a>Solutions</a><a>Pricing</a><a>Company</a></div>
+      <span class="sp"></span>
+      <a class="login">Log in</a>
+      <a class="btn btn-primary nav-btn btn-sm">Start building</a>
+    </div>
+  </section>
+
+  <!-- HERO -->
+  <section class="block">
+    <div class="block-head"><span class="n">02</span><h2>Hero</h2><span class="spec">mono eyebrow · DM Sans 500 + Fraunces italic · body · CTA pair</span></div>
+    <div class="stage pad hero-demo">
+      <div class="eyebrow">B2B Data Infrastructure</div>
+      <h1 class="hl">The trust layer <span class="fa">for B2B data.</span></h1>
+      <p>One platform to clean the data you have, keep it current, and find what's missing. Flat-rate feeds, per-outcome APIs, full provenance on every record.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary">Start building for free<i class="cm cm-tl"></i><i class="cm cm-tr"></i><i class="cm cm-bl"></i><i class="cm cm-br"></i></a>
+        <a class="btn btn-secondary">Get a demo<i class="cm cm-tl"></i><i class="cm cm-tr"></i><i class="cm cm-bl"></i><i class="cm cm-br"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section class="block">
+    <div class="block-head"><span class="n">03</span><h2>Buttons</h2><span class="spec">primary navy-150 · secondary outline · crosshair corners · 0px</span></div>
+    <div class="stage pad">
+      <div class="btn-row">
+        <a class="btn btn-primary">Primary<i class="cm cm-tl"></i><i class="cm cm-tr"></i><i class="cm cm-bl"></i><i class="cm cm-br"></i></a>
+        <a class="btn btn-secondary">Secondary<i class="cm cm-tl"></i><i class="cm cm-tr"></i><i class="cm cm-bl"></i><i class="cm cm-br"></i></a>
+        <a class="btn btn-primary nav-btn">Nav · 8px</a>
+        <a class="btn btn-primary btn-sm">Small<i class="cm cm-tl"></i><i class="cm cm-tr"></i><i class="cm cm-bl"></i><i class="cm cm-br"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE CARDS -->
+  <section class="block">
+    <div class="block-head"><span class="n">04</span><h2>Feature cards</h2><span class="spec">accent-50 fill · accent top rule · mono eyebrow · icon</span></div>
+    <div class="feat-grid">
+      <div class="feat teal"><div class="ico">◍</div><div class="fe">Product Teams</div><h3>Launch data-powered products faster.</h3><p>Embed verified company and contact data, enrichment, and verification without building the pipeline yourself.</p></div>
+      <div class="feat slate"><div class="ico">✦</div><div class="fe">Sales &amp; Marketing</div><h3>Keep your data clean and complete.</h3><p>Fix stale records, verify emails, detect job changes, and enrich accounts automatically. Spend less time chasing data.</p></div>
+      <div class="feat amber"><div class="ico">◆</div><div class="fe">Demand Gen Agencies</div><h3>Volume without the bill shock.</h3><p>Run high-volume programs on flat-rate, continuously refreshed data. Predictable spend, every client.</p></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="block">
+    <div class="block-head"><span class="n">05</span><h2>Stat figures</h2><span class="spec">Fraunces italic numeral · mono label</span></div>
+    <div class="stage pad">
+      <div class="stats">
+        <div class="stat"><div class="fig">1B+</div><div class="lbl">Verified records</div></div>
+        <div class="stat"><div class="fig">390M+</div><div class="lbl">Contacts</div></div>
+        <div class="stat"><div class="fig">60M+</div><div class="lbl">Companies</div></div>
+        <div class="stat"><div class="fig">60d</div><div class="lbl">Re-verification</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO GRID -->
+  <section class="block">
+    <div class="block-head"><span class="n">06</span><h2>Customer logo grid</h2><span class="spec">hairline grid texture · Testimonial tag</span></div>
+    <div class="logo-grid">
+      <div class="lg-cell"><span class="nm">clay</span></div>
+      <div class="lg-cell"><span class="nm">Watt.</span><span class="tt">Testimonial</span></div>
+      <div class="lg-cell"><span class="nm">Dropzone AI</span></div>
+      <div class="lg-cell"><span class="nm">demostack</span><span class="tt">Testimonial</span></div>
+      <div class="lg-cell"><span class="nm">plannuh</span><span class="tt">Testimonial</span></div>
+      <div class="lg-cell"><span class="nm">orbital</span></div>
+      <div class="lg-cell"><span class="nm">Pliant</span><span class="tt">Testimonial</span></div>
+      <div class="lg-cell"><span class="nm">aviso</span></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="block">
+    <div class="block-head"><span class="n">07</span><h2>Testimonial</h2><span class="spec">Fraunces-italic pull quote · square avatar · opens from logo grid</span></div>
+    <div class="stage pad">
+      <div class="quote">
+        <div class="q">"We replaced three vendors with one feed. The data just stays clean — re-verified before we even notice it's stale."</div>
+        <div class="who"><div class="av">JD</div><div><div class="nm">Jordan Diaz</div><div class="ro">VP RevOps, Orbital</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section class="block">
+    <div class="block-head"><span class="n">08</span><h2>Before / after comparison</h2><span class="spec">red negative · green positive bullets</span></div>
+    <div class="ba">
+      <div class="ba-col ba-without">
+        <h4>Without RevenueBase</h4>
+        <ul>
+          <li><span class="mk">✕</span> Stitching together 3+ vendors with overlapping, conflicting records.</li>
+          <li><span class="mk">✕</span> Data decays the moment it lands; no idea what's stale.</li>
+          <li><span class="mk">✕</span> Per-record pricing that punishes volume.</li>
+        </ul>
+      </div>
+      <div class="ba-col ba-with">
+        <h4>With RevenueBase</h4>
+        <ul>
+          <li><span class="mk">✓</span> One unified feed, primary-sourced, no resale.</li>
+          <li><span class="mk">✓</span> Re-verified every 60 days, automatically.</li>
+          <li><span class="mk">✓</span> Flat-rate feeds with full provenance.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block">
+    <div class="block-head"><span class="n">09</span><h2>FAQ accordion</h2><span class="spec">DM Sans question · mono plus · hairline rows</span></div>
+    <div class="stage pad">
+      <div class="faq">
+        <div class="row"><span class="q">Where does the data come from?</span><span class="pl">+</span></div>
+        <div class="row"><span class="q">How often is it re-verified?</span><span class="pl">+</span></div>
+        <div class="row"><span class="q">Can I start without a credit card?</span><span class="pl">+</span></div>
+        <div class="row"><span class="q">What delivery options are supported?</span><span class="pl">+</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="block">
+    <div class="block-head"><span class="n">10</span><h2>CTA banner</h2><span class="spec">navy-900 panel · noise · inverse buttons</span></div>
+    <div class="cta">
+      <div class="eyebrow mono">Get started</div>
+      <h2><span class="fa">You shouldn't have to choose</span> between clean data &amp; doing your actual job.</h2>
+      <p>RevenueBase keeps your data accurate in the background. You focus on revenue.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary">Start building for free<i class="cm cm-tl"></i><i class="cm cm-tr"></i><i class="cm cm-bl"></i><i class="cm cm-br"></i></a>
+        <a class="btn btn-secondary">Get a demo<i class="cm cm-tl"></i><i class="cm cm-tr"></i><i class="cm cm-bl"></i><i class="cm cm-br"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <section class="block">
+    <div class="block-head"><span class="n">11</span><h2>Footer</h2><span class="spec">mono column heads · DM Sans links</span></div>
+    <div class="foot">
+      <div class="col brand"><span class="wm"><b>Revenue</b>Base</span><p>The trust layer for B2B data. Primary-sourced, re-verified, no resale.</p></div>
+      <div class="col"><h5>Product</h5><a>Data Catalog</a><a>Integrations</a><a>Email Verification</a><a>API</a></div>
+      <div class="col"><h5>Solutions</h5><a>Product Teams</a><a>Sales &amp; Marketing</a><a>Agencies</a></div>
+      <div class="col"><h5>Company</h5><a>About</a><a>Blog</a><a>Careers</a><a>Contact</a></div>
+    </div>
+  </section>
+
+  <div class="next">
+    <div class="eyebrow" style="color:inherit;opacity:.7">Next</div>
+    <h3>Approve the marketing set, or tell me what to change.</h3>
+    <p>Step 3 documents the product (app shell + sidebar, top bar, credits pill, setup stepper, plan cards, tabs, data tables, status badges, modals, the teal action button, forms). Then everything merges into the unified DESIGN.md.</p>
+    <div class="flow"><span>1 · Foundations ✓</span><span class="cur">2 · Marketing</span><span>3 · Product</span><span>→ DESIGN.md</span></div>
+  </div>
+</main>
+
+<script>
+  const t=document.getElementById("toggle"),h=document.documentElement,ti=document.getElementById("ti"),tl=document.getElementById("tl");
+  t.addEventListener("click",()=>{const d=h.getAttribute("data-theme")==="dark";h.setAttribute("data-theme",d?"light":"dark");ti.textContent=d?"☀︎":"☾";tl.textContent=d?"Light":"Dark";});
+</script>
+</body>
+</html>

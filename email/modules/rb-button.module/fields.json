@@ -1,0 +1,37 @@
+[
+  {
+    "name": "button_text",
+    "label": "Button text",
+    "type": "text",
+    "default": "Explore Insight Fields"
+  },
+  {
+    "name": "button_url",
+    "label": "Button URL",
+    "type": "text",
+    "default": "https://app.revenuebase.ai/catalog"
+  },
+  {
+    "name": "style",
+    "label": "Style",
+    "type": "choice",
+    "display": "select",
+    "choices": [
+      ["navy", "Navy (primary)"],
+      ["teal", "Teal (action)"],
+      ["outline", "Outline (secondary)"]
+    ],
+    "default": "navy"
+  },
+  {
+    "name": "align",
+    "label": "Alignment",
+    "type": "choice",
+    "display": "select",
+    "choices": [
+      ["left", "Left"],
+      ["center", "Center"]
+    ],
+    "default": "left"
+  }
+]

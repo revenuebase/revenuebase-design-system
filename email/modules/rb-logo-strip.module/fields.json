@@ -1,0 +1,20 @@
+[
+  { "name": "strip_eyebrow", "label": "Eyebrow (optional)", "type": "text", "default": "Trusted by teams at" },
+  { "name": "logo1_src",  "label": "Logo 1 URL",  "type": "text", "default": "" },
+  { "name": "logo1_alt",  "label": "Logo 1 alt",  "type": "text", "default": "" },
+  { "name": "logo2_src",  "label": "Logo 2 URL",  "type": "text", "default": "" },
+  { "name": "logo2_alt",  "label": "Logo 2 alt",  "type": "text", "default": "" },
+  { "name": "logo3_src",  "label": "Logo 3 URL",  "type": "text", "default": "" },
+  { "name": "logo3_alt",  "label": "Logo 3 alt",  "type": "text", "default": "" },
+  { "name": "logo4_src",  "label": "Logo 4 URL",  "type": "text", "default": "" },
+  { "name": "logo4_alt",  "label": "Logo 4 alt",  "type": "text", "default": "" },
+  { "name": "logo_height", "label": "Logo height (px)", "type": "number", "default": 24 },
+  {
+    "name": "strip_bg",
+    "label": "Background",
+    "type": "choice",
+    "display": "select",
+    "choices": [ ["white", "White"], ["light", "Light grey (#f1f4f9)"] ],
+    "default": "light"
+  }
+]

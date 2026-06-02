@@ -1,0 +1,19 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+{% if module.strip_bg == "white" %}{% set bg = "#ffffff" %}{% else %}{% set bg = "#f1f4f9" %}{% endif %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td bgcolor="{{ bg }}" style="background:{{ bg }}; padding:28px 40px;">
+      {% if module.strip_eyebrow %}
+      <p style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; font-weight:500; letter-spacing:1px; text-transform:uppercase; color:#868c9b; margin:0 0 20px; text-align:center;">{{ module.strip_eyebrow }}</p>
+      {% endif %}
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          {% if module.logo1_src %}<td align="center" valign="middle" style="padding:8px 12px;"><img src="{{ module.logo1_src }}" alt="{{ module.logo1_alt }}" height="{{ module.logo_height }}" style="display:inline-block; border:0; height:{{ module.logo_height }}px; width:auto;"></td>{% endif %}
+          {% if module.logo2_src %}<td align="center" valign="middle" style="padding:8px 12px;"><img src="{{ module.logo2_src }}" alt="{{ module.logo2_alt }}" height="{{ module.logo_height }}" style="display:inline-block; border:0; height:{{ module.logo_height }}px; width:auto;"></td>{% endif %}
+          {% if module.logo3_src %}<td align="center" valign="middle" style="padding:8px 12px;"><img src="{{ module.logo3_src }}" alt="{{ module.logo3_alt }}" height="{{ module.logo_height }}" style="display:inline-block; border:0; height:{{ module.logo_height }}px; width:auto;"></td>{% endif %}
+          {% if module.logo4_src %}<td align="center" valign="middle" style="padding:8px 12px;"><img src="{{ module.logo4_src }}" alt="{{ module.logo4_alt }}" height="{{ module.logo_height }}" style="display:inline-block; border:0; height:{{ module.logo_height }}px; width:auto;"></td>{% endif %}
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

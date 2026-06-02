@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RevenueBase — Product Components (Step 3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-50:#f1f4f9;--navy-75:#edf3fa;--navy-100:#dde6f1;--navy-150:#c1cfe0;--navy-200:#b5c8e0;--navy-300:#89a5cc;--navy-400:#5e82b8;--navy-500:#43649f;--navy-600:#2e5a82;--navy-700:#1a4a6e;--navy-800:#0f537e;--navy-850:#0a3652;--navy-900:#0e1a2e;--navy-950:#091220;
+    --amber-50:#fff8e6;--amber-100:#fff0cc;--amber-200:#ffe099;--amber-600:#bf7c00;--amber-700:#946000;--amber-800:#704700;--amber-900:#4d3000;
+    --teal-50:#ecfcfb;--teal-100:#cff5f4;--teal-400:#2dc9c4;--teal-500:#00b5b0;--teal-600:#219f98;--teal-700:#107069;
+    --slate-50:#f7f7f9;--slate-100:#ecedf0;--slate-200:#d2d5dc;--slate-300:#adb2bd;--slate-400:#868c9b;--slate-500:#626879;--slate-700:#2e323d;--slate-800:#1e2129;--slate-900:#13161d;
+    --success:#2e7d32;--success-bg:#e6f3e6;--danger:#c62828;--danger-bg:#fae3e3;--warning:#bf7c00;--warning-bg:#fff8e6;
+    --serif:"Fraunces",Georgia,serif;--sans:"DM Sans",Arial,sans-serif;--mono:"JetBrains Mono",Menlo,monospace;
+  }
+  html[data-theme="light"]{
+    --doc-bg:#e9edf3;--canvas:#ffffff;--app-bg:var(--navy-50);--surface:#ffffff;--surface-2:var(--slate-50);
+    --heading:var(--slate-900);--text:var(--slate-700);--muted:var(--slate-400);--eyebrow:var(--slate-400);
+    --accent:var(--navy-800);--border:var(--slate-200);--border-strong:var(--navy-200);
+    --nav-active-bg:var(--navy-50);--nav-active-fg:var(--navy-800);
+    --btn-primary:var(--navy-800);--btn-primary-h:var(--navy-700);--action:var(--teal-500);
+    --field-bg:#ffffff;--field-border:var(--navy-300);--field-ph:var(--slate-400);
+    --noise:url("assets/bg-noise-light.webp");
+  }
+  html[data-theme="dark"]{
+    --doc-bg:#0a1322;--canvas:var(--navy-900);--app-bg:var(--navy-950);--surface:var(--navy-850);--surface-2:var(--navy-800);
+    --heading:var(--navy-50);--text:var(--navy-200);--muted:var(--navy-300);--eyebrow:var(--navy-300);
+    --accent:var(--navy-100);--border:var(--navy-700);--border-strong:var(--navy-600);
+    --nav-active-bg:var(--navy-800);--nav-active-fg:var(--navy-50);
+    --btn-primary:var(--navy-600);--btn-primary-h:var(--navy-500);--action:var(--teal-400);
+    --field-bg:var(--navy-900);--field-border:var(--navy-600);--field-ph:var(--navy-400);
+    --noise:url("assets/bg-noise-dark.webp");
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans);background:var(--doc-bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;font-size:14px;transition:background .25s,color .25s;}
+  .serif{font-family:var(--serif);} .mono{font-family:var(--mono);}
+
+  header.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:13px clamp(16px,4vw,40px);background:color-mix(in srgb,var(--canvas) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .logo{display:flex;align-items:center;gap:9px;} .logo .wm{font-size:18px;letter-spacing:-.02em;color:var(--heading);} .logo .wm b{font-weight:700;}
+  .topbar-right{display:flex;align-items:center;gap:12px;}
+  .step-pill{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border:1px solid var(--border);padding:6px 12px;}
+  .toggle{display:flex;align-items:center;gap:7px;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:7px 13px;font-size:13px;font-weight:500;}
+
+  main{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 120px;}
+  .doc-intro{padding:46px 0 8px;}
+  .doc-intro h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.5vw,44px);color:var(--heading);letter-spacing:-.01em;line-height:1.05;}
+  .doc-intro p{color:var(--muted);font-size:16px;margin-top:14px;max-width:66ch;}
+  .block{margin-top:52px;}
+  .block-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:20px;}
+  .block-head .n{font-family:var(--mono);font-size:12px;color:var(--action);letter-spacing:.08em;}
+  .block-head h2{font-family:var(--sans);font-weight:600;font-size:21px;color:var(--heading);letter-spacing:-.01em;}
+  .block-head .spec{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;max-width:50%;}
+  .stage{background:var(--app-bg);border:1px solid var(--border);padding:clamp(18px,3vw,32px);}
+  .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--eyebrow);}
+
+  /* ===== app shell ===== */
+  .appframe{display:flex;height:560px;border:1px solid var(--border);background:var(--canvas);overflow:hidden;font-size:14px;}
+  .sidebar{width:232px;flex:none;background:var(--canvas);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:16px 0;}
+  .sb-logo{display:flex;align-items:center;gap:8px;padding:4px 18px 18px;}
+  .sb-logo .wm{font-size:16px;color:var(--heading);} .sb-logo .wm b{font-weight:700;}
+  .sb-scroll{flex:1;overflow:auto;}
+  .sb-group{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:14px 18px 6px;}
+  .navitem{display:flex;align-items:center;gap:11px;padding:9px 18px;color:var(--text);cursor:pointer;border-left:2px solid transparent;}
+  .navitem .ic{width:16px;text-align:center;opacity:.7;}
+  .navitem .ch{margin-left:auto;opacity:.5;font-size:11px;}
+  .navitem:hover{background:var(--surface-2);}
+  .navitem.active{background:var(--nav-active-bg);color:var(--nav-active-fg);border-left-color:var(--navy-800);font-weight:500;}
+  .navitem.sub{padding-left:45px;font-size:13px;}
+  .navitem.active.sub{font-weight:500;}
+  .navitem.danger{color:var(--danger);}
+  .sb-bottom{border-top:1px solid var(--border);padding-top:8px;}
+  .app-main{flex:1;display:flex;flex-direction:column;background:var(--app-bg);min-width:0;}
+  .app-top{display:flex;align-items:center;justify-content:flex-end;gap:12px;padding:13px 24px;border-bottom:1px solid var(--border);background:var(--canvas);}
+  .credits-pill{font-size:13px;color:var(--accent);background:var(--navy-50);border:1px solid var(--navy-200);padding:6px 13px;}
+  html[data-theme=dark] .credits-pill{background:var(--navy-800);border-color:var(--navy-700);color:var(--navy-100);}
+  .icon-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--canvas);color:var(--muted);cursor:pointer;}
+  .app-body{padding:26px;overflow:auto;}
+  .page-title{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--heading);letter-spacing:-.01em;}
+  .page-sub{color:var(--muted);font-size:14px;margin-top:4px;}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font:500 14px/1 var(--sans);padding:11px 18px;border:1px solid transparent;cursor:pointer;text-decoration:none;}
+  .btn-primary{background:var(--btn-primary);color:#fff;}
+  .btn-action{background:var(--action);color:#fff;}
+  html[data-theme=dark] .btn-action{color:var(--navy-900);}
+  .btn-secondary{background:var(--canvas);color:var(--accent);border-color:var(--field-border);}
+  .btn-danger{background:var(--danger-bg);color:var(--danger);}
+  .btn-sm{padding:8px 13px;font-size:13px;}
+  .link{color:var(--accent);font-weight:500;cursor:pointer;font-size:13px;text-decoration:none;}
+  .link.danger{color:var(--danger);}
+
+  /* badges */
+  .badge{font-size:11px;font-weight:600;padding:3px 9px;display:inline-flex;align-items:center;gap:5px;}
+  .badge-success{background:var(--success-bg);color:var(--success);}
+  html[data-theme=dark] .badge-success{background:#16321a;color:#7bd488;}
+  .badge-neutral{background:var(--navy-50);color:var(--accent);border:1px solid var(--navy-200);}
+  html[data-theme=dark] .badge-neutral{background:var(--navy-800);border-color:var(--navy-700);color:var(--navy-100);}
+  .badge-pop{background:var(--navy-800);color:#fff;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--success);display:inline-block;}
+
+  /* panel/card */
+  .panel{background:var(--surface);border:1px solid var(--border);padding:20px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:780px){.grid3{grid-template-columns:1fr;}}
+
+  /* plan card */
+  .plan{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--pa);padding:20px;position:relative;}
+  .plan.teal{--pa:var(--teal-600);} .plan.navy{--pa:var(--navy-800);} .plan.blue{--pa:var(--navy-500);}
+  .plan.featured{border-color:var(--navy-800);}
+  .plan .pop{position:absolute;top:-1px;left:-1px;}
+  .plan h3{font-family:var(--sans);font-weight:600;font-size:18px;color:var(--heading);margin-bottom:3px;}
+  .plan .ds{font-size:13px;color:var(--muted);margin-bottom:16px;}
+  .plan .stats{display:flex;gap:18px;border-top:1px solid var(--border);padding-top:14px;}
+  .plan .stat .k{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
+  .plan .stat .v{font-weight:600;color:var(--heading);font-size:15px;margin-top:3px;}
+  .plan .price{margin-top:16px;border-top:1px solid var(--border);padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;}
+  .plan .price .amt{font-weight:700;color:var(--accent);font-size:18px;}
+
+  /* table */
+  table.dt{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);}
+  table.dt th{text-align:left;font-family:var(--sans);font-weight:500;font-size:12px;color:var(--muted);background:var(--surface-2);padding:11px 16px;border-bottom:1px solid var(--border);}
+  table.dt td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--text);}
+  table.dt tr:last-child td{border-bottom:none;}
+  table.dt .neg{color:var(--danger);font-weight:500;} table.dt .head{color:var(--heading);}
+
+  /* tabs */
+  .tabs{display:flex;gap:26px;border-bottom:1px solid var(--border);}
+  .tab{padding:11px 2px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;font-size:14px;}
+  .tab.active{color:var(--accent);border-bottom-color:var(--navy-800);font-weight:500;}
+
+  /* steppers */
+  .progress-wrap{background:var(--surface-2);border:1px solid var(--border);padding:16px 18px;}
+  .progress-top{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:10px;}
+  .progress-bar{height:4px;background:var(--navy-100);position:relative;}
+  html[data-theme=dark] .progress-bar{background:var(--navy-800);}
+  .progress-bar i{position:absolute;inset:0 60% 0 0;background:var(--teal-500);}
+  .steps-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;}
+  .chip{padding:9px 12px;font-size:12.5px;border:1px solid var(--border);background:var(--surface);display:flex;gap:7px;align-items:center;}
+  .chip.done{color:var(--teal-700);} .chip.done .m{color:var(--teal-600);}
+  .chip.active{border-color:var(--navy-300);color:var(--accent);}
+  html[data-theme=dark] .chip.done{color:var(--teal-400);}
+
+  .hstep{display:flex;align-items:center;margin-top:6px;}
+  .hstep .node{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);background:var(--surface);flex:none;}
+  .hstep .node.on{background:var(--navy-800);color:#fff;border-color:var(--navy-800);}
+  .hstep .ln{height:1px;flex:1;background:var(--border);}
+
+  /* forms */
+  .field{margin-bottom:16px;} .field label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;}
+  .input{width:100%;background:var(--field-bg);border:1px solid var(--field-border);color:var(--heading);font:400 14px var(--sans);padding:11px 13px;}
+  .input::placeholder{color:var(--field-ph);}
+  .seg{display:inline-flex;border:1px solid var(--field-border);}
+  .seg .opt{padding:9px 16px;font-size:13px;color:var(--muted);cursor:pointer;border-right:1px solid var(--field-border);}
+  .seg .opt:last-child{border-right:none;}
+  .seg .opt.on{background:var(--navy-50);color:var(--accent);font-weight:500;}
+  html[data-theme=dark] .seg .opt.on{background:var(--navy-800);color:var(--navy-100);}
+  .opt-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media(max-width:680px){.opt-cards{grid-template-columns:1fr;}}
+  .opt-card{border:1px solid var(--border);background:var(--surface);padding:20px;text-align:center;cursor:pointer;font-size:13px;color:var(--text);}
+  .opt-card.on{border-color:var(--navy-800);background:var(--navy-50);color:var(--accent);}
+  html[data-theme=dark] .opt-card.on{background:var(--navy-800);color:var(--navy-100);}
+  .opt-card .ic{font-size:20px;margin-bottom:8px;color:var(--action);}
+  .dropzone{border:1.5px dashed var(--field-border);background:var(--surface-2);padding:30px;text-align:center;color:var(--muted);}
+  .dropzone .up{font-size:22px;}
+  .cardrow{display:flex;align-items:center;gap:12px;border:1px solid var(--border);background:var(--surface);padding:13px 16px;}
+  .brandchip{font-size:10px;font-weight:700;color:#fff;background:var(--navy-800);padding:4px 7px;letter-spacing:.04em;}
+  .cardrow .mask{color:var(--heading);font-weight:500;letter-spacing:.06em;}
+  .cardrow .sp{margin-left:auto;display:flex;gap:14px;align-items:center;}
+
+  /* banners + results */
+  .banner{display:flex;align-items:flex-start;gap:11px;padding:13px 16px;font-size:13.5px;border:1px solid;}
+  .banner-warn{background:var(--warning-bg);border-color:var(--warning);color:var(--amber-800);}
+  html[data-theme=dark] .banner-warn{background:#2a1d00;color:var(--amber-200);}
+  .banner-info{background:var(--navy-50);border-color:var(--navy-200);color:var(--accent);}
+  html[data-theme=dark] .banner-info{background:var(--navy-800);border-color:var(--navy-700);color:var(--navy-100);}
+  .result{display:flex;align-items:center;gap:11px;padding:13px 16px;border:1px solid;font-size:14px;}
+  .result .sp{margin-left:auto;font-weight:600;}
+  .res-valid{background:var(--success-bg);border-color:#bfe0c0;color:var(--success);}
+  .res-invalid{background:var(--danger-bg);border-color:#f0c4c4;color:var(--danger);}
+  .res-unknown{background:var(--surface-2);border-color:var(--border);color:var(--muted);}
+  html[data-theme=dark] .res-valid{background:#16321a;color:#7bd488;border-color:#2c5a32;}
+  html[data-theme=dark] .res-invalid{background:#3a1717;color:#e58b8b;border-color:#5a2c2c;}
+
+  /* integration row */
+  .intg{display:flex;align-items:center;gap:14px;border:1px solid var(--border);background:var(--surface);padding:16px;}
+  .intg .ico{width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;flex:none;}
+  .intg .nm{font-weight:600;color:var(--heading);} .intg .meta{font-size:12.5px;color:var(--muted);margin-top:2px;}
+  .intg .sp{margin-left:auto;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:7px;}
+
+  /* modal */
+  .modal-stage{position:relative;background:var(--app-bg);border:1px solid var(--border);min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:24px;}
+  .scrim{position:absolute;inset:0;background:rgba(14,26,46,.45);}
+  .modal{position:relative;width:420px;max-width:100%;background:var(--surface);border:1px solid var(--border);box-shadow:0 20px 50px rgba(9,18,32,.25);}
+  .modal-h{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border);}
+  .modal-h .t{font-weight:600;color:var(--heading);font-size:16px;} .modal-h .x{color:var(--muted);cursor:pointer;}
+  .modal-b{padding:20px;} .modal-f{padding:16px 20px;border-top:1px solid var(--border);}
+  .amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 16px;}
+  .amt{border:1px solid var(--field-border);padding:9px;text-align:center;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;}
+  .amt.on{border-color:var(--navy-800);background:var(--navy-50);color:var(--accent);}
+  html[data-theme=dark] .amt.on{background:var(--navy-800);color:var(--navy-100);}
+  .sumbox{border:1px solid var(--border);background:var(--surface-2);padding:12px 14px;font-size:13px;}
+  .sumbox .tot{display:flex;justify-content:space-between;color:var(--accent);font-weight:600;margin-top:6px;}
+
+  .next{margin-top:60px;background:var(--warning-bg);color:var(--amber-800);border:1px solid var(--warning);padding:32px clamp(20px,4vw,40px);}
+  html[data-theme=dark] .next{background:var(--amber-900);color:var(--amber-50);border-color:var(--amber-700);}
+  .next h3{font-family:var(--serif);font-size:24px;font-weight:600;margin-bottom:8px;}
+  .next p{font-size:15px;max-width:66ch;} .next .flow{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .next .flow span{font-family:var(--mono);font-size:12px;padding:7px 12px;border:1px solid currentColor;opacity:.55;}
+  .next .flow span.cur{opacity:1;font-weight:700;}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">
+    <svg width="24" height="24" viewBox="0 0 26 26"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7708"/><stop offset="1" stop-color="#ffaa00"/></linearGradient></defs><path d="M3 4 L13 13 L3 22 Z" fill="url(#g)"/><path d="M11 4 L21 13 L11 22 Z" fill="url(#g)" opacity="0.55"/></svg>
+    <span class="wm"><b>Revenue</b><span>Base</span></span>
+  </div>
+  <div class="topbar-right">
+    <span class="step-pill">Step 3 of 3 · Product</span>
+    <div class="toggle" id="toggle"><span id="ti">☀︎</span><span id="tl">Light</span></div>
+  </div>
+</header>
+
+<main>
+  <div class="doc-intro">
+    <h1>Product components</h1>
+    <p>The in-app surface from the Figma file, rebuilt on the foundation. Page titles use Fraunces serif; UI runs DM Sans 14px on the slate text ramp; primary actions are solid navy with teal as the action accent. Square corners and crosshair-free chrome (crosshairs are a marketing motif). Dark mode is extrapolated — see the note at the end.</p>
+  </div>
+
+  <!-- APP SHELL -->
+  <section class="block">
+    <div class="block-head"><span class="n">01</span><h2>App shell</h2><span class="spec">sidebar · grouped nav · top bar · credits pill · theme toggle</span></div>
+    <div class="appframe">
+      <aside class="sidebar">
+        <div class="sb-logo"><svg width="20" height="20" viewBox="0 0 26 26"><path d="M3 4 L13 13 L3 22 Z" fill="url(#g)"/><path d="M11 4 L21 13 L11 22 Z" fill="url(#g)" opacity="0.55"/></svg><span class="wm"><b>Revenue</b>Base</span></div>
+        <div class="sb-scroll">
+          <div class="navitem"><span class="ic">◎</span> Getting Started</div>
+          <div class="sb-group">Data</div>
+          <div class="navitem active"><span class="ic">▦</span> Data Catalog <span class="ch">▾</span></div>
+          <div class="navitem sub">Free</div>
+          <div class="navitem sub active">Basic</div>
+          <div class="navitem sub">Enhanced</div>
+          <div class="navitem"><span class="ic">⇄</span> Integrations</div>
+          <div class="sb-group">Tools</div>
+          <div class="navitem"><span class="ic">✉</span> Email Verification</div>
+          <div class="sb-group">Build</div>
+          <div class="navitem"><span class="ic">&lt;/&gt;</span> API Access</div>
+          <div class="navitem"><span class="ic">▤</span> Docs ↗</div>
+        </div>
+        <div class="sb-bottom">
+          <div class="navitem"><span class="ic">▭</span> Plan &amp; Billing</div>
+          <div class="navitem"><span class="ic">⚇</span> Account Settings</div>
+          <div class="navitem danger"><span class="ic">⏻</span> Sign out</div>
+        </div>
+      </aside>
+      <div class="app-main">
+        <div class="app-top">
+          <span class="credits-pill">5,000 credits</span>
+          <span class="icon-btn">☀︎</span>
+        </div>
+        <div class="app-body">
+          <div class="page-title serif">Data Catalog</div>
+          <div class="page-sub">Primary-source B2B data, re-verified every 60 days.</div>
+          <div class="tabs" style="margin-top:20px;"><span class="tab active">Subscription &amp; Credits</span><span class="tab">Invoices</span><span class="tab">Billing settings</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section class="block">
+    <div class="block-head"><span class="n">02</span><h2>Buttons &amp; links</h2><span class="spec">navy primary · teal action · outline · destructive · link</span></div>
+    <div class="stage"><div class="row">
+      <a class="btn btn-primary">Purchase credits</a>
+      <a class="btn btn-action">Add credits</a>
+      <a class="btn btn-secondary">Add destination</a>
+      <a class="btn btn-danger">Cancel renewal</a>
+      <a class="link">Edit</a>
+      <a class="link">Make default</a>
+      <a class="link danger">Remove</a>
+    </div></div>
+  </section>
+
+  <!-- BADGES -->
+  <section class="block">
+    <div class="block-head"><span class="n">03</span><h2>Badges &amp; status</h2><span class="spec">success · neutral · most-popular · sync dot</span></div>
+    <div class="stage"><div class="row">
+      <span class="badge badge-success">Active</span>
+      <span class="badge badge-success">Free</span>
+      <span class="badge badge-neutral">Default</span>
+      <span class="badge badge-pop">Most popular</span>
+      <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--muted)"><span class="dot"></span> Last sync Mar 25</span>
+    </div></div>
+  </section>
+
+  <!-- PLAN CARDS -->
+  <section class="block">
+    <div class="block-head"><span class="n">04</span><h2>Plan / tier cards</h2><span class="spec">accent top rule · stat columns · MOST POPULAR · price</span></div>
+    <div class="grid3">
+      <div class="plan teal"><h3>Free</h3><div class="ds">People + Companies — masked, 100+ fields</div><div class="stats"><div class="stat"><div class="k">Contacts</div><div class="v">390M+</div></div><div class="stat"><div class="k">Updates</div><div class="v">90 days</div></div></div><div class="price"><span style="font-size:12px;color:var(--muted)">S3 · Snowflake</span><span class="amt" style="color:var(--teal-700);font-weight:700">Free</span></div></div>
+      <div class="plan navy"><h3>Basic</h3><div class="ds">People + Companies — full attributes</div><div class="stats"><div class="stat"><div class="k">Contacts</div><div class="v">390M+</div></div><div class="stat"><div class="k">Updates</div><div class="v">30 days</div></div></div><div class="price"><span style="font-size:12px;color:var(--muted)">mix &amp; match</span><span class="amt">$6,000<span style="font-size:12px;color:var(--muted)">/yr</span></span></div></div>
+      <div class="plan blue featured"><span class="pop"><span class="badge badge-pop">Most popular</span></span><h3 style="margin-top:8px">Enhanced</h3><div class="ds">+ Insights — 70+ targeting fields</div><div class="stats"><div class="stat"><div class="k">Insight</div><div class="v" style="color:var(--navy-500)">70+</div></div><div class="stat"><div class="k">Updates</div><div class="v">30 days</div></div></div><div class="price"><span style="font-size:12px;color:var(--muted)">mix &amp; match</span><span class="amt">$10,000<span style="font-size:12px;color:var(--muted)">/yr</span></span></div></div>
+    </div>
+  </section>
+
+  <!-- TABLE + STAT -->
+  <section class="block">
+    <div class="block-head"><span class="n">05</span><h2>Data table &amp; metric</h2><span class="spec">header row · negative red · big metric</span></div>
+    <div class="stage" style="display:grid;grid-template-columns:1.6fr 1fr;gap:18px;align-items:start;">
+      <table class="dt">
+        <thead><tr><th>Activity</th><th>Date &amp; Time</th><th>Credits used</th><th>Balance</th></tr></thead>
+        <tbody>
+          <tr><td class="head">Bulk email verification</td><td>Mar 4, 2026 · 14:22</td><td class="neg">−234</td><td>2,000</td></tr>
+          <tr><td class="head">Bulk email verification</td><td>Mar 3, 2026 · 09:10</td><td class="neg">−266</td><td>2,234</td></tr>
+          <tr><td class="head">API — contact search</td><td>Mar 2, 2026 · 11:45</td><td class="neg">−150</td><td>2,500</td></tr>
+        </tbody>
+      </table>
+      <div class="panel"><div class="eyebrow">Credits remaining</div><div style="font-family:var(--sans);font-weight:700;font-size:40px;color:var(--heading);line-height:1;margin:8px 0 4px;">5,000</div><div style="font-size:12px;color:var(--muted)">$0.0027 per credit</div><a class="btn btn-action" style="margin-top:14px">Add credits</a></div>
+    </div>
+  </section>
+
+  <!-- STEPPERS -->
+  <section class="block">
+    <div class="block-head"><span class="n">06</span><h2>Steppers</h2><span class="spec">setup progress (bar + chips) · numbered flow</span></div>
+    <div class="stage" style="display:grid;gap:18px;">
+      <div class="progress-wrap">
+        <div class="progress-top"><span style="color:var(--heading);font-weight:500">Setup progress</span><span>1 of 4 complete</span></div>
+        <div class="progress-bar"><i></i></div>
+        <div class="steps-chips">
+          <div class="chip done"><span class="m">✓</span> Account created</div>
+          <div class="chip active">→ Try a data feed</div>
+          <div class="chip">Verify emails</div>
+          <div class="chip">Connect CRM</div>
+        </div>
+      </div>
+      <div class="hstep">
+        <span class="node on">1</span><span class="ln"></span><span class="node">2</span><span class="ln"></span><span class="node">3</span><span class="ln"></span><span class="node">4</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMS -->
+  <section class="block">
+    <div class="block-head"><span class="n">07</span><h2>Inputs &amp; controls</h2><span class="spec">field · segmented · option cards · dropzone · saved card</span></div>
+    <div class="stage" style="display:grid;gap:22px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+        <div class="field"><label>Card number</label><input class="input" placeholder="1234 5678 9012 3456"></div>
+        <div class="field"><label>License scope</label><div class="seg"><span class="opt on">Internal use</span><span class="opt">Resale rights</span></div></div>
+      </div>
+      <div><div class="eyebrow" style="margin-bottom:10px">Choose a destination</div>
+        <div class="opt-cards">
+          <div class="opt-card on"><div class="ic">❄</div>Snowflake</div>
+          <div class="opt-card"><div class="ic">▤</div>Amazon S3</div>
+          <div class="opt-card"><div class="ic">▦</div>Gigasheet</div>
+        </div>
+      </div>
+      <div class="dropzone"><div class="up">⬆</div><div style="margin:6px 0 12px">Drop your CSV or TXT here</div><a class="btn btn-secondary btn-sm">Choose File</a></div>
+      <div class="cardrow"><span class="brandchip">VISA</span><span class="mask">•••• 4242</span><span style="color:var(--muted);font-size:13px">Exp 03/28</span><span class="badge badge-neutral">Default</span><span class="sp"><a class="link">Edit</a><a class="link danger">Remove</a></span></div>
+    </div>
+  </section>
+
+  <!-- BANNERS + RESULTS -->
+  <section class="block">
+    <div class="block-head"><span class="n">08</span><h2>Banners &amp; validation</h2><span class="spec">warning (amber) · info (navy) · valid / invalid / unknown</span></div>
+    <div class="stage" style="display:grid;gap:12px;">
+      <div class="banner banner-warn"><span>🔒</span><span>Integrations cannot be modified once configured. To reconfigure, please <a class="link" style="color:inherit;text-decoration:underline">contact support</a>.</span></div>
+      <div class="banner banner-info"><span>ⓘ</span><span>We use Snowflake Secure Data Sharing — no credentials needed. Share your Account Locator and we'll add you to the share.</span></div>
+      <div class="result res-valid"><span>✓</span> test0@example.com <span class="sp">Valid</span></div>
+      <div class="result res-invalid"><span>✕</span> bounce@example.com <span class="sp">Invalid</span></div>
+      <div class="result res-unknown"><span>?</span> catchall@example.com <span class="sp">Unknown</span></div>
+    </div>
+  </section>
+
+  <!-- INTEGRATION ROWS -->
+  <section class="block">
+    <div class="block-head"><span class="n">09</span><h2>Integration rows</h2><span class="spec">icon tile · name · meta · sync status</span></div>
+    <div class="stage" style="display:grid;gap:12px;">
+      <div class="intg"><span class="ico" style="background:#2dc9c4">❄</span><div><div class="nm">Snowflake</div><div class="meta">revenuebase_prod · Companies feed · Monthly</div></div><span class="sp"><span class="dot"></span> Last sync Mar 25 · Next Mar 26</span></div>
+      <div class="intg"><span class="ico" style="background:#6b4fd6">◑</span><div><div class="nm">Gigasheet</div><div class="meta">People Lite · Shared workspace · Monthly</div></div><span class="sp"><span class="dot"></span> Last sync Mar 24 · Next Mar 31</span></div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <section class="block">
+    <div class="block-head"><span class="n">10</span><h2>Modal / dialog</h2><span class="spec">scrim · header+close · option grid · summary · footer CTA</span></div>
+    <div class="modal-stage">
+      <div class="scrim"></div>
+      <div class="modal">
+        <div class="modal-h"><span class="t">Add credits</span><span class="x">✕</span></div>
+        <div class="modal-b">
+          <div style="font-size:12.5px;color:var(--muted);margin-bottom:6px">1 credit ≈ $0.0027 · email verification & API calls</div>
+          <div class="eyebrow">Select amount</div>
+          <div class="amt-grid"><span class="amt on">10K</span><span class="amt">50K</span><span class="amt">100K</span><span class="amt">250K</span><span class="amt">500K</span><span class="amt">1M</span></div>
+          <div class="sumbox"><div style="display:flex;justify-content:space-between;color:var(--text)"><span>10,000 credits</span><span>$27.00</span></div><div class="tot"><span>Total</span><span>$27.00</span></div></div>
+        </div>
+        <div class="modal-f"><a class="btn btn-primary" style="width:100%">🔒 Purchase credits</a></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="next">
+    <div class="eyebrow" style="color:inherit;opacity:.75">Known gap · then assembly</div>
+    <h3>Product dark mode is extrapolated.</h3>
+    <p>The Figma file ships the product in light only, so the dark variant here is derived from the site's dark tokens — worth a sanity check before it's canon. Approve the product set and I'll merge Foundations + Marketing + Product into the single DESIGN.md (front matter + token-referenced prose) and lint it.</p>
+    <div class="flow"><span>1 · Foundations ✓</span><span>2 · Marketing ✓</span><span class="cur">3 · Product</span><span>→ DESIGN.md</span></div>
+  </div>
+</main>
+
+<script>
+  const t=document.getElementById("toggle"),h=document.documentElement,ti=document.getElementById("ti"),tl=document.getElementById("tl");
+  t.addEventListener("click",()=>{const d=h.getAttribute("data-theme")==="dark";h.setAttribute("data-theme",d?"light":"dark");ti.textContent=d?"☀︎":"☾";tl.textContent=d?"Light":"Dark";});
+</script>
+</body>
+</html>

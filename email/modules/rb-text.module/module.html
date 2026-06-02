@@ -1,0 +1,9 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+{% if module.text_size == "sm" %}{% set fs = "14px" %}{% set lh = "22px" %}
+{% elif module.text_size == "lg" %}{% set fs = "18px" %}{% set lh = "28px" %}
+{% else %}{% set fs = "16px" %}{% set lh = "25px" %}{% endif %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+  <td style="padding:24px 40px;">
+    <div style="font-family:'DM Sans',Arial,Helvetica,sans-serif; font-size:{{ fs }}; line-height:{{ lh }}; color:#2e323d; text-align:{{ module.text_align }};">{{ module.content_text }}</div>
+  </td>
+</tr></table>

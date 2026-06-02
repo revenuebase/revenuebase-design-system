@@ -1,0 +1,124 @@
+<!--
+  templateType: email
+  isAvailableForNewContent: true
+  label: RevenueBase - Feature Update
+-->
+<!-- RevenueBase feature-update / product announcement email, built on the RevenueBase design system. Copy is editable via HubL modules. Footer uses CAN-SPAM tokens; set your address under Settings, Marketing, Email, Configuration. -->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="x-apple-disable-message-reformatting">
+<title>{{ content.subject }}</title>
+<!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  body,table,td,a{ -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+  table,td{ mso-table-lspace:0pt; mso-table-rspace:0pt; }
+  img{ -ms-interpolation-mode:bicubic; border:0; outline:none; text-decoration:none; }
+  body{ margin:0 !important; padding:0 !important; width:100% !important; background:#f1f4f9; }
+  a{ text-decoration:none; }
+  .accent-serif{ font-family:'Fraunces',Georgia,'Times New Roman',serif; font-style:italic; font-weight:400; }
+  @media screen and (max-width:620px){
+    .container{ width:100% !important; }
+    .px{ padding-left:24px !important; padding-right:24px !important; }
+    .h1{ font-size:32px !important; line-height:38px !important; }
+  }
+</style>
+</head>
+<body style="margin:0; padding:0; background:#f1f4f9;">
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#f1f4f9;">
+    {% text "preheader" label="Preheader", value="Technographics, hiring signals, and account scoring — now on every Enhanced feed." %}
+    &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f1f4f9" style="background:#f1f4f9;">
+    <tr><td align="center" style="padding:28px 12px;">
+      <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background:#ffffff; border:1px solid #d2d5dc;">
+
+        <!-- HEADER -->
+        <tr><td class="px" style="padding:20px 40px; border-bottom:1px solid #d2d5dc;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td align="left">{% image "logo" label="Logo", src="https://8486714.fs1.hubspotusercontent-na1.net/hubfs/8486714/revenuebase/revenuebase-logo.png", alt="RevenueBase", width=150 %}</td>
+            <td align="right" style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;"><a href="{{ view_as_page_url }}" style="color:#5e82b8;">View in browser</a></td>
+          </tr></table>
+        </td></tr>
+
+        <!-- HERO -->
+        <tr><td class="px" style="padding:40px 40px 8px;">
+          <div style="font-family:'JetBrains Mono',Courier,monospace; font-size:12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:#107069; margin-bottom:16px;">{% text "eyebrow" label="Eyebrow", value="Product Update" %}</div>
+          <div class="h1" style="font-family:'DM Sans',Arial,sans-serif; font-size:40px; line-height:46px; font-weight:500; letter-spacing:-0.03em; color:#0f537e;">
+            {% text "headline" label="Headline", value="Now live:" %} <span class="accent-serif" style="color:#0f537e;">{% text "headline_accent" label="Headline (italic accent)", value="Insight Fields." %}</span>
+          </div>
+          <div style="font-family:'DM Sans',Arial,sans-serif; font-size:16px; line-height:25px; color:#2e323d; margin-top:18px;">
+            <p style="margin:0 0 12px;">Hi {{ contact.firstname|default("there", true) }},</p>
+            {% rich_text "body" label="Body", html="<p style='margin:0;'>Every Enhanced feed now ships with <b>70+ insight fields</b>: technographics, hiring signals, and account scoring. Target with precision, no extra integration and no change to your pricing.</p>" %}
+          </div>
+        </td></tr>
+
+        <!-- CTA -->
+        <tr><td class="px" style="padding:24px 40px 36px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td bgcolor="#0f537e" style="background:#0f537e;">{% text "primary_button_url" label="Primary button URL", value="https://app.revenuebase.ai/catalog", export_to_template_context=True %}<a href="{{ widget_data.primary_button_url.value }}" style="display:inline-block; font-family:'DM Sans',Arial,sans-serif; font-size:15px; font-weight:500; color:#ffffff; padding:15px 28px;">{% text "primary_button_text" label="Primary button text", value="Explore Insight Fields" %}</a></td>
+            <td width="14">&nbsp;</td>
+            <td style="border:1px solid #89a5cc;">{% text "secondary_button_url" label="Secondary button URL", value="https://revenuebase.ai/docs", export_to_template_context=True %}<a href="{{ widget_data.secondary_button_url.value }}" style="display:inline-block; font-family:'DM Sans',Arial,sans-serif; font-size:15px; font-weight:500; color:#0f537e; padding:14px 26px;">{% text "secondary_button_text" label="Secondary button text", value="Read the docs" %}</a></td>
+          </tr></table>
+        </td></tr>
+
+        <!-- WHAT'S NEW -->
+        <tr><td class="px" style="padding:0 40px 8px;">
+          <div style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:#868c9b; margin-bottom:14px;">What's new</div>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:14px;"><tr>
+            <td bgcolor="#ecfcfb" style="background:#ecfcfb; border-top:3px solid #219f98; padding:20px 22px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif; font-size:18px; font-weight:600; color:#13161d; letter-spacing:-0.01em;">{% text "item1_title" label="Item 1 title", value="Technographics" %}</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif; font-size:14px; line-height:22px; color:#2e323d; margin:6px 0 0;">{% text "item1_body" label="Item 1 body", value="Know the stack before you reach out — 1,200+ tools detected across the install base." %}</p>
+            </td>
+          </tr></table>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:14px;"><tr>
+            <td bgcolor="#f7f7f9" style="background:#f7f7f9; border-top:3px solid #626879; padding:20px 22px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif; font-size:18px; font-weight:600; color:#13161d; letter-spacing:-0.01em;">{% text "item2_title" label="Item 2 title", value="Hiring signals" %}</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif; font-size:14px; line-height:22px; color:#2e323d; margin:6px 0 0;">{% text "item2_body" label="Item 2 body", value="Catch growth the moment it starts — net-new roles and team expansion, refreshed every 30 days." %}</p>
+            </td>
+          </tr></table>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td bgcolor="#fff8e6" style="background:#fff8e6; border-top:3px solid #bf7c00; padding:20px 22px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif; font-size:18px; font-weight:600; color:#13161d; letter-spacing:-0.01em;">{% text "item3_title" label="Item 3 title", value="Account scoring" %}</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif; font-size:14px; line-height:22px; color:#2e323d; margin:6px 0 0;">{% text "item3_body" label="Item 3 body", value="Prioritize the accounts most likely to convert, scored against your ICP." %}</p>
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- STAT STRIP -->
+        <tr><td class="px" style="padding:28px 40px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0e1a2e" style="background:#0e1a2e;"><tr>
+            <td style="padding:18px 24px; font-family:'JetBrains Mono',Courier,monospace; font-size:12px; letter-spacing:0.04em; color:#9eeae7; text-align:center;">{% text "stat_strip" label="Stat strip", value="70+ FIELDS  ·  30-DAY REFRESH  ·  INCLUDED ON ENHANCED" %}</td>
+          </tr></table>
+        </td></tr>
+
+        <!-- CTA BANNER -->
+        <tr><td style="background:#f1f4f9; padding:36px 40px; text-align:center; border-top:1px solid #d2d5dc;">
+          <div style="font-family:'DM Sans',Arial,sans-serif; font-size:22px; line-height:29px; font-weight:500; letter-spacing:-0.02em; color:#0f537e; margin-bottom:18px;">See <span class="accent-serif">Insight Fields</span> in your catalog.</div>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tr>
+            <td bgcolor="#0f537e" style="background:#0f537e;">{% text "cta_button_url" label="CTA button URL", value="https://app.revenuebase.ai/catalog", export_to_template_context=True %}<a href="{{ widget_data.cta_button_url.value }}" style="display:inline-block; font-family:'DM Sans',Arial,sans-serif; font-size:15px; font-weight:500; color:#ffffff; padding:15px 30px;">{% text "cta_button_text" label="CTA button text", value="Open Data Catalog" %}</a></td>
+          </tr></table>
+        </td></tr>
+
+        <!-- FOOTER -->
+        <tr><td class="px" style="padding:28px 40px; background:#ffffff; border-top:1px solid #d2d5dc;">
+          <div style="margin-bottom:10px;">{% image "footer_logo" label="Footer logo", src="https://8486714.fs1.hubspotusercontent-na1.net/hubfs/8486714/revenuebase/revenuebase-logo.png", alt="RevenueBase", width=132 %}</div>
+          <p style="font-family:'DM Sans',Arial,sans-serif; font-size:12px; line-height:19px; color:#626879; margin:0 0 14px;">
+            The trust layer for B2B data.<br>
+            {{ site_settings.company_name }} &middot; {{ site_settings.company_street_address_1 }}{% if site_settings.company_street_address_2 %}, {{ site_settings.company_street_address_2 }}{% endif %}, {{ site_settings.company_city }}, {{ site_settings.company_state }} {{ site_settings.company_zip }}
+          </p>
+          <p style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; letter-spacing:0.04em; color:#868c9b; margin:0;">
+            <a href="{{ unsubscribe_link }}" style="color:#0f537e; text-decoration:underline;">Unsubscribe</a>&nbsp;&middot;&nbsp;<a href="{{ subscription_preferences_link }}" style="color:#0f537e; text-decoration:underline;">Manage preferences</a>
+          </p>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

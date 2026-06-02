@@ -1,0 +1,6 @@
+[
+  { "name": "eyebrow", "label": "Eyebrow", "type": "text", "default": "Product Update" },
+  { "name": "headline", "label": "Headline", "type": "text", "default": "Now live:" },
+  { "name": "headline_accent", "label": "Headline italic accent (Fraunces)", "type": "text", "default": "Insight Fields." },
+  { "name": "body_text", "label": "Body", "type": "richtext", "default": "<p>Every Enhanced feed now ships with <strong>70+ insight fields</strong>: technographics, hiring signals, and account scoring.</p>" }
+]

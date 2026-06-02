@@ -1,0 +1,16 @@
+[
+  {
+    "name": "spacer_height",
+    "label": "Height",
+    "type": "choice",
+    "display": "select",
+    "choices": [
+      ["8",  "XS — 8px"],
+      ["16", "S — 16px"],
+      ["24", "M — 24px"],
+      ["40", "L — 40px"],
+      ["64", "XL — 64px"]
+    ],
+    "default": "24"
+  }
+]

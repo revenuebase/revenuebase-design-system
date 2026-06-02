@@ -1,0 +1,21 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+{% if module.icon_style == "arrow" %}
+  {% set icon = "→" %}{% set icon_color = "#0f537e" %}
+{% elif module.icon_style == "dot" %}
+  {% set icon = "·" %}{% set icon_color = "#868c9b" %}
+{% else %}
+  {% set icon = "✓" %}{% set icon_color = "#00b5b0" %}
+{% endif %}
+{% set items = [module.item1, module.item2, module.item3, module.item4, module.item5, module.item6] %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr><td style="padding:24px 40px;">
+    {% for item in items %}{% if item %}
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">
+      <tr>
+        <td width="24" valign="top" style="font-family:'JetBrains Mono',Courier,monospace; font-size:14px; font-weight:700; color:{{ icon_color }}; padding-top:1px;">{{ icon }}</td>
+        <td style="font-family:'DM Sans',Arial,Helvetica,sans-serif; font-size:15px; line-height:23px; color:#2e323d;">{{ item }}</td>
+      </tr>
+    </table>
+    {% endif %}{% endfor %}
+  </td></tr>
+</table>

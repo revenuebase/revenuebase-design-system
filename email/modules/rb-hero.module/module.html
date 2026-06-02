@@ -1,0 +1,6 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:32px 40px;">
+  {% if module.eyebrow %}<div style="font-family:'JetBrains Mono',Courier,monospace; font-size:12px; font-weight:500; letter-spacing:1px; text-transform:uppercase; color:#107069; margin-bottom:14px;">{{ module.eyebrow }}</div>{% endif %}
+  <div style="font-family:'DM Sans',Arial,Helvetica,sans-serif; font-size:38px; line-height:44px; font-weight:500; letter-spacing:-1px; color:#0f537e;">{{ module.headline }}{% if module.headline_accent %} <span style="font-family:'Fraunces',Georgia,'Times New Roman',serif; font-style:italic; font-weight:400;">{{ module.headline_accent }}</span>{% endif %}</div>
+  {% if module.body_text %}<div style="font-family:'DM Sans',Arial,Helvetica,sans-serif; font-size:16px; line-height:25px; color:#2e323d; margin-top:16px;">{{ module.body_text }}</div>{% endif %}
+</td></tr></table>

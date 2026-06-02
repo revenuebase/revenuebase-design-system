@@ -1,0 +1,5 @@
+[
+  { "name": "quote_text", "label": "Quote", "type": "text", "default": "We replaced three vendors with one feed. The data just stays clean." },
+  { "name": "person_name", "label": "Name", "type": "text", "default": "Jordan Diaz" },
+  { "name": "person_role", "label": "Role / company", "type": "text", "default": "VP RevOps, Orbital" }
+]

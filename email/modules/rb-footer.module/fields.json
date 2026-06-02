@@ -1,0 +1,8 @@
+[
+  { "name": "logo_src", "label": "Logo image URL", "type": "text", "default": "https://8486714.fs1.hubspotusercontent-na1.net/hubfs/8486714/revenuebase/revenuebase-logo-grey.png" },
+  { "name": "logo_alt", "label": "Logo alt text", "type": "text", "default": "RevenueBase" },
+  { "name": "logo_width", "label": "Logo width (px)", "type": "number", "default": 132 },
+  { "name": "footer_tagline", "label": "Tagline", "type": "text", "default": "The trust layer for B2B data." },
+  { "name": "unsubscribe_text", "label": "Unsubscribe link text", "type": "text", "default": "Unsubscribe" },
+  { "name": "prefs_text", "label": "Preferences link text", "type": "text", "default": "Manage preferences" }
+]

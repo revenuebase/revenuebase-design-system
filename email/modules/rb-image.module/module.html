@@ -1,0 +1,15 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Fraunces:ital,opsz,wght@1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+  <td align="{{ module.img_align }}" style="padding:24px 40px;">
+    {% if module.img_src %}
+      {% if module.img_link %}<a href="{{ module.img_link }}" style="display:block; text-decoration:none;" {% if module.img_align == 'center' %}align="center"{% endif %}>{% endif %}
+        <img src="{{ module.img_src }}" alt="{{ module.img_alt }}" {% if module.img_width %}width="{{ module.img_width }}"{% else %}width="100%"{% endif %} style="display:block; border:0; height:auto; {% if module.img_align == 'center' %}margin:0 auto;{% elif module.img_align == 'right' %}margin-left:auto;{% endif %}{% if module.img_width %}max-width:{{ module.img_width }}px;{% else %}max-width:100%;{% endif %}">
+      {% if module.img_link %}</a>{% endif %}
+      {% if module.caption_text %}
+        <p style="font-family:'JetBrains Mono',Courier,monospace; font-size:11px; letter-spacing:0.5px; color:#868c9b; margin:10px 0 0; text-align:{{ module.img_align }};">{{ module.caption_text }}</p>
+      {% endif %}
+    {% else %}
+      <p style="font-family:'DM Sans',Arial,Helvetica,sans-serif; font-size:13px; color:#868c9b; text-align:center; padding:20px; border:1px dashed #d2d5dc; margin:0;">Add an image URL in the module settings</p>
+    {% endif %}
+  </td>
+</tr></table>

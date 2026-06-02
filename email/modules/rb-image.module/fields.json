@@ -1,0 +1,20 @@
+[
+  { "name": "img_src", "label": "Image URL", "type": "text", "default": "" },
+  { "name": "img_alt", "label": "Alt text", "type": "text", "default": "" },
+  { "name": "img_link", "label": "Link URL (optional)", "type": "text", "default": "" },
+  { "name": "img_width", "label": "Max width (px, blank = full width)", "type": "text", "default": "" },
+  {
+    "name": "img_align",
+    "label": "Alignment",
+    "type": "choice",
+    "display": "select",
+    "choices": [ ["left", "Left"], ["center", "Center"], ["right", "Right"] ],
+    "default": "center"
+  },
+  {
+    "name": "caption_text",
+    "label": "Caption (optional)",
+    "type": "text",
+    "default": ""
+  }
+]
