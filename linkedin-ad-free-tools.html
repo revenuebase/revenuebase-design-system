@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RevenueBase — LinkedIn Ad · Free Deliverability Toolkit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;0,9..144,400;0,9..144,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-50:#f1f4f9;--navy-100:#dde6f1;--navy-150:#c1cfe0;--navy-200:#b5c8e0;--navy-300:#89a5cc;--navy-400:#5e82b8;--navy-500:#43649f;--navy-600:#2e5a82;--navy-700:#1a4a6e;--navy-800:#0f537e;--navy-850:#0a3652;--navy-900:#0e1a2e;--navy-950:#091220;
+    --amber-100:#fff0cc;--amber-200:#ffe099;--amber-300:#ffce66;--amber-700:#946000;--amber-800:#704700;--amber-900:#4d3000;
+    --teal-100:#cff5f4;--teal-400:#2dc9c4;--teal-500:#00b5b0;--teal-600:#219f98;--teal-700:#107069;
+    --slate-100:#ecedf0;--slate-200:#d2d5dc;--slate-400:#868c9b;--slate-500:#626879;--slate-700:#2e323d;--slate-900:#13161d;
+    --serif:"Fraunces",Georgia,serif;--sans:"DM Sans",Arial,sans-serif;--mono:"JetBrains Mono",Menlo,monospace;
+    --doc-bg:#0a1322;--panel:#0e1a2e;--panel-bd:#1a4a6e;--ink:#b5c8e0;--ink-hi:#f1f4f9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans);background:var(--doc-bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;padding:40px clamp(16px,4vw,48px) 100px;}
+  .wrap{max-width:1180px;margin:0 auto;}
+  .head .eyebrow{font-family:var(--mono);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--teal-400);margin-bottom:12px;}
+  .head h1{font-family:var(--sans);font-weight:500;font-size:clamp(28px,4vw,42px);color:var(--ink-hi);letter-spacing:-.03em;line-height:1.05;}
+  .head h1 .fa{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.06em;}
+  .head p{color:var(--slate-400);font-size:16px;margin-top:12px;max-width:64ch;}
+
+  .layout{display:grid;grid-template-columns:600px 1fr;gap:40px;align-items:start;margin-top:36px;}
+  @media(max-width:1040px){.layout{grid-template-columns:1fr;}}
+  .col-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--slate-400);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .col-label::after{content:"";flex:1;height:1px;background:var(--panel-bd);}
+
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px;}
+  .ctl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);border:1px solid var(--panel-bd);background:var(--panel);padding:8px 13px;cursor:pointer;}
+  .ctl.active{background:var(--ink-hi);color:var(--navy-900);border-color:var(--ink-hi);}
+
+  /* ===== the 1080x1080 ad ===== */
+  .frame{--scale:0.5;width:calc(1080px*var(--scale));height:calc(1080px*var(--scale));overflow:hidden;border:1px solid var(--panel-bd);}
+  body.actual .frame{--scale:1;}
+  .canvas{width:1080px;height:1080px;transform:scale(var(--scale));transform-origin:top left;position:relative;overflow:hidden;background:var(--navy-900);
+    --cv-head:#f1f4f9;--cv-body:#b5c8e0;--cv-eyebrow:#89a5cc;--cv-border:#1a4a6e;--cv-surface:#0a3652;--cv-rule:#2dc9c4;}
+  .canvas .noise{position:absolute;inset:0;background-image:url("assets/bg-noise-dark.webp");background-size:256px;opacity:.04;pointer-events:none;z-index:4;}
+  .cv-cm{position:absolute;width:22px;height:22px;pointer-events:none;z-index:3;}
+  .cv-cm::before{content:"";position:absolute;left:10px;top:0;width:2px;height:22px;background:var(--cv-eyebrow);opacity:.55;}
+  .cv-cm::after{content:"";position:absolute;top:10px;left:0;height:2px;width:22px;background:var(--cv-eyebrow);opacity:.55;}
+
+  .ad{position:absolute;inset:0;padding:60px 60px 56px;display:flex;flex-direction:column;z-index:2;}
+  .ad-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:30px;}
+  .ad-top img{height:32px;width:auto;display:block;}
+  .ad-eyebrow{font-family:var(--mono);font-size:18px;font-weight:500;text-transform:uppercase;letter-spacing:.13em;color:var(--teal-400);}
+  .ad h2{font-family:var(--sans);font-weight:500;color:var(--cv-head);letter-spacing:-.035em;line-height:.98;font-size:78px;}
+  .ad h2 .fa{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.04em;}
+
+  /* app window holding the screenshot */
+  .win{margin-top:34px;flex:1;display:flex;flex-direction:column;border:1px solid #244468;background:#0a3652;min-height:0;}
+  .win-bar{display:flex;align-items:center;gap:9px;padding:15px 18px;border-bottom:1px solid #244468;background:#0e1a2e;flex:0 0 auto;}
+  .win-bar .d{width:13px;height:13px;background:#244468;}
+  .win-url{margin-left:14px;font-family:var(--mono);font-size:15px;color:#89a5cc;background:#0a3652;border:1px solid #244468;padding:8px 16px;flex:1;letter-spacing:.02em;}
+  .win-body{position:relative;flex:1;background:#f1f4f9;overflow:hidden;min-height:0;}
+  .win-body img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;}
+
+  /* placeholder tool grid (replaced by the real screenshot) */
+  .ph{position:absolute;inset:0;padding:30px;display:flex;flex-direction:column;background:#f1f4f9;}
+  .ph .ph-h{display:flex;align-items:baseline;gap:12px;margin-bottom:22px;}
+  .ph .ph-h b{font-family:var(--sans);font-weight:600;font-size:26px;color:#0f537e;letter-spacing:-.02em;}
+  .ph .ph-h span{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#00b5b0;}
+  .ph-grid{flex:1;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);gap:12px;overflow:hidden;}
+  .ph-tile{border:1px solid #c1cfe0;background:#fff;padding:14px;display:flex;flex-direction:column;gap:10px;}
+  .ph-tile .ic{width:30px;height:30px;background:#cff5f4;border:1px solid #9eeae7;}
+  .ph-tile .nm{font-family:var(--sans);font-weight:600;font-size:13px;color:#13161d;line-height:1.15;}
+  .ph-tile .tag{margin-top:auto;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#00b5b0;}
+  .ph-cap{flex:0 0 auto;margin-top:16px;font-family:var(--mono);font-size:14px;letter-spacing:.05em;color:#704700;background:#fff0cc;border:1px solid #ffe099;padding:11px 16px;text-align:center;}
+
+  /* CTA */
+  .ad-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:34px;}
+  .btn{position:relative;display:inline-flex;align-items:center;gap:14px;font-family:var(--sans);font-weight:600;font-size:32px;letter-spacing:-.01em;padding:26px 46px;background:#00b5b0;color:#06231f;border:1px solid #2dc9c4;}
+  .btn .arr{font-weight:500;}
+  .handle{font-family:var(--mono);font-size:18px;letter-spacing:.04em;color:#89a5cc;text-align:right;}
+
+  /* ===== post-copy panel ===== */
+  .post{background:var(--panel);border:1px solid var(--panel-bd);}
+  .post-h{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--panel-bd);}
+  .post-h .av{width:34px;height:34px;border:1px solid var(--panel-bd);display:flex;align-items:center;justify-content:center;background:#0a3652;}
+  .post-h .av img{height:14px;width:auto;}
+  .post-h .who b{display:block;font-size:14px;color:var(--ink-hi);font-weight:600;}
+  .post-h .who span{font-family:var(--mono);font-size:11px;color:var(--slate-400);}
+  .post-body{padding:20px;font-size:15.5px;color:#cdd9ea;line-height:1.62;white-space:pre-wrap;}
+  .post-body strong{color:var(--ink-hi);font-weight:600;}
+  .copybtn{margin:0 20px 20px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);border:1px solid var(--panel-bd);background:#0a3652;padding:9px 14px;cursor:pointer;}
+
+  .alt{margin-top:26px;}
+  .alt .col-label{margin-bottom:12px;}
+  .alt ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .alt li{font-size:15px;color:#cdd9ea;padding-left:18px;position:relative;}
+  .alt li::before{content:"›";position:absolute;left:0;color:var(--teal-400);}
+  .alt li b{color:var(--ink-hi);font-weight:600;}
+
+  .flag{background:#4d3000;border:1px solid #946000;color:#fff8e6;padding:14px 18px;font-size:14px;margin-top:22px;font-family:var(--sans);}
+  .flag b{color:#ffce66;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="eyebrow">LinkedIn paid ad · lead magnet</div>
+    <h1>Free deliverability toolkit — <span class="fa">access free tools.</span></h1>
+    <p>Square 1080×1080 conversion ad: catchy outcome headline, the 26-tool screenshot as the hero, one high-contrast CTA, zero clutter. The persuasive copy lives in the LinkedIn post above the ad (right). Built for GTM engineers, high-volume outbound, and demand-gen agencies.</p>
+  </div>
+
+  <div class="controls">
+    <span class="ctl" id="size-fit">Fit preview</span>
+    <span class="ctl" id="size-actual">Actual size · 1080px</span>
+  </div>
+
+  <div class="layout">
+    <!-- ===== THE AD CREATIVE ===== -->
+    <div>
+      <div class="col-label">Ad creative · 1080×1080</div>
+      <div class="frame">
+        <div class="canvas">
+          <div class="noise"></div>
+          <div class="cv-cm" style="top:38px;left:38px"></div>
+          <div class="cv-cm" style="top:38px;right:38px"></div>
+          <div class="cv-cm" style="bottom:38px;left:38px"></div>
+          <div class="cv-cm" style="bottom:38px;right:38px"></div>
+          <div class="ad">
+            <div class="ad-top">
+              <img src="assets/revenuebase-logo.svg" alt="RevenueBase">
+              <span class="ad-eyebrow">26 free tools · no credit card</span>
+            </div>
+            <h2>Land every email <span class="fa">in the inbox.</span></h2>
+
+            <div class="win">
+              <div class="win-bar">
+                <span class="d"></span><span class="d"></span><span class="d"></span>
+                <span class="win-url">app.revenuebase.ai/free-tools</span>
+              </div>
+              <div class="win-body">
+                <!-- Replace this placeholder with the real screenshot: set #shot src and it shows automatically -->
+                <img id="shot" alt="Free tools" style="display:none">
+                <div class="ph" id="ph">
+                  <div class="ph-h"><b>Free Tools</b><span>26 available</span></div>
+                  <div class="ph-grid" id="phgrid"></div>
+                  <div class="ph-cap">▒ placeholder — your 26-tools screenshot embeds here ▒</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ad-cta">
+              <a class="btn">Access free tools <span class="arr">→</span></a>
+              <span class="handle">98%+ inbox rate<br>revenuebase.ai</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alt">
+        <div class="col-label">Alt headlines (swap in &lt;h2&gt;)</div>
+        <ul>
+          <li><b>Land every email in the inbox.</b> <span style="color:#868c9b">— current</span></li>
+          <li><b>Stop landing in spam.</b></li>
+          <li><b>98%+ inbox rate. Zero cost.</b></li>
+          <li><b>Your outbound's unfair advantage — free.</b></li>
+          <li><b>26 free tools. 98%+ deliverability.</b></li>
+        </ul>
+      </div>
+
+      <div class="alt">
+        <div class="col-label">CTA button options</div>
+        <ul>
+          <li><b>Access free tools →</b> <span style="color:#868c9b">— current</span></li>
+          <li><b>Get the free tools →</b></li>
+          <li><b>Claim 26 free tools →</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== THE POST COPY ===== -->
+    <div>
+      <div class="col-label">LinkedIn post copy · runs above the ad</div>
+      <div class="post">
+        <div class="post-h">
+          <div class="av"><img src="assets/revenuebase-logo.svg" alt=""></div>
+          <div class="who"><b>RevenueBase</b><span>Promoted</span></div>
+        </div>
+        <div class="post-body" id="postbody">Your list is clean. Your copy is tight.
+
+And you're still landing in spam.
+
+At real outbound volume, deliverability is the whole game — and most teams are flying blind until the replies dry up.
+
+So we built the tools to fix it, and made every one of them <strong>free</strong>:
+
+→ Check domain + inbox health in seconds
+→ SPF, DKIM &amp; DMARC, set up right
+→ Blacklist monitoring + spam-score checks
+→ Validate addresses before you send
+
+<strong>26 tools. 98%+ inbox placement. $0.</strong>
+
+No trial. No credit card. No "book a demo." Just sign up and use them.
+
+Built for GTM engineers and the agencies running outbound at scale.
+
+Grab the free toolkit 👇</div>
+        <button class="copybtn" id="copy">Copy post text</button>
+      </div>
+
+      <div class="alt">
+        <div class="col-label">Hook line A/B tests (first line = the scroll-stopper)</div>
+        <ul>
+          <li>"Your list is clean. Your copy is tight. And you're still landing in spam."</li>
+          <li>"98% of your outbound is wasted if it never reaches the inbox."</li>
+          <li>"Most cold email never gets seen. Here's the free fix."</li>
+          <li>"Deliverability is the only outbound metric that actually matters."</li>
+        </ul>
+      </div>
+
+      <div class="flag">
+        <b>Need from you:</b> the 26-tools screenshot. Drop the file in the repo (or paste it in chat) and I'll embed it in the window above — the placeholder grid is just sized to match. PNG, ideally ≥ 1600px wide and roughly landscape so it fills the frame crisply.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // placeholder tool tiles (stand-in for the screenshot)
+  const tools=["Domain Health","Inbox Placement","SPF Check","DKIM Setup","DMARC Builder","Blacklist Monitor","Spam Score","Email Validator","Warmup Planner","DNS Lookup","MX Checker","Catch-all Test","Bounce Analyzer","Reputation Score","Header Analyzer","Link Checker","Subject Tester","Send-time Optimizer","Seed List","Deliverability Audit","Content Scanner","Reply-rate Calc","List Cleaner","Domain Age","TLS Check","Unsubscribe Audit"];
+  const g=document.getElementById('phgrid');
+  if(g){g.innerHTML=tools.slice(0,15).map(t=>'<div class="ph-tile"><span class="ic"></span><span class="nm">'+t+'</span><span class="tag">Free</span></div>').join('');}
+
+  // if a real screenshot is dropped at this path, show it instead of the placeholder
+  (function(){const img=document.getElementById('shot');const ph=document.getElementById('ph');
+   const test=new Image();test.onload=()=>{img.src=test.src;img.style.display='block';ph.style.display='none';};
+   test.onerror=()=>{};test.src='assets/free-tools-screenshot.png';})();
+
+  // size toggle
+  const sf=document.getElementById('size-fit'),sa=document.getElementById('size-actual');
+  function setSize(a){document.body.classList.toggle('actual',a);sa.classList.toggle('active',a);sf.classList.toggle('active',!a);}
+  sf.onclick=()=>setSize(false);sa.onclick=()=>setSize(true);setSize(false);
+
+  // copy post text
+  const cb=document.getElementById('copy');
+  cb.onclick=()=>{const t=document.getElementById('postbody').innerText;navigator.clipboard.writeText(t).then(()=>{cb.textContent='Copied ✓';setTimeout(()=>cb.textContent='Copy post text',1500);});};
+</script>
+</body>
+</html>
