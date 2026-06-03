@@ -55,20 +55,23 @@
   .win-bar{display:flex;align-items:center;gap:9px;padding:15px 18px;border-bottom:1px solid #244468;background:#0e1a2e;flex:0 0 auto;}
   .win-bar .d{width:13px;height:13px;background:#244468;}
   .win-url{margin-left:14px;font-family:var(--mono);font-size:15px;color:#89a5cc;background:#0a3652;border:1px solid #244468;padding:8px 16px;flex:1;letter-spacing:.02em;}
-  .win-body{position:relative;flex:1;background:#f1f4f9;overflow:hidden;min-height:0;}
+  .win-body{position:relative;flex:1;background:#f3f4fb;overflow:hidden;min-height:0;}
   .win-body img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;}
 
-  /* placeholder tool grid (replaced by the real screenshot) */
-  .ph{position:absolute;inset:0;padding:30px;display:flex;flex-direction:column;background:#f1f4f9;}
-  .ph .ph-h{display:flex;align-items:baseline;gap:12px;margin-bottom:22px;}
-  .ph .ph-h b{font-family:var(--sans);font-weight:600;font-size:26px;color:#0f537e;letter-spacing:-.02em;}
-  .ph .ph-h span{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#00b5b0;}
-  .ph-grid{flex:1;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);gap:12px;overflow:hidden;}
-  .ph-tile{border:1px solid #c1cfe0;background:#fff;padding:14px;display:flex;flex-direction:column;gap:10px;}
-  .ph-tile .ic{width:30px;height:30px;background:#cff5f4;border:1px solid #9eeae7;}
-  .ph-tile .nm{font-family:var(--sans);font-weight:600;font-size:13px;color:#13161d;line-height:1.15;}
-  .ph-tile .tag{margin-top:auto;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#00b5b0;}
-  .ph-cap{flex:0 0 auto;margin-top:16px;font-family:var(--mono);font-size:14px;letter-spacing:.05em;color:#704700;background:#fff0cc;border:1px solid #ffe099;padding:11px 16px;text-align:center;}
+  /* faithful rebuild of the free-tools directory (renders crisp at any scale) */
+  .toolui{position:absolute;top:0;left:0;width:1600px;transform-origin:top left;background:#f3f4fb;padding:30px 32px 40px;}
+  .tu-tabs{display:flex;gap:11px;margin-bottom:26px;flex-wrap:wrap;}
+  .tu-tab{font-family:var(--sans);font-weight:500;font-size:19px;padding:11px 20px;border:1px solid #c6cde0;background:#fff;color:#4a5570;}
+  .tu-tab.on{background:#0f537e;color:#fff;border-color:#0f537e;}
+  .tu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .tu-card{background:#fff;border:1px solid #e4e7f1;padding:24px 26px;position:relative;min-height:168px;}
+  .tu-card .ext{position:absolute;top:22px;right:22px;width:18px;height:18px;border:2px solid #b6bdd0;border-left:none;border-bottom:none;}
+  .tu-card .ext::after{content:"";position:absolute;right:-2px;top:0;width:22px;height:2px;background:#b6bdd0;transform:rotate(45deg);transform-origin:right top;}
+  .tu-top{display:flex;align-items:center;gap:15px;}
+  .tu-logo{width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:700;font-size:15px;color:#fff;flex:0 0 auto;letter-spacing:-.01em;}
+  .tu-name{font-family:var(--sans);font-weight:600;font-size:22px;color:#1b2230;letter-spacing:-.01em;line-height:1.1;}
+  .tu-tag{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:#1a9e6f;margin:18px 0 15px;}
+  .tu-desc{font-family:var(--sans);font-size:16px;line-height:1.42;color:#6b7388;}
 
   /* CTA */
   .ad-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:34px;}
@@ -135,12 +138,13 @@
                 <span class="win-url">app.revenuebase.ai/free-tools</span>
               </div>
               <div class="win-body">
-                <!-- Replace this placeholder with the real screenshot: set #shot src and it shows automatically -->
+                <!-- Optional: drop a real PNG at assets/free-tools-screenshot.png and it overrides this build -->
                 <img id="shot" alt="Free tools" style="display:none">
-                <div class="ph" id="ph">
-                  <div class="ph-h"><b>Free Tools</b><span>26 available</span></div>
-                  <div class="ph-grid" id="phgrid"></div>
-                  <div class="ph-cap">▒ placeholder — your 26-tools screenshot embeds here ▒</div>
+                <div class="toolui" id="toolui">
+                  <div class="tu-tabs">
+                    <span class="tu-tab on">All</span><span class="tu-tab">DNS &amp; Auth</span><span class="tu-tab">Blacklist &amp; Reputation</span><span class="tu-tab">Spam Scoring</span><span class="tu-tab">Inbox Placement</span><span class="tu-tab">Email Testing</span><span class="tu-tab">Provider Monitoring</span><span class="tu-tab">Verification</span>
+                  </div>
+                  <div class="tu-grid" id="tugrid"></div>
                 </div>
               </div>
             </div>
@@ -223,14 +227,53 @@ Grab the free toolkit 👇</div>
 </div>
 
 <script>
-  // placeholder tool tiles (stand-in for the screenshot)
-  const tools=["Domain Health","Inbox Placement","SPF Check","DKIM Setup","DMARC Builder","Blacklist Monitor","Spam Score","Email Validator","Warmup Planner","DNS Lookup","MX Checker","Catch-all Test","Bounce Analyzer","Reputation Score","Header Analyzer","Link Checker","Subject Tester","Send-time Optimizer","Seed List","Deliverability Audit","Content Scanner","Reply-rate Calc","List Cleaner","Domain Age","TLS Check","Unsubscribe Audit"];
-  const g=document.getElementById('phgrid');
-  if(g){g.innerHTML=tools.slice(0,15).map(t=>'<div class="ph-tile"><span class="ic"></span><span class="nm">'+t+'</span><span class="tag">Free</span></div>').join('');}
+  // faithful rebuild of the 26-tool directory — [name, tag, desc, mark, bg, darkText?]
+  const tools=[
+    ["MXToolbox – DNS Checker","FREE","Check SPF, DKIM, DMARC records and diagnose DNS issues","X","#f5821f"],
+    ["MXToolbox – Blacklist Check","FREE","Check if your domain is on any email blacklists","X","#f5821f"],
+    ["RevenueBase Email Verification","500 CREDITS FREE","The only verifier that resolves catch-all domains accurately","RB","#ff7708"],
+    ["Mail-Tester","FREE","Test your email spam score before sending campaigns","✉","#d24b4b"],
+    ["Sender Score","FREE","Check your IP reputation and sender score","◆","#2f6df0"],
+    ["GlockApps","FREE TIER","Test inbox placement across multiple email providers","G","#6b4ee6"],
+    ["Dmarcian DMARC Inspector","FREE","Analyze and validate your DMARC configuration","d","#1f9e6f"],
+    ["Google Postmaster Tools","FREE","Monitor Gmail deliverability and reputation metrics","G","#4285f4"],
+    ["Microsoft SNDS","FREE","Smart Network Data Services for Outlook / Hotmail deliverability","▦","#2563c9"],
+    ["Google Admin Toolbox","FREE","Google's MX, SPF and DKIM record checker — run it first when Gmail rejects mail","G","#34a853"],
+    ["MXToolbox Email Header Analyzer","FREE","Decode raw email headers: full delivery path, auth results and every hop","X","#f5821f"],
+    ["MXToolbox SMTP Test","FREE","Test SMTP connectivity, TLS support and response codes","X","#f5821f"],
+    ["EasyDMARC Header Analyzer","FREE","Visual authentication-chain breakdown from an EML file or raw headers","ED","#1d4ed8"],
+    ["DNS Checker","FREE","Check SPF / DKIM / DMARC propagation across 100+ DNS servers worldwide","DNS","#2563c9"],
+    ["Cisco Talos Intelligence","FREE","Check domain or IP reputation against Cisco's threat-intelligence network","◉","#0d6f9e"],
+    ["Barracuda Reputation Lookup","FREE","Look up your IP in Barracuda's reputation database","✓","#0b5fa5"],
+    ["Spamhaus Lookup","FREE","The most authoritative spam blocklist — check SBL, XBL, PBL and DBL","◯","#1b2230"],
+    ["MultiRBL","FREE","Check your sending IP against 300+ real-time blacklists at once","RBL","#3a4255"],
+    ["IPVoid","FREE","IP reputation check against 80+ blacklisting engines","IP","#2e3440"],
+    ["Postmark Spam Check","FREE","Get a SpamAssassin score with every failing rule, from raw HTML","PM","#ffde00",1],
+    ["MXToolbox Deliverability","FREE","Full deliverability report: auth, blacklist, content score and headers","X","#f5821f"],
+    ["IsNotSpam","FREE","Pass / fail report on SPF, DKIM, DomainKeys, SpamAssassin and Razor2","IS","#5a6273"],
+    ["MailReach Spam Test","FREE TIER","Inbox-placement test to real Gmail and Outlook seed accounts","M","#6b4ee6"],
+    ["Mailtrap Email Sandbox","FREE TIER","Sandbox that catches outgoing email — 1,000 free tests / month","M","#1f9e6f"],
+    ["Email Privacy Tester","FREE","See what data your email client leaks when you open a message","EP","#2e3440"],
+    ["Yahoo Sender Hub","FREE","Yahoo / AOL sender portal — monitor reputation and request delisting","Y!","#6b1fb2"]
+  ];
+  const grid=document.getElementById('tugrid');
+  if(grid){grid.innerHTML=tools.map(t=>{
+    const tc=t[5]?'#1b2230':'#fff';
+    return '<div class="tu-card"><span class="ext"></span><div class="tu-top">'+
+      '<span class="tu-logo" style="background:'+t[4]+';color:'+tc+'">'+t[3]+'</span>'+
+      '<span class="tu-name">'+t[0]+'</span></div>'+
+      '<span class="tu-tag">'+t[1]+'</span>'+
+      '<div class="tu-desc">'+t[2]+'</div></div>';
+  }).join('');}
 
-  // if a real screenshot is dropped at this path, show it instead of the placeholder
-  (function(){const img=document.getElementById('shot');const ph=document.getElementById('ph');
-   const test=new Image();test.onload=()=>{img.src=test.src;img.style.display='block';ph.style.display='none';};
+  // scale the 1600px UI to fill the window body, like a real screenshot
+  function fitUI(){const wb=document.querySelector('.win-body'),ui=document.getElementById('toolui');
+    if(wb&&ui){ui.style.transform='scale('+(wb.clientWidth/1600)+')';}}
+  fitUI();window.addEventListener('resize',fitUI);
+
+  // if a real screenshot is dropped at this path, show it instead of the rebuild
+  (function(){const img=document.getElementById('shot');const ui=document.getElementById('toolui');
+   const test=new Image();test.onload=()=>{img.src=test.src;img.style.display='block';ui.style.display='none';};
    test.onerror=()=>{};test.src='assets/free-tools-screenshot.png';})();
 
   // size toggle
