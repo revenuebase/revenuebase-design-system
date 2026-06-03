@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RevenueBase — LinkedIn Post Graphics</title>
+<title>RevenueBase — LinkedIn Ad Graphics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;0,9..144,400;0,9..144,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -18,127 +18,123 @@
   html[data-theme="light"]{
     --canvas:var(--navy-50);--surface:#fff;
     --heading:var(--navy-800);--text:rgba(15,83,126,.72);--eyebrow:rgba(15,83,126,.45);--muted:var(--slate-400);
-    --accent:var(--navy-800);--border:var(--navy-200);--border-soft:var(--slate-200);--grid-line:var(--slate-200);
-    --btn-bg:var(--navy-150);--btn-fg:var(--navy-800);--btn-bd:var(--navy-300);
-    --brand-bg:var(--amber-100);--brand-fg:var(--amber-800);--action:var(--teal-500);
-    --noise:url("assets/bg-noise-light.webp");--grid:url("assets/grid-light.svg");
-    --doc-bg:#e9edf3;
+    --accent:var(--navy-800);--border:var(--navy-200);--grid-line:var(--slate-200);
+    --noise:url("assets/bg-noise-light.webp");--doc-bg:#e9edf3;
   }
   html[data-theme="dark"]{
     --canvas:var(--navy-900);--surface:var(--navy-850);
     --heading:var(--navy-50);--text:var(--navy-200);--eyebrow:var(--navy-300);--muted:var(--navy-300);
-    --accent:var(--navy-100);--border:var(--navy-700);--border-soft:var(--navy-700);--grid-line:var(--navy-850);
-    --btn-bg:var(--navy-200);--btn-fg:var(--navy-900);--btn-bd:var(--navy-400);
-    --brand-bg:var(--amber-900);--brand-fg:var(--amber-50);--action:var(--teal-400);
-    --noise:url("assets/bg-noise-dark.webp");--grid:url("assets/grid-dark.svg");
-    --doc-bg:#0a1322;
+    --accent:var(--navy-100);--border:var(--navy-700);--grid-line:var(--navy-850);
+    --noise:url("assets/bg-noise-dark.webp");--doc-bg:#0a1322;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:var(--sans);background:var(--doc-bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s;}
   .fa{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.07em;}
   code{font-family:var(--mono);font-size:.85em;background:color-mix(in srgb,var(--accent) 9%,transparent);padding:.1em .4em;}
 
-  /* topbar */
   header.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:13px clamp(16px,4vw,40px);background:color-mix(in srgb,var(--canvas) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
   .logo{display:flex;align-items:center;gap:9px;}
   .topbar-right{display:flex;align-items:center;gap:12px;}
   .step-pill{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border:1px solid var(--border);padding:6px 12px;}
   .toggle{display:flex;align-items:center;gap:7px;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:7px 13px;font-size:13px;font-weight:500;}
 
-  /* doc scaffold */
   main{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 120px;}
   .doc-intro{padding:48px 0 8px;}
-  .doc-intro .eyebrow{font-family:var(--mono);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--action);margin-bottom:14px;}
+  .doc-intro .eyebrow{font-family:var(--mono);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--teal-500);margin-bottom:14px;}
   .doc-intro h1{font-family:var(--sans);font-weight:500;font-size:clamp(30px,4.5vw,46px);color:var(--heading);letter-spacing:-.03em;line-height:1.05;}
   .doc-intro p{color:var(--muted);font-size:17px;margin-top:14px;max-width:64ch;}
 
-  .block{margin-top:56px;}
-  .block-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:24px;}
-  .block-head .n{font-family:var(--mono);font-size:12px;color:var(--action);letter-spacing:.08em;}
-  .block-head h2{font-family:var(--sans);font-weight:600;font-size:22px;color:var(--heading);letter-spacing:-.01em;}
-  .block-head .spec{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;max-width:48%;}
-
-  /* controls */
+  .block{margin-top:48px;}
   .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px;}
   .ctl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text);border:1px solid var(--border);background:var(--surface);padding:8px 13px;cursor:pointer;}
   .ctl.active{background:var(--accent);color:var(--canvas);border-color:var(--accent);}
-  .hint{font-size:13px;color:var(--muted);margin:4px 0 22px;max-width:70ch;}
-  .hint code{font-size:12px;}
+  .hint{font-size:13px;color:var(--muted);margin:4px 0 22px;max-width:72ch;}
 
-  /* ===== gallery ===== */
   .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:40px;align-items:start;}
   body.actual .gallery{grid-template-columns:1fr;justify-items:center;}
-
   .card-wrap{display:flex;flex-direction:column;gap:12px;}
   .card-meta{display:flex;align-items:baseline;justify-content:space-between;gap:10px;}
   .card-meta .name{font-family:var(--sans);font-weight:600;font-size:15px;color:var(--heading);}
   .card-meta .dims{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;}
 
-  /* The frame holds a 1080x1080 canvas scaled to fit. Default preview = 0.3334 (360px). */
-  .frame{--scale:0.3334;width:calc(1080px*var(--scale));height:calc(1080px*var(--scale));overflow:hidden;border:1px solid var(--border);box-shadow:0 1px 0 rgba(0,0,0,.04);}
-  body.actual .frame{--scale:1;border:1px solid var(--border);}
-  .canvas{width:1080px;height:1080px;transform:scale(var(--scale));transform-origin:top left;position:relative;overflow:hidden;font-family:var(--sans);}
-  .canvas .noise{position:absolute;inset:0;background-image:var(--cv-noise);background-size:256px;opacity:.04;pointer-events:none;}
-  .canvas .gridtex{position:absolute;inset:0;background-image:var(--cv-grid);background-size:90px 90px;opacity:1;pointer-events:none;}
+  .frame{--scale:0.3334;width:calc(1080px*var(--scale));height:calc(1080px*var(--scale));overflow:hidden;border:1px solid var(--border);}
+  body.actual .frame{--scale:1;}
+  .canvas{width:1080px;height:1080px;transform:scale(var(--scale));transform-origin:top left;position:relative;overflow:hidden;font-family:var(--sans);background:var(--cv);}
+  .canvas .noise{position:absolute;inset:0;background-image:var(--cv-noise);background-size:256px;opacity:.04;pointer-events:none;z-index:3;}
 
-  /* per-canvas theme: each graphic carries its own surface so it reads correctly regardless of page theme */
-  .canvas.light{--cv:#f1f4f9;--cv-surface:#fff;--cv-head:#0f537e;--cv-body:rgba(15,83,126,.74);--cv-eyebrow:rgba(15,83,126,.5);--cv-border:#b5c8e0;--cv-rule:#00b5b0;--cv-brand-bg:#fff0cc;--cv-brand-fg:#704700;--cv-btn-bg:#c1cfe0;--cv-btn-fg:#0f537e;--cv-btn-bd:#89a5cc;--cv-noise:url("assets/bg-noise-light.webp");--cv-grid:url("assets/grid-light.svg");--cv-cross:#0f537e;}
-  .canvas.dark{--cv:#0e1a2e;--cv-surface:#0a3652;--cv-head:#f1f4f9;--cv-body:#b5c8e0;--cv-eyebrow:#89a5cc;--cv-border:#1a4a6e;--cv-rule:#2dc9c4;--cv-brand-bg:#4d3000;--cv-brand-fg:#fff8e6;--cv-btn-bg:#b5c8e0;--cv-btn-fg:#0e1a2e;--cv-btn-bd:#5e82b8;--cv-noise:url("assets/bg-noise-dark.webp");--cv-grid:url("assets/grid-dark.svg");--cv-cross:#89a5cc;}
-  .canvas{background:var(--cv);}
+  /* per-canvas theme */
+  .canvas.light{--cv:#f1f4f9;--cv-surface:#fff;--cv-head:#0f537e;--cv-body:rgba(15,83,126,.74);--cv-eyebrow:rgba(15,83,126,.55);--cv-border:#b5c8e0;--cv-hair:#cdd9ea;--cv-rule:#00b5b0;--cv-ink:#0f537e;--cv-brand-bg:#fff0cc;--cv-brand-fg:#704700;--cv-btn-bg:#c1cfe0;--cv-btn-fg:#0f537e;--cv-btn-bd:#89a5cc;--cv-noise:url("assets/bg-noise-light.webp");--cv-cross:#0f537e;--cv-dim:#dbe4f0;}
+  .canvas.dark{--cv:#0e1a2e;--cv-surface:#0a3652;--cv-head:#f1f4f9;--cv-body:#b5c8e0;--cv-eyebrow:#89a5cc;--cv-border:#1a4a6e;--cv-hair:#163a5a;--cv-rule:#2dc9c4;--cv-ink:#f1f4f9;--cv-brand-bg:#4d3000;--cv-brand-fg:#fff8e6;--cv-btn-bg:#b5c8e0;--cv-btn-fg:#0e1a2e;--cv-btn-bd:#5e82b8;--cv-noise:url("assets/bg-noise-dark.webp");--cv-cross:#89a5cc;--cv-dim:#13294180;}
 
-  /* shared canvas pieces — 64px LinkedIn-safe gutter */
-  .cv-pad{position:absolute;inset:0;padding:72px;display:flex;flex-direction:column;}
-  .cv-logo{height:34px;width:auto;display:block;align-self:flex-start;}
-  .cv-eyebrow{font-family:var(--mono);font-size:21px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--cv-eyebrow);}
-  .cv-rule{height:3px;width:88px;background:var(--cv-rule);border:0;}
-  .cv-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:auto;}
+  /* ad scaffold */
+  .ad-pad{position:absolute;inset:0;padding:64px;display:flex;flex-direction:column;z-index:2;}
+  .ad-top{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .cv-logo{height:32px;width:auto;display:block;}
+  .cv-eyebrow{font-family:var(--mono);font-size:20px;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--cv-eyebrow);}
+  .cv-chip{font-family:var(--mono);font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;padding:9px 15px;background:var(--cv-brand-bg);color:var(--cv-brand-fg);}
+  .cv-h{font-family:var(--sans);font-weight:500;color:var(--cv-head);letter-spacing:-.035em;line-height:1.0;}
+  .cv-h .fa{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.05em;letter-spacing:-.01em;}
+  .cv-sub{font-family:var(--sans);font-weight:400;color:var(--cv-body);line-height:1.4;}
+  .ad-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:auto;}
   .cv-handle{font-family:var(--mono);font-size:19px;letter-spacing:.04em;color:var(--cv-eyebrow);}
-  .cv-chip{font-family:var(--mono);font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;padding:9px 16px;background:var(--cv-brand-bg);color:var(--cv-brand-fg);}
 
-  /* headline / body */
-  .cv-h{font-family:var(--sans);font-weight:500;color:var(--cv-head);letter-spacing:-.03em;line-height:1.04;}
-  .cv-h .fa{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.07em;}
-  .cv-sub{font-family:var(--sans);font-weight:400;color:var(--cv-body);line-height:1.45;}
+  .cv-btn{position:relative;display:inline-flex;align-items:center;font-family:var(--sans);font-weight:500;font-size:24px;padding:20px 32px;background:var(--cv-btn-bg);color:var(--cv-btn-fg);border:1px solid var(--cv-btn-bd);align-self:flex-start;}
+  .cv-cm{position:absolute;width:20px;height:20px;pointer-events:none;}
+  .cv-cm::before{content:"";position:absolute;left:9px;top:0;width:2px;height:20px;background:var(--cv-cross);opacity:.6;}
+  .cv-cm::after{content:"";position:absolute;top:9px;left:0;height:2px;width:20px;background:var(--cv-cross);opacity:.6;}
 
-  /* crosshair marks (marketing-only motif) */
-  .cv-cm{position:absolute;width:26px;height:26px;pointer-events:none;}
-  .cv-cm::before{content:"";position:absolute;left:12px;top:0;width:2px;height:26px;background:var(--cv-cross);opacity:.55;}
-  .cv-cm::after{content:"";position:absolute;top:12px;left:0;height:2px;width:26px;background:var(--cv-cross);opacity:.55;}
+  /* ===== A · verified-record grid ===== */
+  .recgrid{display:grid;grid-template-columns:repeat(20,1fr);gap:8px;width:100%;}
+  .recgrid i{aspect-ratio:1/1;background:var(--cv-rule);}
+  .recgrid i.q{background:transparent;border:2px solid var(--cv-border);}
+  .recgrid i.f{background:#ffce66;}
+  .vA .ad-mid{flex:1;display:flex;align-items:center;}
+  .vA .cv-eyebrow{margin-bottom:0;}
+  .vA .cv-h{font-size:90px;margin:34px 0 0;}
+  .vA .legend{display:flex;gap:30px;margin-top:30px;flex-wrap:wrap;}
+  .vA .legend span{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:17px;letter-spacing:.04em;color:var(--cv-body);}
+  .vA .legend b{width:20px;height:20px;display:inline-block;}
 
-  /* button (muted marketing primary, square, with crosshairs) */
-  .cv-btn{position:relative;display:inline-flex;align-items:center;font-family:var(--sans);font-weight:500;font-size:23px;padding:20px 34px;background:var(--cv-btn-bg);color:var(--cv-btn-fg);border:1px solid var(--cv-btn-bd);align-self:flex-start;}
-  .cv-btn .cv-cm{width:20px;height:20px;}
-  .cv-btn .cv-cm::before{left:9px;height:20px;}
-  .cv-btn .cv-cm::after{top:9px;width:20px;}
+  /* ===== B · coverage stat + chart ===== */
+  .vB .stat-fig{font-family:var(--serif);font-style:italic;font-weight:400;font-size:300px;line-height:.82;color:var(--cv-head);letter-spacing:-.03em;margin-top:18px;}
+  .vB .stat-cap{font-family:var(--sans);font-weight:500;font-size:40px;color:var(--cv-head);margin-top:6px;}
+  .vB .stat-sub{font-size:25px;margin-top:14px;max-width:30ch;}
+  .vB .bars{display:flex;align-items:flex-end;gap:18px;height:230px;margin-top:auto;border-bottom:2px solid var(--cv-border);padding-bottom:0;}
+  .vB .bars i{flex:1;background:var(--cv-ink);opacity:.32;}
+  .vB .bars i.on{opacity:1;background:var(--cv-rule);}
+  .vB .blabels{display:flex;gap:18px;margin-top:14px;}
+  .vB .blabels span{flex:1;text-align:center;font-family:var(--mono);font-size:14px;letter-spacing:.04em;color:var(--cv-eyebrow);}
 
-  /* editable affordance */
+  /* ===== C · identity graph ===== */
+  .vC .ad-mid{flex:1;display:flex;align-items:center;justify-content:center;position:relative;}
+  .vC .graph{width:100%;height:auto;}
+  .vC .g-edge{stroke:var(--cv-border);stroke-width:2;}
+  .vC .g-node{fill:var(--cv-surface);stroke:var(--cv-border);stroke-width:2;}
+  .vC .g-node.biz{fill:var(--cv-dim);}
+  .vC .g-core{fill:var(--cv-rule);stroke:none;}
+  .vC .g-dot{fill:var(--cv-border);}
+  .vC .g-core-dot{fill:#0e1a2e;}
+  .vC .cv-eyebrow{margin-bottom:0;}
+  .vC .cv-h{font-size:80px;margin-top:30px;}
+
+  /* ===== D · real-time pipeline ===== */
+  .vD .cv-eyebrow{margin-bottom:0;}
+  .vD .cv-h{font-size:78px;margin-top:28px;}
+  .vD .ad-mid{flex:1;display:flex;flex-direction:column;justify-content:center;}
+  .vD .pipe{display:flex;align-items:stretch;margin-top:44px;}
+  .vD .pstage{flex:1;border:2px solid var(--cv-border);background:var(--cv-surface);padding:26px 22px;display:flex;flex-direction:column;gap:12px;}
+  .vD .pstage .pl{font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--cv-eyebrow);}
+  .vD .pstage .pv{font-family:var(--sans);font-weight:600;font-size:27px;color:var(--cv-head);display:flex;align-items:center;gap:10px;}
+  .vD .pstage.live{border-color:var(--cv-rule);}
+  .vD .pstage.live .pv{color:var(--cv-rule);}
+  .vD .parrow{align-self:center;font-family:var(--sans);font-size:34px;color:var(--cv-border);padding:0 14px;}
+  .vD .pbar{height:10px;background:var(--cv-dim);margin-top:26px;position:relative;}
+  .vD .pbar i{position:absolute;left:0;top:0;bottom:0;width:72%;background:var(--cv-rule);}
+  .vD .check{color:var(--cv-rule);}
+  .vD .cv-btn{margin-top:52px;}
+
   [contenteditable]{outline:none;}
-  body.editing [contenteditable]:hover{box-shadow:inset 0 0 0 1px var(--cv-rule);}
-  body.editing [contenteditable]:focus{box-shadow:inset 0 0 0 1px var(--cv-rule);}
-
-  /* ---- Variant A: Insight / hook (dark) ---- */
-  .vA .cv-eyebrow{margin:42px 0 28px;}
-  .vA .cv-h{font-size:78px;max-width:18ch;}
-  .vA .cv-rule{margin:40px 0 0;}
-
-  /* ---- Variant B: Stat highlight (light) ---- */
-  .vB .cv-eyebrow{margin:42px 0 0;}
-  .vB .stat-fig{font-family:var(--serif);font-style:italic;font-weight:400;font-size:230px;line-height:.9;color:var(--cv-head);margin:auto 0 0;letter-spacing:-.02em;}
-  .vB .stat-cap{font-family:var(--sans);font-weight:500;font-size:34px;color:var(--cv-head);margin-top:14px;}
-  .vB .stat-sub{margin-top:14px;font-size:23px;max-width:30ch;}
-
-  /* ---- Variant C: Quote (dark) ---- */
-  .vC .quote-mark{font-family:var(--serif);font-style:italic;font-weight:400;font-size:150px;line-height:.6;color:var(--cv-rule);margin:36px 0 -10px;height:90px;}
-  .vC .cv-h{font-size:52px;max-width:24ch;font-weight:500;}
-  .vC .byline{margin-top:36px;}
-  .vC .byline .nm{font-family:var(--sans);font-weight:600;font-size:25px;color:var(--cv-head);}
-  .vC .byline .rl{font-family:var(--mono);font-size:18px;letter-spacing:.04em;color:var(--cv-eyebrow);margin-top:6px;}
-
-  /* ---- Variant D: Announcement / launch (light) ---- */
-  .vD .cv-eyebrow{margin:42px 0 28px;}
-  .vD .cv-h{font-size:64px;max-width:17ch;}
-  .vD .cv-sub{font-size:26px;max-width:34ch;margin-top:24px;}
-  .vD .cv-btn{margin-top:44px;}
+  body.editing [contenteditable]:hover,body.editing [contenteditable]:focus{box-shadow:inset 0 0 0 1px var(--cv-rule);}
 
   footer.pg{max-width:1180px;margin:0 auto;padding:40px clamp(16px,4vw,40px) 80px;border-top:1px solid var(--border);color:var(--muted);font-size:13px;}
   footer.pg code{font-size:12px;}
@@ -148,16 +144,16 @@
 <header class="topbar">
   <div class="logo"><img src="assets/revenuebase-logo.svg" alt="RevenueBase" style="display:block;height:22px;width:auto;"></div>
   <div class="topbar-right">
-    <span class="step-pill">Social · LinkedIn</span>
+    <span class="step-pill">Ads · LinkedIn</span>
     <div class="toggle" id="toggle"><span id="ti">☀︎</span><span id="tl">Light</span></div>
   </div>
 </header>
 
 <main>
   <div class="doc-intro">
-    <div class="eyebrow">Social graphics</div>
-    <h1>LinkedIn post <span class="fa">graphic template.</span></h1>
-    <p>Four ready-to-fill square layouts for the RevenueBase feed — built on the brand tokens: navy-tinted canvases, DM&nbsp;Sans headlines with a Fraunces-italic guest word, mono eyebrows, blueprint crosshairs, and a teal action rule. Amber stays a scarce accent chip. Click any text to edit, then export at full 1080×1080.</p>
+    <div class="eyebrow">Social ads</div>
+    <h1>LinkedIn ad <span class="fa">graphic template.</span></h1>
+    <p>Four square (1080×1080) ad concepts, each carrying a real technical data-viz built from the brand tokens — a verified-record grid, a coverage chart, an identity graph, and a re-verification pipeline — under a big, dominant DM&nbsp;Sans headline with one Fraunces-italic guest word. Click any text to edit, then export at full size.</p>
   </div>
 
   <div class="block">
@@ -167,101 +163,139 @@
       <span class="ctl" id="edit-toggle">Edit text: off</span>
       <span class="step-pill" style="border-color:var(--border)">1080 × 1080 · 1:1 square</span>
     </div>
-    <p class="hint">LinkedIn renders single-image feed posts as a 1:1 square (1080×1080 export, displayed up to 1200&nbsp;wide). Keep the 72px gutter clear of text. To export: switch to <b>Actual size</b>, then screenshot the canvas or print-to-PDF and crop. Each canvas carries its own light/dark surface, so graphics look correct no matter the page theme above.</p>
+    <p class="hint">To export: switch to <b>Actual size</b>, then screenshot the canvas (or print-to-PDF and crop to the square). Each ad carries its own light/dark surface and renders correctly regardless of the page theme above.</p>
 
     <div class="gallery">
 
-      <!-- ===== A · Insight / hook (dark) ===== -->
+      <!-- ===== A · Verified-record grid (dark) ===== -->
       <div class="card-wrap">
-        <div class="card-meta"><span class="name">A · Insight hook</span><span class="dims">dark · 1080×1080</span></div>
+        <div class="card-meta"><span class="name">A · Verified-record grid</span><span class="dims">dark · 1080×1080</span></div>
         <div class="frame">
-          <div class="canvas dark vA">
+          <div class="canvas dark ad vA">
             <div class="noise"></div>
-            <div class="cv-cm" style="top:46px;left:46px"></div>
-            <div class="cv-cm" style="top:46px;right:46px"></div>
-            <div class="cv-cm" style="bottom:46px;left:46px"></div>
-            <div class="cv-cm" style="bottom:46px;right:46px"></div>
-            <div class="cv-pad">
-              <img class="cv-logo" src="assets/revenuebase-logo.svg" alt="RevenueBase">
-              <div class="cv-eyebrow" contenteditable>The trust layer</div>
-              <div class="cv-h" contenteditable>B2B data you can <span class="fa">actually</span> build on.</div>
-              <hr class="cv-rule">
-              <div class="cv-foot">
+            <div class="ad-pad">
+              <div class="ad-top">
+                <img class="cv-logo" src="assets/revenuebase-logo.svg" alt="RevenueBase">
+                <span class="cv-eyebrow" contenteditable>Data quality</span>
+              </div>
+              <div class="ad-mid"><div class="recgrid" data-grid="A"></div></div>
+              <div class="legend">
+                <span><b style="background:var(--cv-rule)"></b><span contenteditable>Re-verified</span></span>
+                <span><b style="background:#ffce66"></b><span contenteditable>Flagged &amp; fixed</span></span>
+                <span><b style="background:transparent;border:2px solid var(--cv-border)"></b><span contenteditable>In pipeline</span></span>
+              </div>
+              <div class="cv-h" contenteditable>Every record, <span class="fa">re-verified.</span></div>
+              <div class="ad-foot">
                 <span class="cv-handle" contenteditable>revenuebase.ai</span>
-                <span class="cv-chip" contenteditable>Primary-sourced</span>
+                <span class="cv-chip" contenteditable>No resale, no decay</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ===== B · Stat highlight (light) ===== -->
+      <!-- ===== B · Coverage stat + chart (light) ===== -->
       <div class="card-wrap">
-        <div class="card-meta"><span class="name">B · Stat highlight</span><span class="dims">light · 1080×1080</span></div>
+        <div class="card-meta"><span class="name">B · Coverage stat + chart</span><span class="dims">light · 1080×1080</span></div>
         <div class="frame">
-          <div class="canvas light vB">
+          <div class="canvas light ad vB">
             <div class="noise"></div>
-            <div class="cv-pad">
-              <img class="cv-logo" src="assets/revenuebase-logo.svg" alt="RevenueBase">
-              <div class="cv-eyebrow" contenteditable>Coverage</div>
+            <div class="ad-pad">
+              <div class="ad-top">
+                <img class="cv-logo" src="assets/revenuebase-logo.svg" alt="RevenueBase">
+                <span class="cv-eyebrow" contenteditable>Coverage</span>
+              </div>
               <div class="stat-fig" contenteditable>390M+</div>
-              <div class="stat-cap" contenteditable>verified contacts</div>
-              <div class="cv-sub stat-sub" contenteditable>Re-verified at the source. No resale, no decay, no guessing.</div>
-              <div class="cv-foot">
+              <div class="stat-cap" contenteditable>verified business contacts</div>
+              <div class="cv-sub stat-sub" contenteditable>Primary-sourced and re-verified — growing every quarter.</div>
+              <div class="bars" data-bars="34,46,55,63,78,90,100"></div>
+              <div class="blabels"><span contenteditable>Q1</span><span contenteditable>Q2</span><span contenteditable>Q3</span><span contenteditable>Q4</span><span contenteditable>Q1</span><span contenteditable>Q2</span><span contenteditable>Now</span></div>
+              <div class="ad-foot" style="margin-top:34px">
                 <span class="cv-handle" contenteditable>revenuebase.ai</span>
-                <hr class="cv-rule" style="margin:0">
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ===== C · Quote (dark) ===== -->
+      <!-- ===== C · Identity graph (dark) ===== -->
       <div class="card-wrap">
-        <div class="card-meta"><span class="name">C · Quote / testimonial</span><span class="dims">dark · 1080×1080</span></div>
+        <div class="card-meta"><span class="name">C · Identity graph</span><span class="dims">dark · 1080×1080</span></div>
         <div class="frame">
-          <div class="canvas dark vC">
+          <div class="canvas dark ad vC">
             <div class="noise"></div>
-            <div class="cv-pad">
-              <img class="cv-logo" src="assets/revenuebase-logo.svg" alt="RevenueBase">
-              <div class="quote-mark">&ldquo;</div>
-              <div class="cv-h" contenteditable>We cut our bad-data rate to near zero and <span class="fa">stopped</span> second-guessing every list.</div>
-              <div class="byline">
-                <div class="nm" contenteditable>Jordan Vega</div>
-                <div class="rl" contenteditable>VP Revenue Ops · Northwind</div>
+            <div class="ad-pad">
+              <div class="ad-top">
+                <img class="cv-logo" src="assets/revenuebase-logo.svg" alt="RevenueBase">
+                <span class="cv-eyebrow" contenteditable>Identity resolution</span>
               </div>
-              <div class="cv-foot">
+              <div class="ad-mid">
+                <svg class="graph" viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <g>
+                    <line class="g-edge" x1="450" y1="220" x2="120" y2="70"/>
+                    <line class="g-edge" x1="450" y1="220" x2="450" y2="44"/>
+                    <line class="g-edge" x1="450" y1="220" x2="780" y2="70"/>
+                    <line class="g-edge" x1="450" y1="220" x2="852" y2="220"/>
+                    <line class="g-edge" x1="450" y1="220" x2="780" y2="372"/>
+                    <line class="g-edge" x1="450" y1="220" x2="450" y2="398"/>
+                    <line class="g-edge" x1="450" y1="220" x2="120" y2="372"/>
+                    <line class="g-edge" x1="450" y1="220" x2="48" y2="220"/>
+                  </g>
+                  <g>
+                    <rect class="g-node" x="92"  y="42"  width="56" height="56"/>
+                    <rect class="g-node" x="422" y="16"  width="56" height="56"/>
+                    <rect class="g-node biz" x="752" y="42"  width="56" height="56"/>
+                    <rect class="g-node biz" x="824" y="192" width="56" height="56"/>
+                    <rect class="g-node biz" x="752" y="344" width="56" height="56"/>
+                    <rect class="g-node" x="422" y="370" width="56" height="56"/>
+                    <rect class="g-node" x="92"  y="344" width="56" height="56"/>
+                    <rect class="g-node" x="20"  y="192" width="56" height="56"/>
+                  </g>
+                  <rect class="g-core" x="406" y="176" width="88" height="88"/>
+                  <rect class="g-core-dot" x="438" y="208" width="24" height="24"/>
+                </svg>
+              </div>
+              <div class="cv-h" contenteditable>One person. <span class="fa">One</span> verified profile.</div>
+              <div class="ad-foot">
                 <span class="cv-handle" contenteditable>revenuebase.ai</span>
-                <span class="cv-chip" contenteditable>Customer story</span>
+                <span class="cv-chip" contenteditable>Entity-resolved</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ===== D · Announcement / launch (light) ===== -->
+      <!-- ===== D · Real-time pipeline (light) ===== -->
       <div class="card-wrap">
-        <div class="card-meta"><span class="name">D · Announcement + CTA</span><span class="dims">light · 1080×1080</span></div>
+        <div class="card-meta"><span class="name">D · Real-time pipeline + CTA</span><span class="dims">light · 1080×1080</span></div>
         <div class="frame">
-          <div class="canvas light vD">
+          <div class="canvas light ad vD">
             <div class="noise"></div>
-            <div class="cv-cm" style="top:46px;left:46px"></div>
-            <div class="cv-cm" style="top:46px;right:46px"></div>
-            <div class="cv-cm" style="bottom:46px;left:46px"></div>
-            <div class="cv-cm" style="bottom:46px;right:46px"></div>
-            <div class="cv-pad">
-              <img class="cv-logo" src="assets/revenuebase-logo.svg" alt="RevenueBase">
-              <div class="cv-eyebrow" contenteditable>Now live</div>
-              <div class="cv-h" contenteditable>Real-time <span class="fa">re-verification,</span> on every record.</div>
-              <div class="cv-sub" contenteditable>Your CRM stays accurate while you sleep. See it in the product tour.</div>
-              <a class="cv-btn" contenteditable>
-                Read the announcement
-                <span class="cv-cm" style="top:-10px;left:-10px"></span>
-                <span class="cv-cm" style="top:-10px;right:-10px"></span>
-                <span class="cv-cm" style="bottom:-10px;left:-10px"></span>
-                <span class="cv-cm" style="bottom:-10px;right:-10px"></span>
-              </a>
-              <div class="cv-foot">
+            <div class="cv-cm" style="top:40px;left:40px"></div>
+            <div class="cv-cm" style="top:40px;right:40px"></div>
+            <div class="cv-cm" style="bottom:40px;left:40px"></div>
+            <div class="cv-cm" style="bottom:40px;right:40px"></div>
+            <div class="ad-pad">
+              <div class="ad-top">
+                <img class="cv-logo" src="assets/revenuebase-logo.svg" alt="RevenueBase">
+                <span class="cv-eyebrow" contenteditable>Now live</span>
+              </div>
+              <div class="cv-h" contenteditable>Real-time <span class="fa">re-verification.</span></div>
+              <div class="ad-mid">
+                <div class="pipe">
+                  <div class="pstage"><span class="pl" contenteditable>Source</span><span class="pv" contenteditable>Your CRM</span></div>
+                  <span class="parrow">&rarr;</span>
+                  <div class="pstage live"><span class="pl" contenteditable>RevenueBase</span><span class="pv"><span class="check">&#10003;</span><span contenteditable>Re-verify</span></span></div>
+                  <span class="parrow">&rarr;</span>
+                  <div class="pstage"><span class="pl" contenteditable>Output</span><span class="pv" contenteditable>Clean records</span></div>
+                </div>
+                <div class="pbar"><i></i></div>
+                <a class="cv-btn" contenteditable>See it live
+                  <span class="cv-cm" style="top:-10px;left:-10px"></span><span class="cv-cm" style="top:-10px;right:-10px"></span>
+                  <span class="cv-cm" style="bottom:-10px;left:-10px"></span><span class="cv-cm" style="bottom:-10px;right:-10px"></span>
+                </a>
+              </div>
+              <div class="ad-foot">
                 <span class="cv-handle" contenteditable>revenuebase.ai</span>
               </div>
             </div>
@@ -273,22 +307,14 @@
   </div>
 
   <div class="block">
-    <div class="block-head">
-      <span class="n">USE</span>
-      <h2>How to use this template</h2>
-      <span class="spec">square · 1:1 · 1080px export</span>
-    </div>
-    <p class="hint" style="max-width:78ch">
-      <b>1 · Pick a layout.</b> A &mdash; a one-line insight hook. B &mdash; a single big Fraunces-italic stat. C &mdash; a customer quote. D &mdash; an announcement with a CTA button.<br>
-      <b>2 · Edit in place.</b> Click <b>Edit text: on</b>, then click any field and type. Keep one — and only one — Fraunces-italic guest phrase per headline (wrap it in <code>&lt;span class="fa"&gt;</code>).<br>
-      <b>3 · Stay on-brand.</b> Square corners only, navy-tinted surfaces (never pure #fff/#000), amber lives in the chip and logo alone, teal carries the rule. Crosshair marks are marketing-only — fine here.<br>
-      <b>4 · Export.</b> Switch to <b>Actual size · 1080px</b> and screenshot the canvas (or print-to-PDF, then crop to the square). Upload to LinkedIn as a single-image post.
+    <p class="hint" style="max-width:80ch">
+      <b>The graphic does the work, the headline lands the point.</b> A — a verified-record grid (teal = re-verified, amber = flagged &amp; fixed, outline = in pipeline). B — a coverage stat with a real growth chart. C — an identity graph resolving many signals to one square core node. D — a live re-verification pipeline with a CTA. Keep one Fraunces-italic guest phrase per headline (<code>&lt;span class="fa"&gt;</code>), square corners only, amber scarce, teal for action. Switch to <b>Actual size</b> to export at 1080×1080.
     </p>
   </div>
 </main>
 
 <footer class="pg">
-  RevenueBase Design System · LinkedIn post graphics · square 1:1 (1080×1080). Tokens, type, and motifs per <code>CLAUDE.md</code>. Assets hosted at <code>revenuebase.github.io/revenuebase-design-system/assets/</code>.
+  RevenueBase Design System · LinkedIn ad graphics · square 1:1 (1080×1080). Tokens, type, and motifs per <code>CLAUDE.md</code>. Assets hosted at <code>revenuebase.github.io/revenuebase-design-system/assets/</code>.
 </footer>
 
 <script>
@@ -296,7 +322,24 @@
   const t=document.getElementById("toggle"),h=document.documentElement,ti=document.getElementById("ti"),tl=document.getElementById("tl");
   t.addEventListener("click",()=>{const d=h.getAttribute("data-theme")==="dark";h.setAttribute("data-theme",d?"light":"dark");ti.textContent=d?"☀︎":"☾";tl.textContent=d?"Light":"Dark";});
 
-  // preview size: fit vs actual
+  // build the verified-record grid (A): mostly verified, a few in-pipeline, a couple flagged
+  document.querySelectorAll('[data-grid]').forEach(g=>{
+    const cols=20, rows=10, n=cols*rows;
+    const queued=new Set(), flagged=new Set();
+    while(queued.size<22) queued.add(Math.floor(Math.random()*n));
+    while(flagged.size<3){const i=Math.floor(Math.random()*n); if(!queued.has(i)) flagged.add(i);}
+    let html='';
+    for(let i=0;i<n;i++){ const c = flagged.has(i)?' class="f"' : queued.has(i)?' class="q"':''; html+='<i'+c+'></i>'; }
+    g.innerHTML=html;
+  });
+
+  // build the coverage bars (B)
+  document.querySelectorAll('[data-bars]').forEach(b=>{
+    const vals=b.dataset.bars.split(',').map(Number); const max=Math.max(...vals);
+    b.innerHTML=vals.map((v,i)=>'<i style="height:'+(v/max*100)+'%"'+(i===vals.length-1?' class="on"':'')+'></i>').join('');
+  });
+
+  // preview size
   const sf=document.getElementById("size-fit"),sa=document.getElementById("size-actual");
   function setSize(actual){document.body.classList.toggle("actual",actual);sa.classList.toggle("active",actual);sf.classList.toggle("active",!actual);}
   sf.addEventListener("click",()=>setSize(false));
