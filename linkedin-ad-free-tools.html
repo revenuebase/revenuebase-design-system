@@ -65,8 +65,8 @@
   .tu-tab.on{background:#0f537e;color:#fff;border-color:#0f537e;}
   .tu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
   .tu-card{background:#fff;border:1px solid #e4e7f1;padding:24px 26px;position:relative;min-height:168px;}
-  .tu-card .ext{position:absolute;top:22px;right:22px;width:18px;height:18px;border:2px solid #b6bdd0;border-left:none;border-bottom:none;}
-  .tu-card .ext::after{content:"";position:absolute;right:-2px;top:0;width:22px;height:2px;background:#b6bdd0;transform:rotate(45deg);transform-origin:right top;}
+  .tu-card .ext{position:absolute;top:20px;right:20px;width:24px;height:24px;color:#aab2c5;}
+  .tu-card .ext svg{width:100%;height:100%;display:block;}
   .tu-top{display:flex;align-items:center;gap:15px;}
   .tu-logo{width:46px;height:46px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;overflow:hidden;background:#fff;border:1px solid #eceff5;}
   .tu-logo img{width:100%;height:100%;object-fit:contain;display:block;}
@@ -269,7 +269,8 @@ Grab the free toolkit 👇</div>
     const lg=t[3];
     const icon=lg.img?'<img src="'+L+lg.img+'" alt="">':lg.svg;
     const bg=lg.bg||'#fff';
-    return '<div class="tu-card"><span class="ext"></span><div class="tu-top">'+
+    const EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>';
+    return '<div class="tu-card"><span class="ext">'+EXT+'</span><div class="tu-top">'+
       '<span class="tu-logo" style="background:'+bg+'">'+icon+'</span>'+
       '<span class="tu-name">'+t[0]+'</span></div>'+
       '<span class="tu-tag">'+t[1]+'</span>'+
