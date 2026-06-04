@@ -275,6 +275,7 @@ All assets are hosted at `https://revenuebase.github.io/revenuebase-design-syste
 | Noise grain (dark) | `https://revenuebase.github.io/revenuebase-design-system/assets/bg-noise-dark.webp` |
 | Grid tile (light) | `https://revenuebase.github.io/revenuebase-design-system/assets/grid-light.svg` |
 | Grid tile (dark) | `https://revenuebase.github.io/revenuebase-design-system/assets/grid-dark.svg` |
+| Email background (grid on #f1f4f9) | `https://revenuebase.github.io/revenuebase-design-system/assets/email-bg-grid.png` — also at `https://8486714.fs1.hubspotusercontent-na1.net/hubfs/8486714/revenuebase/email-bg-grid.png` |
 
 ---
 
