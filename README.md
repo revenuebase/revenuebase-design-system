@@ -32,6 +32,7 @@ These interactive pages were built to review the system step by step; open any i
 - `foundations.html` — color, themes, type, spacing, shape, texture
 - `marketing.html` — the 11 marketing components
 - `product.html` — the product app components
+- `linkedin.html` — four editable LinkedIn post graphic templates (square 1080×1080)
 
 Each has a live light/dark toggle and renders in the real fonts and tokens.
 
