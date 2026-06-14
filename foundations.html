@@ -267,12 +267,15 @@
   .cm::before { content:""; position:absolute; left:5px; top:0; width:1px; height:11px; background:var(--accent); opacity:.6; }
   .cm::after { content:""; position:absolute; top:5px; left:0; height:1px; width:11px; background:var(--accent); opacity:.6; }
   .cm-tl{ top:-6px; left:-6px; } .cm-tr{ top:-6px; right:-6px; } .cm-bl{ bottom:-6px; left:-6px; } .cm-br{ bottom:-6px; right:-6px; }
+  .theme-logo-dark{display:none;}
+  html[data-theme="dark"] .theme-logo-light{display:none;}
+  html[data-theme="dark"] .theme-logo-dark{display:block;}
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="logo">
-    <img src="assets/revenuebase-logo.svg" alt="RevenueBase" style="display:block;height:22px;width:auto;">
+    <img class="theme-logo-light" src="assets/revenuebase-logo.svg" alt="RevenueBase" style="display:block;height:22px;width:auto;"><img class="theme-logo-dark" src="assets/revenuebase-logo-dark.svg" alt="RevenueBase" style="display:block;height:22px;width:auto;">
   </div>
   <div class="topbar-right">
     <div class="toggle" id="toggle">

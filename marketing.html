@@ -167,12 +167,15 @@
   .next p{font-size:15px;max-width:64ch;} .next .flow{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
   .next .flow span{font-family:var(--mono);font-size:12px;padding:7px 12px;border:1px solid currentColor;opacity:.55;}
   .next .flow span.cur{opacity:1;font-weight:700;background:color-mix(in srgb,var(--brand-fg) 14%,transparent);}
+  .theme-logo-dark{display:none;}
+  html[data-theme="dark"] .theme-logo-light{display:none;}
+  html[data-theme="dark"] .theme-logo-dark{display:block;}
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="logo">
-    <img src="assets/revenuebase-logo.svg" alt="RevenueBase" style="display:block;height:22px;width:auto;">
+    <img class="theme-logo-light" src="assets/revenuebase-logo.svg" alt="RevenueBase" style="display:block;height:22px;width:auto;"><img class="theme-logo-dark" src="assets/revenuebase-logo-dark.svg" alt="RevenueBase" style="display:block;height:22px;width:auto;">
   </div>
   <div class="topbar-right">
     <div class="toggle" id="toggle"><span id="ti">☀︎</span><span id="tl">Light</span></div>
@@ -189,7 +192,7 @@
   <section class="block">
     <div class="block-head"><span class="n">01</span><h2>Top navigation</h2><span class="spec">8px rounded bar · logo · links · Log in + muted primary</span></div>
     <div class="navbar">
-      <div class="logo"><img src="assets/revenuebase-logo.svg" alt="RevenueBase" style="display:block;height:20px;width:auto;"></div>
+      <div class="logo"><img class="theme-logo-light" src="assets/revenuebase-logo.svg" alt="RevenueBase" style="display:block;height:20px;width:auto;"><img class="theme-logo-dark" src="assets/revenuebase-logo-dark.svg" alt="RevenueBase" style="display:block;height:20px;width:auto;"></div>
       <div class="links"><a>Data</a><a>Tools</a><a>Solutions</a><a>Pricing</a><a>Company</a></div>
       <span class="sp"></span>
       <a class="login">Log in</a>
@@ -327,7 +330,7 @@
   <section class="block">
     <div class="block-head"><span class="n">11</span><h2>Footer</h2><span class="spec">mono column heads · DM Sans links</span></div>
     <div class="foot">
-      <div class="col brand"><img src="assets/revenuebase-logo.svg" alt="RevenueBase" style="display:block;height:20px;width:auto;margin-bottom:10px;"><p>The trust layer for B2B data. Primary-sourced, re-verified, no resale.</p></div>
+      <div class="col brand"><img class="theme-logo-light" src="assets/revenuebase-logo.svg" alt="RevenueBase" style="display:block;height:20px;width:auto;margin-bottom:10px;"><img class="theme-logo-dark" src="assets/revenuebase-logo-dark.svg" alt="RevenueBase" style="display:block;height:20px;width:auto;margin-bottom:10px;"><p>The trust layer for B2B data. Primary-sourced, re-verified, no resale.</p></div>
       <div class="col"><h5>Product</h5><a>Data Catalog</a><a>Integrations</a><a>Email Verification</a><a>API</a></div>
       <div class="col"><h5>Solutions</h5><a>Product Teams</a><a>Sales &amp; Marketing</a><a>Agencies</a></div>
       <div class="col"><h5>Company</h5><a>About</a><a>Blog</a><a>Careers</a><a>Contact</a></div>
